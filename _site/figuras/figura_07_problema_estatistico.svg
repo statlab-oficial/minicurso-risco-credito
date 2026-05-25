@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 7 — O problema estatístico</text>
+<text x="80" y="130" class="subtitle">Variáveis do cliente entram no modelo para estimar a probabilidade de inadimplência.</text>
+
+<rect x="120" y="240" width="410" height="380" class="box"/>
+<text x="255" y="305" class="label">Entradas X</text>
+<text x="185" y="370" class="body">• idade</text>
+<text x="185" y="415" class="body">• renda</text>
+<text x="185" y="460" class="body">• valor do crédito</text>
+<text x="185" y="505" class="body">• duração</text>
+<text x="185" y="550" class="body">• histórico</text>
+
+<rect x="640" y="295" width="320" height="250" class="box2"/>
+<text x="740" y="375" class="label">Modelo</text>
+<text x="695" y="430" class="body">aprende padrões</text>
+<text x="735" y="470" class="body">nos dados</text>
+
+<rect x="1080" y="240" width="360" height="380" class="box"/>
+<text x="1145" y="320" class="label">Saída</text>
+<text x="1145" y="390" style="font: 700 34px Arial; fill: #F3F7FB;">P(Y = 1 | X)</text>
+<text x="1135" y="455" class="body">Probabilidade de</text>
+<text x="1140" y="495" class="body">inadimplência</text>
+
+<line x1="530" y1="430" x2="620" y2="430" class="arrow"/>
+<line x1="960" y1="430" x2="1060" y2="430" class="arrow"/>
+</svg>

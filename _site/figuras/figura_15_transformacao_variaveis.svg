@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 15 — Transformação de variáveis</text>
+<text x="80" y="130" class="subtitle">Uma variável bruta pode ser reorganizada para melhorar interpretação, estabilidade e comunicação.</text>
+
+<rect x="150" y="250" width="420" height="420" class="box"/>
+<text x="275" y="320" class="label">Antes</text>
+<text x="210" y="390" class="body">idade = 19, 22, 24, 27, 31,</text>
+<text x="210" y="430" class="body">34, 39, 45, 52, 61...</text>
+<text x="210" y="500" class="small">escala original, muitos valores</text>
+<text x="210" y="535" class="small">e interpretação menos direta</text>
+
+<rect x="1030" y="250" width="420" height="420" class="box2"/>
+<text x="1170" y="320" class="label">Depois</text>
+<text x="1090" y="390" class="body">até 25</text>
+<text x="1090" y="435" class="body">26 a 35</text>
+<text x="1090" y="480" class="body">36 a 50</text>
+<text x="1090" y="525" class="body">acima de 50</text>
+<text x="1090" y="595" class="small">faixas interpretáveis e úteis</text>
+
+<line x1="590" y1="460" x2="1010" y2="460" class="arrow"/>
+</svg>

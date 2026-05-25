@@ -1,0 +1,1054 @@
+---
+bibliography: referencias.bib
+csl: apa.csl
+link-citations: true
+format:
+  revealjs:
+    theme: [default]
+    css: estilos-dark.css
+    highlight-style: github-dark
+    slide-number: true
+    chalkboard: false
+    toc: false
+    incremental: false
+    code-overflow: wrap
+    transition: slide
+execute:
+  echo: true
+---
+
+## 
+
+![](figuras/Slide_1o.PNG){width=100% fig-align="center"}
+
+---
+
+## 
+
+![](figuras/Slide_p2.PNG){width=100% fig-align="center"}
+
+---
+
+## Vamos continuar
+
+Na Parte 1:
+
+- estruturamos o problema  
+- trabalhamos com os dados  
+- Compreendemos o custo dos erros  
+
+Agora:
+
+> como usar isso para tomar decisões?
+
+
+---
+
+## O problema que queremos resolver
+
+Queremos estimar a probabilidade de um indivíduo se tornar inadimplente dado o seu histórico:
+
+$$
+P(Y=1 \mid X)
+$$
+
+em que:
+
+- $Y=1$ → inadimplência  
+- $X$ → características do cliente  
+
+Mas estimar não é suficiente.
+
+> Precisamos transformar probabilidade em decisão prática.
+
+---
+
+## Do dado à decisão
+
+Fluxo do processo:
+
+1. Trabalhar com os dados  
+2. Ajustar um modelo  
+3. Obter probabilidades individuais  
+4. construir um critério de decisão  
+
+O modelo gera probabilidades.
+
+> A decisão depende de como usamos essas probabilidades.
+
+---
+
+## 
+
+![](figuras/figura_17_fluxo_modelo_decisao.svg){width=95% fig-align="center"}
+
+---
+
+## Probabilidade em si não é decisão
+
+Considere dois clientes e suas respectivas probabilidades de se tornar inadimplente: 
+
+- Cliente A: a probabilidade **ESTIMADA** de não quitar a dívida é 0,49  
+- Cliente B: a probabilidade **ESTIMADA** de não quitar a dívida é 0,51  
+
+Pergunta:
+
+> Um deve ser aprovado e o outro negado?
+
+> Essa diferença é irrelevante?
+
+👉 O modelo não decide. Quem decide é a regra de negócio.
+
+
+---
+
+## Por que regressão logística?
+
+A regressão logística é amplamente usada porque:
+
+- produz probabilidades  
+- é interpretável  
+- é estável  
+- é aceita em regulação  
+
+> Em crédito, é o principal modelo base (baseline) [@hand_henley_1997; @lessmann_2015].
+
+---
+
+## O que o modelo entrega?
+
+Para cada cliente:
+
+- um valor entre 0 e 1  
+
+Isso representa:
+
+> a probabilidade de inadimplência
+
+---
+
+## Como transformar o histórico do cliente em probabilidade?
+
+> Queremos transformar uma combinação de variáveis em um valor entre 0 e 1.
+
+A ideia é usar uma função que:
+
+- receba qualquer valor  
+- produza uma probabilidade  
+
+Uma escolha comum é:
+
+$$
+P(Y=1 \mid X) = \frac{1}{1 + e^{-z}}
+$$
+
+> onde $z$ representa uma combinação das variáveis $X's$.
+
+---
+
+## O que é esse $z$?
+
+O termo $z$ representa uma combinação linear das variáveis:
+
+$$
+z = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_p X_p
+$$
+
+Neste caso temos:
+
+- cada variável contribui para o risco  
+- os coeficientes medem esse impacto  
+
+> O modelo transforma essa combinação em probabilidade.
+
+---
+
+## Modelo logístico
+
+
+$$
+P(Y_i=1 \mid X_i) = \frac{1}{1 + \exp\{-\eta_i\}}
+$$
+
+em que
+
+$$
+\eta_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip}
+$$
+
+Isso garante:
+
+- valores entre 0 e 1  
+- interpretação probabilística  
+
+> É um modelo simples, mas muito eficaz em crédito.
+
+---
+
+## 
+
+![](figuras/figura_18_curva_logistica.svg){width=95% fig-align="center"}
+
+---
+
+## Interpretação dos coeficientes
+
+Na regressão logística:
+
+- coeficiente positivo → aumenta o risco  
+- coeficiente negativo → reduz o risco  
+
+Cada variável influencia a probabilidade de inadimplência.
+
+> O modelo permite entender o efeito de cada característica do cliente.
+
+> **Atenção:** o tamanho dos coeficientes não deve ser comparado diretamente entre variávei, pois elas podem estar em escalas diferentes.  
+> Para comparações, é necessário padronizar as variáveis ou analisar com cuidado.
+
+---
+
+## Exemplo: renda
+
+Considere a variável renda:
+
+- coeficiente negativo  
+
+Interpretação:
+
+- quanto maior a renda, menor o risco de inadimplência  
+
+Ou seja:
+
+> clientes com maior renda tendem a ter menor probabilidade de não pagamento  
+
+Em modelos de crédito, essa relação também pode ser analisada por meio de **odds** (chance relativa).
+
+---
+
+## O que são odds?
+
+Odds compara a chance de acontecer com a chance de não acontecer  
+
+Exemplo:
+
+- probabilidade de inadimplência = 20%  
+- probabilidade de não inadimplência = 80%  
+
+Então a odds de inadimplência é:
+
+$$
+\text{odds} = \frac{\text{probabilidade de inadimplência}}{1-\text{probabilidade de inadimplência}} = \frac{0,20}{0,80} = \frac{1}{4} = 0,25
+$$
+
+Interpretação:
+
+> para cada 1 cliente inadimplente, há cerca de 4 adimplentes
+
+---
+
+## Por que não usar odds diretamente?
+
+Odds são úteis, mas:
+
+- não variam de forma linear  
+- pequenas mudanças nas variáveis podem gerar variações difíceis de interpretar  
+
+Precisamos de uma transformação mais adequada para modelagem.
+
+---
+
+## Por que usar log-odds?
+
+O modelo logístico trabalha com:
+
+$$
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_p X_{ip},
+\quad p = P(Y_i=1 \mid X_i)
+$$
+
+Essa transformação:
+
+- leva as odds para uma escala linear  
+- permite modelar o efeito das variáveis de forma aditiva  
+
+> isso viabiliza o uso de um modelo linear
+
+---
+
+## Interpretando o efeito
+
+Cada coeficiente atua sobre o **log-odds de inadimplência**.
+
+Na prática:
+
+- coeficiente positivo → aumenta o log-odds → aumenta o risco  
+- coeficiente negativo → reduz o log-odds → reduz o risco  
+
+Ou seja:
+
+> as variáveis influenciam o risco por meio dos log-odds
+
+👉 Mesmo pequenas mudanças no log-odds podem gerar mudanças relevantes na probabilidade.
+
+---
+
+## Relembrando a divisão dos dados
+
+Na Parte 1, separamos a base em conjuntos diferentes.
+
+Agora vamos usar:
+
+- treino → para ajustar o modelo  
+- teste → para avaliar o desempenho  
+
+Por quê?
+
+- o modelo aprende no treino  
+- e é avaliado em dados que não viu antes  
+
+> isso evita uma avaliação otimista do modelo
+
+---
+
+## Ajustando o modelo no Python
+
+```{python}
+#| label: chunk_6
+#| echo: true
+#| eval: false
+
+from sklearn.linear_model import LogisticRegression
+
+# Transformar variáveis categóricas em numéricas
+X_train_dum = pd.get_dummies(X_train, drop_first=True)
+X_test_dum  = pd.get_dummies(X_test, drop_first=True)
+
+# Garantir mesmas colunas em treino e teste
+X_train_dum, X_test_dum = X_train_dum.align(X_test_dum, fill_value=0)
+
+# Ajustar o modelo usando os dados de treino
+modelo_log = LogisticRegression(max_iter=1000)
+modelo_log.fit(X_train_dum, y_train)
+
+# Obter probabilidades de inadimplência no teste
+y_prob_log = modelo_log.predict_proba(X_test_dum)[:, 1]
+```
+
+---
+
+## O que o código faz?
+
+Etapas principais:
+
+- transforma variáveis categóricas em numéricas  
+- ajusta o modelo usando os dados de treino  
+- aplica o modelo aos dados de teste  
+
+Resultado:
+
+- para cada cliente no teste, o modelo retorna uma probabilidade de inadimplência  
+
+> essas probabilidades serão usadas para avaliar o modelo
+
+---
+
+## Probabilidades previstas
+
+Cada cliente recebe um score:
+
+- valor entre 0 e 1  
+- interpretação probabilística  
+
+Exemplo:
+
+- 0,8 → alto risco  
+- 0,1 → baixo risco  
+
+> o modelo quantifica risco, não toma decisão
+
+---
+
+## A distribuição mostra como o modelo diferencia níveis de risco entre os clientes.
+
+![](figuras/figura_19_distribuicao_scores.svg){width=95% fig-align="center"}
+
+---
+
+## Da probabilidade para a decisão
+
+O modelo retorna probabilidades de inadimplência.
+
+Mas precisamos tomar uma decisão:
+
+- aprovar  
+- rejeitar  
+
+Para isso, usamos um ponto de corte (threshold).
+
+Exemplo:
+
+- se probabilidade ≥ 0,5 → classifica como inadimplente  
+- caso contrário → adimplente  
+
+> o valor 0,5 é uma escolha inicial, não necessariamente a melhor
+
+---
+
+## Classificando os clientes
+
+**Ponto de corte (threshold)**
+
+```{python}
+#| label: chunk_10_a
+#| echo: true
+#| eval: false
+
+# Classificação usando threshold de 0.5
+y_pred_log = (y_prob_log >= 0.5).astype(int)
+```
+
+**Matriz de Confusão**
+
+```{python}
+#| label: chunk_10
+#| echo: true
+#| eval: false
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+cm = confusion_matrix(y_test, y_pred_log)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+plt.title("Matriz de Confusão")
+plt.show()
+```
+
+- transformando probabilidades em classes
+
+- definindo quem é considerado inadimplente
+
+> agora podemos comparar com a realidade
+
+---
+
+## Matriz de confusão
+
+Queremos comparar o que realmente aconteceu com o que o modelo previu  
+
+|        | Prevê adimplente (0) | Prevê inadimplente (1) |
+|--------|---------------------|------------------------|
+| Real 0 (adimplente)   | acertou cliente bom (VN) | classificou como risco sem ser (FP) |
+| Real 1 (inadimplente) | deixou passar um cliente de risco (FN) | acertou cliente de risco (VP) |
+
+Nem todos os erros têm o mesmo impacto:
+
+- FP → perda financeira direta  
+- FN → perda de oportunidade  
+
+> mudar o threshold muda os erros do modelo
+
+---
+
+## Visualização dos acertos e erros do modelo.
+
+![](figuras/figura_20_matriz_confusao.svg){width=95% fig-align="center"}
+
+---
+
+## Como avaliar um modelo?
+
+Depois de ajustar o modelo, precisamos entender se ele é útil.
+
+1. Ele consegue separar clientes bons e maus?  
+2. As probabilidades estimadas fazem sentido?  
+3. Ele ajuda na tomada de decisão?  
+
+Em outras palavras:
+
+- o modelo distingue bem os perfis?  
+- as previsões são coerentes?  
+- as decisões geradas são adequadas?  
+
+> métricas são ferramentas para responder essas perguntas
+
+---
+
+## Métricas de avaliação
+
+Para responder essas perguntas, usamos métricas.
+
+- acurácia → proporção total de acertos  
+- sensibilidade (recall) → capacidade de identificar inadimplentes  
+- precisão → entre os classificados como inadimplentes, quantos realmente são  
+
+Cada métrica destaca um aspecto diferente do desempenho.
+
+> a escolha da métrica depende do objetivo da análise
+
+---
+
+## Curva ROC
+
+A curva ROC avalia o desempenho do modelo para diferentes valores de threshold.
+
+Ela relaciona:
+
+- TPR (taxa de verdadeiros positivos) → proporção de inadimplentes corretamente identificados  
+- FPR (taxa de falsos positivos) → proporção de clientes bons classificados como inadimplentes  
+
+Ou seja:
+
+- TPR mede a capacidade de identificar risco  
+- FPR mede o erro com clientes bons  
+
+> a curva mostra o equilíbrio entre acertos e erros ao variar o threshold
+
+---
+
+## Curva ROC no Python
+
+
+```{python}
+#| label: chunk_8
+#| echo: true
+#| eval: false
+
+from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+fpr, tpr, _ = roc_curve(y_test, y_prob_log)
+auc = roc_auc_score(y_test, y_prob_log)
+
+plt.figure()
+plt.plot(fpr, tpr, label=f"AUC = {auc:.3f}")
+plt.plot([0,1], [0,1], linestyle="--")
+plt.xlabel("FPR (taxa de falsos positivos)")
+plt.ylabel("TPR (sensibilidade)")
+plt.title("Curva ROC")
+plt.legend()
+plt.show()
+```
+
+
+---
+
+## 
+
+![](figuras/figura_21_curva_roc.svg){width=95% fig-align="center"}
+
+---
+
+## AUC (Área sob a curva)
+
+A AUC mede a capacidade do modelo de separar bons e maus clientes.
+
+$$
+AUC = P(\text{cliente inadimplente recebe maior probabilidade que cliente adimplente})
+$$
+
+Ou seja:
+
+- escolhemos um cliente inadimplente e um adimplente ao acaso  
+- verificamos se o modelo atribui maior risco ao inadimplente  
+
+- quanto maior a AUC → melhor a separação  
+
+> a AUC avalia ordenação, não garante boa decisão nem boas probabilidades [@sklearn_model_eval]
+
+---
+
+## Precision–Recall
+
+Importante quando a inadimplência é rara.
+
+Foco na classe positiva (inadimplentes):
+
+- precisão → entre os clientes classificados como inadimplentes, quantos realmente são  
+- recall (sensibilidade) → quantos inadimplentes o modelo consegue identificar  
+
+Em contextos com poucos inadimplentes:
+
+- a precisão reduz falsos alarmes  
+- o recall reduz clientes de risco não identificados  
+
+> mais adequado quando a classe de interesse é rara
+
+---
+
+## 
+
+![](figuras/figura_22_precision_recall.svg){width=95% fig-align="center"}
+
+---
+
+## O papel do threshold
+
+Aqui, $p$ representa:
+
+- a probabilidade de inadimplência do cliente  
+
+A classificação depende de um ponto de corte $t$:
+
+- $p > t$ → classifica como cliente de risco (inadimplente)  
+- $p \leq t$ → classifica como cliente sem risco (adimplente)  
+
+Na prática, esse valor define:
+
+- quais clientes são considerados de risco  
+- quais clientes são aprovados  
+
+> o threshold controla a decisão do modelo
+
+---
+
+## 
+
+![](figuras/figura_23_threshold_efeito.svg){width=90% fig-align="center"}
+Ao alterar o threshold:
+
+- mudamos a quantidade de clientes classificados como risco  
+- alteramos o nível de rigor da decisão
+
+---
+
+## Efeito do ponto de corte (threshold)
+
+- threshold baixo → mais clientes classificados como risco  
+- threshold alto → menos clientes classificados como risco  
+
+Consequência:
+
+- mais clientes podem ser aprovados ou rejeitados  
+- aumentam ou diminuem os erros do modelo  
+
+Em particular:
+
+- falsos positivos (FP) → clientes bons classificados como risco  
+- falsos negativos (FN) → clientes de risco não identificados  
+
+> o threshold determina o tipo de erro mais frequente
+
+---
+
+## Custo e decisão
+
+Da 1ª Parte:
+
+$$
+\text{Custo} = c_{FP} \cdot FP + c_{FN} \cdot FN
+$$
+
+Em crédito:
+
+- $c_{FP}$ → perda financeira direta (aprovar quem não paga)  
+- $c_{FN}$ → perda de oportunidade (rejeitar quem pagaria)  
+
+Como o threshold altera FP e FN:
+
+> ele também altera o custo total das decisões
+
+> o melhor modelo não é o mais preciso, é o que gera menor custo
+
+---
+
+## Então qual é o melhor modelo?
+
+Não é necessariamente:
+
+- o de maior AUC  
+- o mais complexo  
+
+Mas sim:
+
+> o que leva à melhor decisão prática
+
+👉 isso depende do contexto e dos custos envolvidos
+
+---
+
+## Decisão ótima
+
+A escolha do threshold deve:
+
+- minimizar o custo esperado  
+- considerar o contexto do negócio  
+
+$$
+\min \left(c_{FP} \cdot FP + c_{FN} \cdot FN\right)
+$$
+
+> um bom modelo não garante uma boa decisão  
+> a decisão depende de como usamos o modelo
+
+---
+
+## Outros modelos
+
+Além da regressão logística, podemos usar outros modelos para estimar o risco de crédito. Exemplos:
+
+- Árvore de decisão  
+- Random Forest  
+- Gradient Boosting  
+
+Esses modelos:
+
+- capturam relações não lineares  
+- identificam interações entre variáveis automaticamente  
+
+> todos têm o mesmo objetivo: estimar a probabilidade de inadimplência
+
+---
+
+## Intuição dos modelos
+
+- Logística → relação linear e interpretação direta  
+- Árvore → decisões baseadas em regras (“se... então...”)  
+- Random Forest → combinação de várias árvores para reduzir instabilidade  
+- Boosting → sequência de modelos que corrige erros anteriores  
+
+> cada modelo aprende padrões diferentes nos dados
+
+---
+
+## Comparação de modelos
+
+| Modelo | Vantagem | Limitação |
+|--------|----------|-----------|
+| Logística | interpretável e estável | assume relação linear |
+| Árvore | fácil de explicar | alta variabilidade |
+| Random Forest | robusto e reduz overfitting | menor interpretabilidade |
+| Boosting | alto poder preditivo | maior complexidade |
+
+> não existe modelo universalmente melhor [@lessmann_2015]
+
+---
+
+## 
+
+![](figuras/figura_24_comparacao_modelos.svg){width=95% fig-align="center"}
+
+Diferentes modelos podem levar a diferentes níveis de desempenho e interpretação.
+
+---
+
+## Na prática
+
+Em crédito:
+
+- regressão logística → modelo padrão (baseline)  
+- modelos mais complexos → usados para comparação e ganho de desempenho  
+
+Por quê?
+
+- interpretabilidade é essencial  
+- exigências regulatórias favorecem modelos explicáveis  
+
+> modelos mais complexos podem melhorar desempenho,  
+> mas exigem maior cuidado na interpretação e validação
+
+---
+
+## O que não muda
+
+Independentemente do modelo:
+
+- todos estimam probabilidade de inadimplência  
+- todos dependem de dados e variáveis  
+- todos precisam de um threshold para decisão  
+
+> o modelo muda, mas o problema continua o mesmo
+
+---
+
+## Overfitting
+
+O modelo pode se ajustar demais aos dados de treino:
+
+- aprende padrões reais  
+- mas também aprende ruído  
+
+Resultado:
+
+- desempenho ótimo no treino  
+- desempenho pior em dados novos  
+
+> o objetivo não é ajustar bem o treino,  
+> é generalizar para novos dados
+
+---
+
+## Por que isso importa?
+
+Um modelo com overfitting pode:
+
+- parecer ótimo nos dados de treino  
+- mas tomar decisões ruins na prática  
+
+> avaliar corretamente é essencial para tomar boas decisões
+
+---
+
+## Validação
+
+Para avaliar corretamente o modelo:
+
+- usar dados que não foram usados no ajuste  
+- utilizar validação cruzada  
+
+Isso permite:
+
+- estimar o desempenho em novos dados  
+- reduzir o risco de overfitting  
+
+---
+
+## validação no Python
+
+```{python}
+#| label: chunk_11
+#| echo: true
+#| eval: false
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(
+    modelo_log,
+    X_train,
+    y_train,
+    cv=5,
+    scoring="roc_auc"
+)
+
+print("AUC média (validação):", scores.mean())
+
+```
+
+> Avaliação fora da amostra é essencial [@sklearn_cv].
+
+---
+
+## E se mudarmos o modelo?
+
+Até agora usamos regressão logística.
+
+Mas outros modelos podem capturar padrões mais complexos:
+
+- relações não lineares  
+- interações entre variáveis  
+
+> vamos comparar diferentes modelos
+
+---
+
+## Árvore de Decisão
+
+- modelo baseado em regras
+- divide os dados em grupos mais homogêneos
+
+> fácil de interpretar, mas pode variar bastante
+
+```{python}
+#| label: chunk_12
+#| echo: true
+#| eval: false
+
+from sklearn.tree import DecisionTreeClassifier
+
+modelo_tree = Pipeline(steps=[
+    ("prep", preprocess),
+    ("model", DecisionTreeClassifier(max_depth=5, random_state=42))
+])
+
+modelo_tree.fit(X_train, y_train)
+y_prob_tree = modelo_tree.predict_proba(X_test)[:, 1]
+
+```
+
+---
+
+## Random Forest
+
+ - combina várias árvores
+ - reduz variabilidade do modelo
+
+> mais robusto, porém menos interpretável
+
+```{python}
+#| label: chunk_13
+#| echo: true
+#| eval: false
+
+from sklearn.ensemble import RandomForestClassifier
+
+modelo_rf = Pipeline(steps=[
+    ("prep", preprocess),
+    ("model", RandomForestClassifier(n_estimators=100, random_state=42))
+])
+
+modelo_rf.fit(X_train, y_train)
+y_prob_rf = modelo_rf.predict_proba(X_test)[:, 1]
+
+```
+
+---
+
+## Comparação de modelos
+
+| Modelo | Vantagem | Limitação |
+|--------|----------|-----------|
+| Logística | interpretável e estável | assume relação linear |
+| Árvore | fácil de explicar | alta variabilidade |
+| Random Forest | robusto | menor interpretabilidade |
+
+> não existe modelo universalmente melhor [@lessmann_2015]
+
+```{python}
+#| label: chunk_14
+#| echo: true
+#| eval: false
+
+from sklearn.metrics import roc_auc_score
+
+auc_log = roc_auc_score(y_test, y_prob_log)
+auc_tree = roc_auc_score(y_test, y_prob_tree)
+auc_rf = roc_auc_score(y_test, y_prob_rf)
+
+print("AUC Logística:", auc_log)
+print("AUC Árvore:", auc_tree)
+print("AUC Random Forest:", auc_rf)
+```
+
+---
+
+## Comparando modelos na prática
+
+```{python}
+#| label: chunk_15
+#| echo: true
+#| eval: false
+
+fpr_log, tpr_log, _ = roc_curve(y_test, y_prob_log)
+fpr_tree, tpr_tree, _ = roc_curve(y_test, y_prob_tree)
+fpr_rf, tpr_rf, _ = roc_curve(y_test, y_prob_rf)
+
+plt.figure()
+plt.plot(fpr_log, tpr_log, label="Logística")
+plt.plot(fpr_tree, tpr_tree, label="Árvore")
+plt.plot(fpr_rf, tpr_rf, label="Random Forest")
+plt.plot([0,1], [0,1], linestyle="--")
+
+plt.xlabel("FPR")
+plt.ylabel("TPR")
+plt.title("Comparação de Modelos")
+plt.legend()
+plt.show()
+```
+
+> modelos diferentes podem ter desempenhos diferentes  
+> mas isso não garante melhor decisão final
+
+---
+
+## Modelo vs decisão
+
+Um modelo pode ter:
+
+- maior AUC  
+- melhor separação  
+
+Mas ainda assim:
+
+- não gerar a melhor decisão  
+
+> a decisão depende do threshold e dos custos
+
+---
+
+## Quando usar cada modelo?
+
+- Logística → quando precisa explicar decisões  
+- Árvore → quando quer regras simples  
+- Random Forest → quando busca robustez  
+- Boosting → quando busca maior desempenho  
+
+Mas:
+
+> a escolha depende do contexto, dos dados e do objetivo da decisão
+
+---
+
+## E na prática do mercado?
+
+Em instituições financeiras:
+
+- modelos podem ser adquiridos de bureaus de crédito  
+- modelos internos são desenvolvidos e ajustados  
+- modelos precisam ser monitorados continuamente  
+
+Além disso:
+
+- decisões devem ser justificáveis  
+- modelos precisam ser auditáveis  
+
+> a instituição continua responsável pelas decisões [@sr117; @cfpb_2022]
+
+---
+
+## O que aprendemos hoje
+
+- modelos geram probabilidades de risco  
+- métricas avaliam desempenho  
+- o threshold define a decisão  
+- o custo define a melhor escolha  
+- diferentes modelos podem ser comparados  
+
+> modelar é importante  
+> decidir é essencial
+
+---
+
+## Referências essenciais
+
+::: {#refs}
+:::
+
+> Essas referências sustentam os conceitos apresentados neste módulo.
+
+---
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+![](StatLab_oficial.png){width=75% fig-align="center"}
+
+:::
+
+::: {.column width="60%"}
+
+### Laboratório de Inovação em Estatística
+
+<div class="link-card">
+  🌐 <a href="https://statlab-oficial.github.io/site_statlab/" target="_blank">Site</a>
+</div>
+
+<div class="link-card">
+  📸 <a href="https://www.instagram.com/statlab_oficial/" target="_blank">Instagram</a>
+</div>
+
+<div class="link-card">
+  💼 <a href="https://www.linkedin.com/in/laboratório-de-inovação-em-estatística-e-ciência-de-dados-statlab-ab653330b" target="_blank">LinkedIn</a>
+</div>
+
+<div class="link-card">
+  💻 <a href="https://github.com/statlab-oficial/" target="_blank">GitHub</a>
+</div>
+
+<div class="link-card">
+  ✉️ <a href="mailto:statlab@ufc.br">Email</a>
+</div>
+
+:::
+
+:::
+

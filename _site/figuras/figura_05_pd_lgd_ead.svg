@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 5 — Linguagem do risco de crédito</text>
+<text x="80" y="130" class="subtitle">A perda esperada combina chance de default, severidade da perda e valor exposto.</text>
+
+<rect x="110" y="320" width="360" height="220" class="box2"/>
+<text x="240" y="390" class="label">PD</text>
+<text x="170" y="435" class="body">Probabilidade de default</text>
+<text x="170" y="475" class="small">Chance de inadimplência</text>
+
+<rect x="620" y="320" width="360" height="220" class="box"/>
+<text x="750" y="390" class="label">LGD</text>
+<text x="690" y="435" class="body">Loss Given Default</text>
+<text x="660" y="475" class="small">Quanto se perde se houver default</text>
+
+<rect x="1130" y="320" width="360" height="220" class="box"/>
+<text x="1260" y="390" class="label">EAD</text>
+<text x="1185" y="435" class="body">Exposure at Default</text>
+<text x="1185" y="475" class="small">Valor exposto no momento</text>
+
+<line x1="470" y1="430" x2="600" y2="430" class="arrow"/>
+<line x1="980" y1="430" x2="1110" y2="430" class="arrow"/>
+
+<text x="450" y="680" style="font: 700 34px Arial; fill: #F3F7FB;">Perda Esperada = PD × LGD × EAD</text>
+<rect x="215" y="285" width="150" height="40" rx="10" fill="#F28C28"/>
+<text x="235" y="312" style="font: 700 20px Arial; fill: #081C3A;">Foco do curso</text>
+</svg>

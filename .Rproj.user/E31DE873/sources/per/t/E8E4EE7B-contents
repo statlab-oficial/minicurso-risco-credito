@@ -1,0 +1,278 @@
+/* =========================
+   BASE GERAL
+   ========================= */
+
+html,
+body,
+.reveal,
+.reveal .slides,
+.reveal .slide-background,
+.reveal .backgrounds {
+  background: #022859 !important;
+  color: #FFFFFF !important;
+}
+
+/* =========================
+   TIPOGRAFIA
+   ========================= */
+
+.reveal {
+  font-size: 30px;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+
+.reveal h1 {
+  font-size: 2em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  margin-bottom: 0.45em;
+}
+
+.reveal h3 {
+  font-size: 1.15em;
+  margin-top: 0.1em;
+  margin-bottom: 0.35em;
+}
+
+.reveal p,
+.reveal li,
+.reveal ol,
+.reveal ul {
+  color: #FFFFFF !important;
+  line-height: 1.35;
+}
+
+.reveal p {
+  margin-bottom: 0.45em;
+}
+
+.reveal ul,
+.reveal ol {
+  margin-top: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+.reveal ul li,
+.reveal ol li {
+  margin-bottom: 0.22em;
+}
+
+/* =========================
+   BLOCKQUOTE
+   ========================= */
+
+.reveal blockquote {
+  border-left: 6px solid #F66B0E;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF !important;
+  padding: 0.6em 1em;
+  border-radius: 10px;
+  font-size: 0.95em;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+/* =========================
+   IMAGENS
+   ========================= */
+
+.reveal section img {
+  display: block;
+  margin: 0.3em auto 0 auto;
+  max-width: 100%;
+  max-height: 85vh;  /* AUMENTADO */
+  object-fit: contain;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* SLIDE COM APENAS FIGURA */
+.reveal section h2:empty + img,
+.reveal section img:only-of-type {
+  max-height: 92vh;   /* quase tela cheia */
+  margin-top: 0.2em;
+}
+
+/* =========================
+   CÓDIGO
+   ========================= */
+
+.reveal div.sourceCode {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 0.8em;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.reveal pre.sourceCode {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent !important;
+  overflow: visible;
+}
+
+.reveal pre code {
+  font-size: 0.8em;
+  line-height: 1.35;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Remove numeração de linhas, se aparecer */
+.reveal pre.numberSource {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-left: none !important;
+}
+
+.reveal pre.numberSource code > span {
+  left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.reveal pre.numberSource code > span > a:first-child::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Botão de copiar */
+.reveal .code-copy-button {
+  color: #FFFFFF !important;
+  opacity: 0.85;
+}
+
+/* =========================
+   TABELAS
+   ========================= */
+
+.reveal table {
+  color: #FFFFFF !important;
+  border-collapse: collapse;
+}
+
+.reveal table th,
+.reveal table td {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.35em 0.6em;
+}
+
+.reveal table th {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   LINKS
+   ========================= */
+
+.reveal a {
+  color: #F66B0E;
+}
+
+.reveal a:hover {
+  color: #ff8d43;
+}
+
+/* =========================
+   ESPAÇAMENTO GERAL
+   ========================= */
+
+.reveal section {
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   TÍTULO INICIAL
+   ========================= */
+
+#title-slide .title {
+  color: #FFFFFF !important;
+}
+
+#title-slide .subtitle {
+  color: #DCE8F6 !important;
+}
+
+#title-slide .quarto-title-author-name {
+  color: #FFFFFF !important;
+}
+
+/* =========================
+   MENU / NÚMERO DO SLIDE
+   ========================= */
+
+.reveal .slide-number {
+  color: #FFFFFF !important;
+  background: transparent !important;
+}
+
+/* =========================
+   AJUSTES MATEMÁTICOS
+   ========================= */
+
+.reveal .math.display,
+.reveal .MathJax,
+.reveal .mjx-chtml {
+  color: #FFFFFF !important;
+}
+
+/* Saída do Python - manter fundo escuro e texto claro */
+.reveal .cell-output pre {
+  color: #ffffff !important;
+}
+
+/* Para garantir em tabelas e outros outputs */
+.reveal .cell-output {
+  color: #ffffff !important;
+}
+
+/* Caso o texto esteja vindo como code */
+.reveal .cell-output code {
+  color: #ffffff !important;
+}
+
+/* =========================
+   LINKS EM BLOCO (SEM ALTERAR FUNDO GLOBAL)
+   ========================= */
+
+.link-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.link-card a {
+  text-decoration: none;
+  color: #344054 !important;
+  font-weight: 500;
+  width: 100%;
+}
+
+.link-card:hover {
+  background-color: #f9fafb;
+  transform: translateY(-2px);
+  border-color: #F66B0E;
+}

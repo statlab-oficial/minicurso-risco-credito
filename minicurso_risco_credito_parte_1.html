@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="minicurso_risco_credito_parte_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="minicurso_risco_credito_parte_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="minicurso_risco_credito_parte_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="minicurso_risco_credito_parte_1_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="minicurso_risco_credito_parte_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="minicurso_risco_credito_parte_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="minicurso_risco_credito_parte_1_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Este notebook acompanha o <strong>Dia 1</strong> do minicurso e foi pensado para ser usado <strong>após a apresentação dos slides</strong>.</p>
+<section id="objetivos-do-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-do-notebook">Objetivos do notebook</h2>
+<ul>
+<li>carregar e entender a base de dados;</li>
+<li>definir a variável alvo de inadimplência;</li>
+<li>identificar desbalanceamento;</li>
+<li>dividir a base em treino, validação e teste;</li>
+<li>construir uma transformação simples de variável contínua em faixas.</li>
+</ul>
+</section>
+<section id="observação" class="level2">
+<h2 class="anchored" data-anchor-id="observação">Observação</h2>
+<p>A ideia aqui não é ajustar modelos ainda. O foco do Dia 1 é <strong>entender o problema, os dados e a preparação da base</strong>.</p>
+</section>
+<section id="importação-de-bibliotecas" class="level2">
+<h2 class="anchored" data-anchor-id="importação-de-bibliotecas">1. Importação de bibliotecas</h2>
+<div id="f5f13c1d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="carregando-a-base-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="carregando-a-base-de-dados">2. Carregando a base de dados</h2>
+<p>Usaremos a base <code>credit-g</code>, disponível no OpenML. Ela é uma base clássica em ensino de risco de crédito.</p>
+<div id="a30fe953" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>credit <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"credit-g"</span>, version<span class="op">=</span><span class="dv">1</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> credit.data.copy()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> credit.target.copy()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dados <span class="op">=</span> X.copy()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"class"</span>] <span class="op">=</span> y</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dados.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="primeira-inspeção-da-base" class="level2">
+<h2 class="anchored" data-anchor-id="primeira-inspeção-da-base">3. Primeira inspeção da base</h2>
+<p>Aqui queremos responder perguntas simples:</p>
+<ul>
+<li>quantas linhas e colunas temos?</li>
+<li>quais variáveis existem?</li>
+<li>quais parecem numéricas ou categóricas?</li>
+</ul>
+<div id="60cb20d1" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dimensão da base:"</span>, dados.shape)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Colunas:"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dados.columns.tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="1ea9e4be" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dados.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="olhando-a-base-de-forma-mais-concreta" class="level2">
+<h2 class="anchored" data-anchor-id="olhando-a-base-de-forma-mais-concreta">4. Olhando a base de forma mais concreta</h2>
+<p>Além do <code>head()</code>, vale observar algumas linhas aleatórias para perceber a variedade dos perfis.</p>
+<div id="61b74d24" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dados.sample(<span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="explorando-algumas-variáveis" class="level2">
+<h2 class="anchored" data-anchor-id="explorando-algumas-variáveis">5. Explorando algumas variáveis</h2>
+<p>Antes de pensar em modelo, precisamos entender o que existe na base.</p>
+<div id="eaf794fc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dados[[<span class="st">"duration"</span>, <span class="st">"credit_amount"</span>, <span class="st">"age"</span>]].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="a412fa11" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"purpose"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="e18e9972" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"housing"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-1" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-1">Atividade de leitura 1</h3>
+<p>Sem fazer conta ainda, observe as saídas acima e responda mentalmente:</p>
+<ul>
+<li>quais variáveis parecem numéricas?</li>
+<li>quais parecem categóricas?</li>
+<li>quais podem carregar informação sobre risco?</li>
+</ul>
+</section>
+</section>
+<section id="definindo-a-variável-alvo" class="level2">
+<h2 class="anchored" data-anchor-id="definindo-a-variável-alvo">6. Definindo a variável alvo</h2>
+<p>A variável original <code>class</code> assume os valores <code>good</code> e <code>bad</code>. Vamos transformá-la em uma variável binária:</p>
+<ul>
+<li><code>0</code> → adimplente</li>
+<li><code>1</code> → inadimplente</li>
+</ul>
+<div id="fab07ea0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="45fbbd43" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"target"</span>] <span class="op">=</span> (dados[<span class="st">"class"</span>] <span class="op">==</span> <span class="st">"bad"</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dados[[<span class="st">"class"</span>, <span class="st">"target"</span>]].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="distribuição-da-variável-alvo" class="level2">
+<h2 class="anchored" data-anchor-id="distribuição-da-variável-alvo">7. Distribuição da variável alvo</h2>
+<p>Agora queremos ver quantos clientes estão em cada classe.</p>
+<div id="a7460463" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"target"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="5adfa00f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"target"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="1f581082" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> dados[<span class="st">"target"</span>].value_counts().sort_index()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>freq.index <span class="op">=</span> [<span class="st">"Adimplente (0)"</span>, <span class="st">"Inadimplente (1)"</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.bar(freq.index, freq.values)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribuição da variável alvo"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-2" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-2">Atividade de leitura 2</h3>
+<p>Observe a distribuição da variável alvo e responda:</p>
+<ol type="1">
+<li>A base parece balanceada?</li>
+<li>Qual classe parece mais rara?</li>
+<li>Em risco de crédito, qual classe tende a ser mais importante identificar?</li>
+</ol>
+</section>
+</section>
+<section id="por-que-isso-importa" class="level2">
+<h2 class="anchored" data-anchor-id="por-que-isso-importa">8. Por que isso importa?</h2>
+<p>Quando a classe de interesse é rara, métricas simples como acurácia podem enganar.</p>
+<p>Um modelo pode parecer bom apenas por prever quase sempre a classe majoritária.</p>
+<section id="questão-para-reflexão" class="level3">
+<h3 class="anchored" data-anchor-id="questão-para-reflexão">Questão para reflexão</h3>
+<p>Se a maioria dos clientes é adimplente, o que acontece se um modelo prever sempre <strong>“adimplente”</strong>?</p>
+<ul>
+<li>Ele teria alta acurácia?</li>
+<li>Ele seria útil para risco de crédito?</li>
+</ul>
+</section>
+</section>
+<section id="divisão-da-base-em-treino-validação-e-teste" class="level2">
+<h2 class="anchored" data-anchor-id="divisão-da-base-em-treino-validação-e-teste">9. Divisão da base em treino, validação e teste</h2>
+<p>Vamos dividir a base em duas etapas:</p>
+<ol type="1">
+<li>80% treino inicial + 20% teste</li>
+<li>dos 80% de treino inicial, separar 75% para treino final e 25% para validação</li>
+</ol>
+<p>Resultado final esperado: - treino: 60% - validação: 20% - teste: 20%</p>
+<div id="7b17c8c1" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1ª divisão: 80% treino inicial e 20% teste</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    dados.drop(columns<span class="op">=</span>[<span class="st">"class"</span>, <span class="st">"target"</span>]),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    dados[<span class="st">"target"</span>],</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>dados[<span class="st">"target"</span>]</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2ª divisão: dos 80% iniciais, 75% ficam em treino final e 25% em validação</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y_train</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Treino:"</span>, <span class="bu">len</span>(X_train))</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Validação:"</span>, <span class="bu">len</span>(X_valid))</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Teste:"</span>, <span class="bu">len</span>(X_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="verificando-a-estratificação" class="level2">
+<h2 class="anchored" data-anchor-id="verificando-a-estratificação">10. Verificando a estratificação</h2>
+<p>Como usamos <code>stratify</code>, esperamos que a proporção de inadimplentes fique parecida nos três conjuntos.</p>
+<div id="ed1cbe2a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proporção de inadimplentes no treino:    "</span>, <span class="bu">round</span>(y_train.mean(), <span class="dv">4</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proporção de inadimplentes na validação:"</span>, <span class="bu">round</span>(y_valid.mean(), <span class="dv">4</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proporção de inadimplentes no teste:    "</span>, <span class="bu">round</span>(y_test.mean(), <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-3" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-3">Atividade de leitura 3</h3>
+<p>Compare as três proporções acima.</p>
+<ol type="1">
+<li>Elas ficaram parecidas?</li>
+<li>O que poderia acontecer se a divisão fosse feita sem estratificação?</li>
+</ol>
+</section>
+</section>
+<section id="exemplo-de-transformação-agrupando-idade" class="level2">
+<h2 class="anchored" data-anchor-id="exemplo-de-transformação-agrupando-idade">11. Exemplo de transformação: agrupando idade</h2>
+<p>Variáveis contínuas podem ser agrupadas em faixas para:</p>
+<ul>
+<li>facilitar interpretação;</li>
+<li>resumir padrões;</li>
+<li>reduzir sensibilidade a valores extremos.</li>
+</ul>
+<p>Isso é comum em aplicações de crédito, especialmente em análises exploratórias e scorecards tradicionais.</p>
+<div id="0253d65a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"age"</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A idade varia de 19 a 75 anos, com maior concentração entre aproximadamente 27 e 42 anos.</p>
+<div id="5037ba26" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"faixa_idade"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>dados[[<span class="st">"age"</span>, <span class="st">"faixa_idade"</span>]].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="1b42cee6" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>faixas <span class="op">=</span> dados[<span class="st">"faixa_idade"</span>].value_counts().sort_index()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.bar(faixas.index.astype(<span class="bu">str</span>), faixas.values)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribuição das faixas de idade"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Agrupar a idade em faixas reduz a variabilidade dos dados e facilita a interpretação dos padrões de risco.</p>
+</section>
+<section id="cruzando-faixa-etária-e-inadimplência" class="level2">
+<h2 class="anchored" data-anchor-id="cruzando-faixa-etária-e-inadimplência">12. Cruzando faixa etária e inadimplência</h2>
+<p>Agora vamos olhar, de forma exploratória, como a inadimplência se distribui entre as faixas de idade.</p>
+<div id="9b28e7c8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tab_idade <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_idade"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tab_idade.columns <span class="op">=</span> [<span class="st">"Adimplente"</span>, <span class="st">"Inadimplente"</span>]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>tab_idade</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-4" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-4">Atividade de leitura 4</h3>
+<p>Observe a tabela acima.</p>
+<ol type="1">
+<li>Alguma faixa parece ter proporção maior de inadimplência?</li>
+<li>Isso significa causalidade?</li>
+<li>Que outras variáveis poderiam interferir nessa relação?</li>
+</ol>
+</section>
+</section>
+<section id="tratamento-pré-modelagem-checagens-básicas" class="level2">
+<h2 class="anchored" data-anchor-id="tratamento-pré-modelagem-checagens-básicas">13. Tratamento pré-modelagem: checagens básicas</h2>
+<p>Antes de modelar, precisamos verificar se a base está coerente. Nesta etapa, vamos observar:</p>
+<ul>
+<li>dados faltantes</li>
+<li>duplicatas</li>
+<li>tipos das variáveis</li>
+<li>valores potencialmente impossíveis</li>
+</ul>
+<p>Mesmo quando a base está “limpa”, fazer esse checklist é uma boa prática.</p>
+<div id="3a9ea49e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dados faltantes por coluna</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>faltantes <span class="op">=</span> dados.isna().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>faltantes.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="e1fb497b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de linhas duplicadas</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>dados.duplicated().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="b5ac1e29" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tipos das variáveis</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>dados.dtypes.value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="58c73994" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checagem simples de valores potencialmente problemáticos</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Idades &lt; 18:"</span>, (dados[<span class="st">"age"</span>] <span class="op">&lt;</span> <span class="dv">18</span>).<span class="bu">sum</span>())</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Duração &lt;= 0:"</span>, (dados[<span class="st">"duration"</span>] <span class="op">&lt;=</span> <span class="dv">0</span>).<span class="bu">sum</span>())</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Crédito &lt;= 0:"</span>, (dados[<span class="st">"credit_amount"</span>] <span class="op">&lt;=</span> <span class="dv">0</span>).<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-5" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-5">Atividade de leitura 5</h3>
+<p>Observe as checagens acima e responda:</p>
+<ol type="1">
+<li>A base possui muitos dados faltantes?</li>
+<li>Encontramos duplicatas?</li>
+<li>Algum valor parece claramente impossível?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Em uma base real, essas verificações ajudam a evitar erros de modelagem.</p>
+</blockquote>
+</section>
+</section>
+<section id="transformações-simples-de-variáveis" class="level2">
+<h2 class="anchored" data-anchor-id="transformações-simples-de-variáveis">14. Transformações simples de variáveis</h2>
+<p>Além de limpar os dados, podemos criar variáveis mais informativas.</p>
+<p>Exemplos: - usar o log do valor do crédito - criar uma medida de crédito por mês - comparar discretizações diferentes da mesma variável</p>
+<p>Essas transformações podem tornar os padrões de risco mais visíveis.</p>
+<div id="efd3ee6b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformações simples</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"log_credit_amount"</span>] <span class="op">=</span> np.log1p(dados[<span class="st">"credit_amount"</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"credit_per_month"</span>] <span class="op">=</span> dados[<span class="st">"credit_amount"</span>] <span class="op">/</span> dados[<span class="st">"duration"</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>dados[[<span class="st">"credit_amount"</span>, <span class="st">"log_credit_amount"</span>, <span class="st">"duration"</span>, <span class="st">"credit_per_month"</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A variável <code>log_credit_amount</code> reduz a assimetria do valor do crédito, enquanto <code>credit_per_month</code> combina valor e prazo em uma medida simples de esforço mensal.</p>
+</section>
+<section id="comparando-duas-discretizações-manuais-da-idade" class="level2">
+<h2 class="anchored" data-anchor-id="comparando-duas-discretizações-manuais-da-idade">15. Comparando duas discretizações manuais da idade</h2>
+<p>A discretização que usamos antes foi definida manualmente. Mas será que outra divisão seria melhor para separar clientes bons e maus?</p>
+<p>Vamos comparar duas possibilidades.</p>
+<div id="9b7bc434" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Divisão A</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"faixa_A"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">100</span>],</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"até 30"</span>, <span class="st">"31–45"</span>, <span class="st">"46–60"</span>, <span class="st">"60+"</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Divisão B</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>dados[<span class="st">"faixa_B"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>tabela_A <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_A"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>tabela_B <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_B"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Divisão A ==="</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>display(tabela_A)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Divisão B ==="</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>display(tabela_B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="9bd2ddc4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparando a diferença entre a maior e a menor proporção de inadimplentes</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dif_A <span class="op">=</span> tabela_A[<span class="dv">1</span>].<span class="bu">max</span>() <span class="op">-</span> tabela_A[<span class="dv">1</span>].<span class="bu">min</span>()</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>dif_B <span class="op">=</span> tabela_B[<span class="dv">1</span>].<span class="bu">max</span>() <span class="op">-</span> tabela_B[<span class="dv">1</span>].<span class="bu">min</span>()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diferença de risco - Divisão A:"</span>, <span class="bu">round</span>(dif_A, <span class="dv">4</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diferença de risco - Divisão B:"</span>, <span class="bu">round</span>(dif_B, <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-6" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-6">Atividade de leitura 6</h3>
+<p>Compare as duas divisões:</p>
+<ol type="1">
+<li>Em qual delas a proporção de inadimplentes varia mais entre as faixas?</li>
+<li>Qual parece separar melhor clientes de maior e menor risco?</li>
+<li>Isso sugere que uma discretização “boa” depende apenas da intuição?</li>
+</ol>
+</section>
+</section>
+<section id="woe-e-iv-ideias-importantes-em-modelagem-de-crédito" class="level2">
+<h2 class="anchored" data-anchor-id="woe-e-iv-ideias-importantes-em-modelagem-de-crédito">16. WoE e IV: ideias importantes em modelagem de crédito</h2>
+<p>Em credit scoring, uma técnica clássica é transformar faixas de variáveis em números usando o <strong>WoE (Weight of Evidence)</strong>.</p>
+<p>Para a faixa <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[
+WoE_j = \ln\left(\frac{\%\,bons_j}{\%\,maus_j}\right)
+\]</span></p>
+<p>Também podemos medir a força preditiva da variável usando o <strong>IV (Information Value)</strong>:</p>
+<p><span class="math display">\[
+IV = \sum_j (\%\,bons_j - \%\,maus_j) \cdot WoE_j
+\]</span></p>
+<p>A ideia central é simples: uma boa divisão cria grupos com comportamentos diferentes de risco.</p>
+<div id="3ce15ea3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalação do pacote para WoE/IV no Colab, se necessário</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>subprocess.check_call([sys.executable, <span class="st">"-m"</span>, <span class="st">"pip"</span>, <span class="st">"install"</span>, <span class="st">"scorecardpy"</span>, <span class="st">"-q"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="7ba01dba" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scorecardpy <span class="im">as</span> sc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="04418636" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_woe(df, var_faixa, target):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    tab <span class="op">=</span> pd.crosstab(df[var_faixa], df[target])</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="kw">not</span> <span class="kw">in</span> tab.columns:</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        tab[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">1</span> <span class="kw">not</span> <span class="kw">in</span> tab.columns:</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        tab[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    tab <span class="op">=</span> tab[[<span class="dv">0</span>, <span class="dv">1</span>]]</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    tab.columns <span class="op">=</span> [<span class="st">"bons"</span>, <span class="st">"maus"</span>]</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    total_bons <span class="op">=</span> tab[<span class="st">"bons"</span>].<span class="bu">sum</span>()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    total_maus <span class="op">=</span> tab[<span class="st">"maus"</span>].<span class="bu">sum</span>()</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    tab[<span class="st">"prop_bons"</span>] <span class="op">=</span> tab[<span class="st">"bons"</span>] <span class="op">/</span> total_bons</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    tab[<span class="st">"prop_maus"</span>] <span class="op">=</span> tab[<span class="st">"maus"</span>] <span class="op">/</span> total_maus</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> <span class="fl">1e-6</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    tab[<span class="st">"woe"</span>] <span class="op">=</span> np.log((tab[<span class="st">"prop_bons"</span>] <span class="op">+</span> eps) <span class="op">/</span> (tab[<span class="st">"prop_maus"</span>] <span class="op">+</span> eps))</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    tab[<span class="st">"iv_parcial"</span>] <span class="op">=</span> (tab[<span class="st">"prop_bons"</span>] <span class="op">-</span> tab[<span class="st">"prop_maus"</span>]) <span class="op">*</span> tab[<span class="st">"woe"</span>]</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="eae09953" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>woe_A <span class="op">=</span> calcular_woe(dados, <span class="st">"faixa_A"</span>, <span class="st">"target"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>woe_B <span class="op">=</span> calcular_woe(dados, <span class="st">"faixa_B"</span>, <span class="st">"target"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== WoE da Divisão A ==="</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>display(woe_A)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IV total - Divisão A:"</span>, <span class="bu">round</span>(woe_A[<span class="st">"iv_parcial"</span>].<span class="bu">sum</span>(), <span class="dv">6</span>))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== WoE da Divisão B ==="</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>display(woe_B)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IV total - Divisão B:"</span>, <span class="bu">round</span>(woe_B[<span class="st">"iv_parcial"</span>].<span class="bu">sum</span>(), <span class="dv">6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Observe que:</p>
+<ul>
+<li>WoE positivo sugere maior presença relativa de bons clientes</li>
+<li>WoE negativo sugere maior presença relativa de maus clientes</li>
+<li>IV maior indica, em geral, maior capacidade de separação</li>
+</ul>
+<p>Assim, podemos comparar discretizações manuais antes mesmo de ajustar um modelo.</p>
+</section>
+<section id="binning-automático-com-scorecardpy" class="level2">
+<h2 class="anchored" data-anchor-id="binning-automático-com-scorecardpy">17. Binning automático com <code>scorecardpy</code></h2>
+<p>Agora vamos deixar que um método automático proponha faixas com base nos dados.</p>
+<p>A ideia é comparar:</p>
+<ul>
+<li>discretização manual</li>
+<li>discretização orientada por dados</li>
+</ul>
+<p>Isso ajuda a mostrar por que o tratamento pré-modelagem é tão importante em crédito.</p>
+<div id="4a568f07" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>base_woe <span class="op">=</span> dados.copy()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>base_woe[<span class="st">"inad"</span>] <span class="op">=</span> base_woe[<span class="st">"target"</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>vars_exemplo <span class="op">=</span> [</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"credit_amount"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"duration"</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"credit_per_month"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log_credit_amount"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inad"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>base_woe <span class="op">=</span> base_woe[vars_exemplo]</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> sc.woebin(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="ea64eece" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabela de bins para a idade</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>bins[<span class="st">"age"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="a9af5a82" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabela de Information Value</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>iv <span class="op">=</span> sc.iv(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>iv.sort_values(<span class="st">"info_value"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="0737579d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicando a transformação WoE</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>base_woe_transf <span class="op">=</span> sc.woebin_ply(base_woe, bins)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>base_woe_transf.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atividade-de-leitura-7" class="level3">
+<h3 class="anchored" data-anchor-id="atividade-de-leitura-7">Atividade de leitura 7</h3>
+<p>Com base nos resultados de WoE e IV:</p>
+<ol type="1">
+<li>A discretização automática parece coerente?</li>
+<li>Quais variáveis parecem mais informativas?</li>
+<li>O que você ganha ao transformar uma faixa em um valor WoE?</li>
+</ol>
+</section>
+</section>
+<section id="síntese-ampliada-do-dia-1" class="level2">
+<h2 class="anchored" data-anchor-id="síntese-ampliada-do-dia-1">18. Síntese ampliada do Dia 1</h2>
+<p>Até aqui, fizemos oito coisas importantes:</p>
+<ul>
+<li>entendemos a estrutura da base</li>
+<li>definimos a variável alvo</li>
+<li>discutimos desbalanceamento</li>
+<li>dividimos a base em treino, validação e teste</li>
+<li>criamos transformações simples</li>
+<li>comparamos discretizações manuais</li>
+<li>calculamos WoE e IV</li>
+<li>aplicamos binning automático em Python</li>
+</ul>
+<blockquote class="blockquote">
+<p>No Dia 2, vamos usar essas informações para construir e avaliar modelos.</p>
+</blockquote>
+</section>
+<section id="exercícios-adicionais" class="level2">
+<h2 class="anchored" data-anchor-id="exercícios-adicionais">19. Exercícios adicionais</h2>
+<section id="exercício-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-8">Exercício 8</h3>
+<p>Por que duas discretizações diferentes da mesma variável podem levar a níveis diferentes de separação entre bons e maus clientes?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-9" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-9">Exercício 9</h3>
+<p>O que significa um WoE negativo em uma faixa?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-10" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-10">Exercício 10</h3>
+<p>Qual é a diferença entre uma discretização manual e uma discretização orientada por dados?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+</section>
+<section id="síntese-do-bloco-inicial-do-dia-1" class="level2">
+<h2 class="anchored" data-anchor-id="síntese-do-bloco-inicial-do-dia-1">20. Síntese do bloco inicial do Dia 1</h2>
+<p>Até aqui, fizemos cinco coisas importantes:</p>
+<ul>
+<li>entendemos a estrutura da base;</li>
+<li>definimos a variável alvo;</li>
+<li>verificamos o desbalanceamento;</li>
+<li>dividimos a base corretamente;</li>
+<li>construímos uma transformação simples de variável contínua.</li>
+</ul>
+</section>
+<section id="exercícios-finais" class="level2">
+<h2 class="anchored" data-anchor-id="exercícios-finais">21. Exercícios finais</h2>
+<p>Responda às questões abaixo com base no que foi visto no notebook.</p>
+<section id="exercício-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-1">Exercício 1</h3>
+<p>Qual é a diferença entre a variável original <code>class</code> e a variável criada <code>target</code>?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-2">Exercício 2</h3>
+<p>Por que a variável <code>target</code> é essencial para formular o problema de risco de crédito como classificação binária?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-3">Exercício 3</h3>
+<p>O que significa dizer que uma base é desbalanceada?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-4">Exercício 4</h3>
+<p>Explique por que alta acurácia não garante um bom modelo em risco de crédito.</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-5">Exercício 5</h3>
+<p>Qual é o papel dos conjuntos de treino, validação e teste?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-6">Exercício 6</h3>
+<p>Por que usamos <code>stratify</code> na divisão da base?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+<section id="exercício-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-7">Exercício 7</h3>
+<p>Qual a vantagem de transformar uma variável contínua, como idade, em faixas?</p>
+<p><strong>Resposta:</strong></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

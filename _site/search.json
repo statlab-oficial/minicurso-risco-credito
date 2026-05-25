@@ -1,0 +1,149 @@
+[
+  {
+    "objectID": "Dia1.html#introdução-à-modelagem-de-risco-de-crédito",
+    "href": "Dia1.html#introdução-à-modelagem-de-risco-de-crédito",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Introdução à Modelagem de Risco de Crédito",
+    "text": "Introdução à Modelagem de Risco de Crédito\nDia 1: do problema real aos dados\nMinicurso introdutório para Estatística e Ciência de Dados\nPython + Google Colab"
+  },
+  {
+    "objectID": "Dia1.html#onde-esse-problema-aparece",
+    "href": "Dia1.html#onde-esse-problema-aparece",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Onde esse problema aparece?",
+    "text": "Onde esse problema aparece?\n\n\nO risco de crédito está presente em diversas situações:\n\nempréstimos pessoais\n\ncartão de crédito\n\nfinanciamento\n\ncrédito estudantil\n\n\n\nfintechs\n\ncrediário\n\nanálise para empresas\n\nPergunta central:\n\nDado um cliente, qual é o risco de inadimplência?"
+  },
+  {
+    "objectID": "Dia1.html#uma-decisão-simples-na-aparência",
+    "href": "Dia1.html#uma-decisão-simples-na-aparência",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Uma decisão simples na aparência",
+    "text": "Uma decisão simples na aparência\n\n\nUma instituição financeira recebe pedidos de crédito.\n\n1000 clientes solicitam crédito\n\nparte paga corretamente\n\nparte atrasa\n\nparte não paga\n\n\nA decisão precisa ser tomada antes de observar o resultado.\nPerguntas:\n\nQuem aprovar?\n\nQuem rejeitar?\n\nEm quais condições?"
+  },
+  {
+    "objectID": "Dia1.html#nem-todo-erro-custa-a-mesma-coisa",
+    "href": "Dia1.html#nem-todo-erro-custa-a-mesma-coisa",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Nem todo erro custa a mesma coisa",
+    "text": "Nem todo erro custa a mesma coisa\n\nAprovar cliente inadimplente → perda financeira\n\nNegar cliente adimplente → perda de receita\n\nInsight:\n\nO objetivo não é eliminar erros, mas minimizar o impacto econômico."
+  },
+  {
+    "objectID": "Dia1.html#a-linguagem-do-risco-de-crédito",
+    "href": "Dia1.html#a-linguagem-do-risco-de-crédito",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "A linguagem do risco de crédito",
+    "text": "A linguagem do risco de crédito\n\\[\n\\text{Perda Esperada} = PD \\times LGD \\times EAD\n\\]\n\n\n\n\\(PD\\): probabilidade de default\n\n\\(LGD\\): perda dado o default\n\n\n\n\\(EAD\\): exposição\n\nFoco do curso: modelagem de \\(PD\\)."
+  },
+  {
+    "objectID": "Dia1.html#por-que-esse-problema-é-importante",
+    "href": "Dia1.html#por-que-esse-problema-é-importante",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Por que esse problema é importante?",
+    "text": "Por que esse problema é importante?\n\ndecisões financeiras reais\n\nimpacto econômico direto\n\nnecessidade de consistência\n\nContexto regulatório (Basileia)."
+  },
+  {
+    "objectID": "Dia1.html#o-problema-estatístico",
+    "href": "Dia1.html#o-problema-estatístico",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "O problema estatístico",
+    "text": "O problema estatístico\n\\[\nY =\n\\begin{cases}\n1, & \\text{inadimplente} \\\\\n0, & \\text{adimplente}\n\\end{cases}\n\\]\nObjetivo:\n\\[\nP(Y=1 \\mid X)\n\\]"
+  },
+  {
+    "objectID": "Dia1.html#tipos-de-modelos-de-crédito",
+    "href": "Dia1.html#tipos-de-modelos-de-crédito",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Tipos de modelos de crédito",
+    "text": "Tipos de modelos de crédito\n\nApplication scoring\n\nBehavioral scoring\n\nCollection scoring\n\nCada modelo responde a uma pergunta diferente."
+  },
+  {
+    "objectID": "Dia1.html#como-o-problema-vira-análise",
+    "href": "Dia1.html#como-o-problema-vira-análise",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Como o problema vira análise",
+    "text": "Como o problema vira análise\n\n\n\ncoleta de dados\n\ntratamento\n\ntransformação\n\n\n\nmodelagem\n\navaliação\n\ndecisão\n\n\nHoje: foco na preparação."
+  },
+  {
+    "objectID": "Dia1.html#base-de-dados-utilizada",
+    "href": "Dia1.html#base-de-dados-utilizada",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Base de dados utilizada",
+    "text": "Base de dados utilizada\nDataset: credit-g (OpenML)\n\nacesso direto via Python\n\nclassificação de crédito\n\nvariáveis reais\n\nVer chunk_1"
+  },
+  {
+    "objectID": "Dia1.html#o-que-temos-nos-dados",
+    "href": "Dia1.html#o-que-temos-nos-dados",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "O que temos nos dados?",
+    "text": "O que temos nos dados?\n\n\n\nidade\n\nduração do crédito\n\nhistórico\n\n\n\nvalor\n\npropósito\n\nstatus\n\n\nCada variável pode indicar risco."
+  },
+  {
+    "objectID": "Dia1.html#definição-da-variável-alvo",
+    "href": "Dia1.html#definição-da-variável-alvo",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Definição da variável alvo",
+    "text": "Definição da variável alvo\n\n1 → inadimplente\n\n0 → adimplente\n\nProblema de classificação binária.\nVer chunk_2"
+  },
+  {
+    "objectID": "Dia1.html#distribuição-da-variável-alvo",
+    "href": "Dia1.html#distribuição-da-variável-alvo",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Distribuição da variável alvo",
+    "text": "Distribuição da variável alvo\nVer chunk_3\nFigura 11"
+  },
+  {
+    "objectID": "Dia1.html#dados-desbalanceados",
+    "href": "Dia1.html#dados-desbalanceados",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Dados desbalanceados",
+    "text": "Dados desbalanceados\n\nmaioria paga\n\npoucos entram em default\n\nProblema:\n\nmétricas podem enganar\n\nFigura 12"
+  },
+  {
+    "objectID": "Dia1.html#um-modelo-pode-ser-inútil",
+    "href": "Dia1.html#um-modelo-pode-ser-inútil",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Um modelo pode ser inútil",
+    "text": "Um modelo pode ser inútil\nSe 90% pagam:\n\nprever sempre “bom” → alta acurácia\n\nMas:\n\nnão identifica risco\n\n\nAcurácia pode ser enganosa."
+  },
+  {
+    "objectID": "Dia1.html#como-lidar-com-desbalanceamento",
+    "href": "Dia1.html#como-lidar-com-desbalanceamento",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Como lidar com desbalanceamento",
+    "text": "Como lidar com desbalanceamento\n\n\n\nundersampling\n\noversampling\n\nSMOTE\n\n\n\najuste de threshold\n\nmétricas adequadas"
+  },
+  {
+    "objectID": "Dia1.html#divisão-da-base-de-dados",
+    "href": "Dia1.html#divisão-da-base-de-dados",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Divisão da base de dados",
+    "text": "Divisão da base de dados\n\ntreino\n\nvalidação\n\nteste\n\n\nTeste não pode ser usado no treinamento.\n\nFigura 14"
+  },
+  {
+    "objectID": "Dia1.html#dividindo-os-dados",
+    "href": "Dia1.html#dividindo-os-dados",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Dividindo os dados",
+    "text": "Dividindo os dados\nVer chunk_4"
+  },
+  {
+    "objectID": "Dia1.html#transformação-de-variáveis",
+    "href": "Dia1.html#transformação-de-variáveis",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Transformação de variáveis",
+    "text": "Transformação de variáveis\n\n\n\ntratar categóricas\n\nagrupar contínuas\n\n\n\nmelhorar interpretação\n\n\nTransformação pode ser mais importante que o modelo."
+  },
+  {
+    "objectID": "Dia1.html#exemplo-agrupando-idade",
+    "href": "Dia1.html#exemplo-agrupando-idade",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "Exemplo: agrupando idade",
+    "text": "Exemplo: agrupando idade\nVer chunk_5\nFigura 16"
+  },
+  {
+    "objectID": "Dia1.html#o-que-aprendemos-hoje",
+    "href": "Dia1.html#o-que-aprendemos-hoje",
+    "title": "Introdução à Modelagem de Risco de Crédito",
+    "section": "O que aprendemos hoje",
+    "text": "O que aprendemos hoje\n\nrisco é decisão sob incerteza\n\nerros têm custos diferentes\n\ndados são desbalanceados\n\ndivisão correta é essencial\n\ntransformação impacta o modelo\n\nPróximo passo:\n\nModelagem e avaliação"
+  }
+]

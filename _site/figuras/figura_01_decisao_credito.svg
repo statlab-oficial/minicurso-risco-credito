@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 1 — Decisão de crédito sob incerteza</text>
+<text x="80" y="130" class="subtitle">Clientes diferentes, riscos diferentes, uma decisão antes do futuro ser conhecido.</text>
+<circle cx="130" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="130" cy="208" r="10" fill="#F3F7FB"/><rect x="114" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="280" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="280" cy="208" r="10" fill="#F3F7FB"/><rect x="264" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="430" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="430" cy="208" r="10" fill="#F3F7FB"/><rect x="414" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="580" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="580" cy="208" r="10" fill="#F3F7FB"/><rect x="564" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="730" cy="220" r="34" fill="#F28C28" opacity="0.95"/><circle cx="730" cy="208" r="10" fill="#F3F7FB"/><rect x="714" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="880" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="880" cy="208" r="10" fill="#F3F7FB"/><rect x="864" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1030" cy="220" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="1030" cy="208" r="10" fill="#F3F7FB"/><rect x="1014" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1180" cy="220" r="34" fill="#F28C28" opacity="0.95"/><circle cx="1180" cy="208" r="10" fill="#F3F7FB"/><rect x="1164" y="220" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="130" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="130" cy="358" r="10" fill="#F3F7FB"/><rect x="114" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="280" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="280" cy="358" r="10" fill="#F3F7FB"/><rect x="264" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="430" cy="370" r="34" fill="#F28C28" opacity="0.95"/><circle cx="430" cy="358" r="10" fill="#F3F7FB"/><rect x="414" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="580" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="580" cy="358" r="10" fill="#F3F7FB"/><rect x="564" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="730" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="730" cy="358" r="10" fill="#F3F7FB"/><rect x="714" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="880" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="880" cy="358" r="10" fill="#F3F7FB"/><rect x="864" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1030" cy="370" r="34" fill="#F28C28" opacity="0.95"/><circle cx="1030" cy="358" r="10" fill="#F3F7FB"/><rect x="1014" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1180" cy="370" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="1180" cy="358" r="10" fill="#F3F7FB"/><rect x="1164" y="370" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="130" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="130" cy="508" r="10" fill="#F3F7FB"/><rect x="114" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="280" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="280" cy="508" r="10" fill="#F3F7FB"/><rect x="264" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="430" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="430" cy="508" r="10" fill="#F3F7FB"/><rect x="414" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="580" cy="520" r="34" fill="#F28C28" opacity="0.95"/><circle cx="580" cy="508" r="10" fill="#F3F7FB"/><rect x="564" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="730" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="730" cy="508" r="10" fill="#F3F7FB"/><rect x="714" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="880" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="880" cy="508" r="10" fill="#F3F7FB"/><rect x="864" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1030" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="1030" cy="508" r="10" fill="#F3F7FB"/><rect x="1014" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/><circle cx="1180" cy="520" r="34" fill="#5DA9E9" opacity="0.95"/><circle cx="1180" cy="508" r="10" fill="#F3F7FB"/><rect x="1164" y="520" width="32" height="22" rx="10" fill="#F3F7FB"/>
+<rect x="1080" y="240" width="360" height="340" class="box"/>
+<text x="1120" y="300" class="label">Decisão</text>
+<rect x="1130" y="350" width="120" height="80" rx="14" fill="#103E2A" stroke="#66D17A" stroke-width="2"/>
+<text x="1155" y="398" class="label" fill="white">Aprovar</text>
+<rect x="1270" y="350" width="120" height="80" rx="14" fill="#4A1F1F" stroke="#FF6B6B" stroke-width="2"/>
+<text x="1300" y="398" class="label" fill="white">Negar</text>
+<text x="1120" y="485" class="body">O desafio não é observar o passado.</text>
+<text x="1120" y="520" class="body">É decidir hoje com base em sinais</text>
+<text x="1120" y="555" class="body">imperfeitos sobre o amanhã.</text>
+<line x1="840" y1="440" x2="1060" y2="440" class="arrow"/>
+</svg>

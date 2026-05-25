@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 2 — Onde o risco de crédito aparece?</text>
+<text x="80" y="130" class="subtitle">O problema está em vários contextos, não apenas em bancos tradicionais.</text>
+<circle cx="800" cy="430" r="120" fill="#102B55" stroke="#F28C28" stroke-width="3"/>
+<text x="700" y="420" class="label">Risco de</text>
+<text x="680" y="460" class="label">Crédito</text>
+
+    <rect x="60" y="190" width="240" height="120" class="box"/>
+    <text x="150" y="245" style="font: 400 42px Arial; fill: #F28C28;">💳</text>
+    <text x="85" y="290" class="body">Cartão de crédito</text>
+    <line x1="180" y1="320" x2="800" y2="430" class="line"/>
+    
+    <rect x="400" y="190" width="240" height="120" class="box"/>
+    <text x="490" y="245" style="font: 400 42px Arial; fill: #F28C28;">💰</text>
+    <text x="425" y="290" class="body">Empréstimo pessoal</text>
+    <line x1="520" y1="320" x2="800" y2="430" class="line"/>
+    
+    <rect x="740" y="190" width="240" height="120" class="box"/>
+    <text x="830" y="245" style="font: 400 42px Arial; fill: #F28C28;">🏠</text>
+    <text x="765" y="290" class="body">Financiamento</text>
+    <line x1="860" y1="320" x2="800" y2="430" class="line"/>
+    
+    <rect x="1080" y="190" width="240" height="120" class="box"/>
+    <text x="1170" y="245" style="font: 400 42px Arial; fill: #F28C28;">🎓</text>
+    <text x="1105" y="290" class="body">Crédito estudantil</text>
+    <line x1="1200" y1="320" x2="800" y2="430" class="line"/>
+    
+    <rect x="230" y="450" width="240" height="120" class="box"/>
+    <text x="320" y="505" style="font: 400 42px Arial; fill: #F28C28;">📱</text>
+    <text x="255" y="550" class="body">Fintechs</text>
+    <line x1="350" y1="450" x2="800" y2="430" class="line"/>
+    
+    <rect x="630" y="450" width="240" height="120" class="box"/>
+    <text x="720" y="505" style="font: 400 42px Arial; fill: #F28C28;">🛒</text>
+    <text x="655" y="550" class="body">Crediário</text>
+    <line x1="750" y1="450" x2="800" y2="430" class="line"/>
+    
+    <rect x="1030" y="450" width="240" height="120" class="box"/>
+    <text x="1120" y="505" style="font: 400 42px Arial; fill: #F28C28;">🏢</text>
+    <text x="1055" y="550" class="body">Empresas</text>
+    <line x1="1150" y1="450" x2="800" y2="430" class="line"/>
+    </svg>

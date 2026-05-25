@@ -1,0 +1,175 @@
+/* =========================
+   VARIÁVEIS GLOBAIS
+   ========================= */
+
+$body-bg: #081C3A;
+$body-color: #F3F7FB;
+$link-color: #7DB7F0;
+$presentation-heading-color: #F3F7FB;
+$code-block-bg: #102B55;
+$code-color: #F3F7FB;
+
+
+/* =========================
+   FUNDO GLOBAL
+   ========================= */
+
+html,
+body,
+#quarto-content,
+.reveal-viewport,
+.reveal,
+.reveal .backgrounds,
+.reveal .slide-background {
+  background: #081C3A !important;
+  color: #F3F7FB !important;
+}
+
+
+/* =========================
+   TAMANHO BASE
+   ========================= */
+
+.reveal {
+  font-size: 26px;
+}
+
+
+/* =========================
+   SLIDES
+   ========================= */
+
+.reveal .slides section {
+  background: #081C3A !important;
+  color: #F3F7FB !important;
+  padding: 26px 42px;
+  box-sizing: border-box;
+  line-height: 1.35;
+}
+
+
+/* =========================
+   TÍTULOS
+   ========================= */
+
+.reveal h1 {
+  font-size: 2em;
+  color: #F3F7FB !important;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  color: #F3F7FB !important;
+  margin-bottom: 0.5em;
+}
+
+.reveal h3 {
+  font-size: 1.3em;
+  color: #F3F7FB !important;
+}
+
+
+/* =========================
+   TEXTO
+   ========================= */
+
+.reveal p,
+.reveal li,
+.reveal ol,
+.reveal ul {
+  color: #EAF1FA !important;
+  font-size: 1em;
+}
+
+.reveal ul li,
+.reveal ol li {
+  margin-bottom: 0.4em;
+}
+
+
+/* =========================
+   DESTAQUES
+   ========================= */
+
+.reveal strong {
+  color: #F28C28 !important;
+}
+
+
+/* =========================
+   BLOCKQUOTE
+   ========================= */
+
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.06);
+  color: #F3F7FB;
+  border-left: 5px solid #F28C28;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   CÓDIGO
+   ========================= */
+
+.reveal code {
+  background: #102B55;
+  color: #F3F7FB;
+  padding: 0.15em 0.35em;
+  border-radius: 6px;
+}
+
+.reveal pre code {
+  background: #102B55;
+  color: #F3F7FB;
+}
+
+
+/* =========================
+   TABELAS
+   ========================= */
+
+.reveal table {
+  color: #F3F7FB;
+}
+
+.reveal thead {
+  background: #12376E;
+}
+
+.reveal tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.04);
+}
+
+
+/* =========================
+   IMAGENS
+   ========================= */
+
+.reveal img {
+  display: block;
+  margin: 1em auto 0 auto;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+
+/* =========================
+   COLUNAS
+   ========================= */
+
+.reveal .columns {
+  align-items: start;
+  gap: 1.2rem;
+}
+
+.reveal .column {
+  padding: 0 0.4rem;
+}

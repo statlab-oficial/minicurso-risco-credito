@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 13 — Estratégias para lidar com desbalanceamento</text>
+<text x="80" y="130" class="subtitle">O problema pode ser tratado na amostra, no critério de decisão e na avaliação do modelo.</text>
+<rect x="100" y="240" width="360" height="160" class="box2"/><text x="125" y="295" class="label">Undersampling</text><text x="125" y="340" class="small">reduz exemplos da classe majoritária</text><rect x="520" y="240" width="360" height="160" class="box2"/><text x="545" y="295" class="label">Oversampling</text><text x="545" y="340" class="small">replica exemplos da classe minoritária</text><rect x="940" y="240" width="360" height="160" class="box2"/><text x="965" y="295" class="label">SMOTE</text><text x="965" y="340" class="small">cria casos sintéticos da minoria</text><rect x="310" y="520" width="360" height="160" class="box2"/><text x="335" y="575" class="label">Threshold</text><text x="335" y="620" class="small">ajusta o ponto de corte da decisão</text><rect x="730" y="520" width="360" height="160" class="box2"/><text x="755" y="575" class="label">Métricas adequadas</text><text x="755" y="620" class="small">usa recall, precisão, AUC e afins</text></svg>

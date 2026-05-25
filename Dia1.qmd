@@ -1,0 +1,1392 @@
+---
+bibliography: referencias.bib
+csl: apa.csl
+link-citations: true
+format:
+  revealjs:
+    theme: [default]
+    css: estilos-dark.css
+    highlight-style: github-dark
+    slide-number: true
+    chalkboard: false
+    toc: false
+    incremental: false
+    code-overflow: wrap
+    transition: slide
+execute:
+  echo: true
+  
+---
+
+```{python}
+#| label: chunk_6c_antes
+#| echo: false
+#| eval: false
+
+# Instalar, se necessário: !pip install scorecardpy
+import sys
+!{sys.executable} -m pip install scorecardpy
+```
+
+---
+
+## 
+
+![](figuras/Slide_1o.PNG){width=100% fig-align="center"}
+
+---
+
+## 
+
+![](figuras/Slide_ap.PNG){width=100% fig-align="center"}
+
+---
+
+## Você já passou por isso?
+
+- limite do cartão aumentado ou reduzido  
+- crédito negado sem explicação clara  
+- financiamento aprovado para uns e não para outros  
+
+Pergunta:
+
+> Como essas decisões são tomadas?
+
+> Existe um critério? Um modelo? Ou é arbitrário?
+
+---
+
+## Perfis diversos
+
+![](figuras/figura_01_decisao_credito.svg){width=100% fig-align="center"}
+
+Decisões de crédito são tomadas com base em informações incompletas e envolvem incerteza sobre o comportamento futuro do cliente.
+
+---
+
+## O que é risco?
+
+Risco está associado a duas coisas:
+
+- incerteza sobre o futuro  
+- possibilidade de perda  
+
+Podemos pensar risco como:
+
+> chance de algo indesejado acontecer + impacto dessa ocorrência  
+
+No nosso contexto:
+
+> risco de crédito = inadimplência + perda financeira associada
+
+
+---
+
+## Onde esse problema aparece?
+
+O risco de crédito está presente em diversas situações:
+
+- empréstimos pessoais  
+- cartão de crédito  
+- financiamento  
+- crédito estudantil  
+- fintechs  
+- crediário  
+- análise para empresas  
+
+---
+
+## Onde está o problema?
+
+Pergunta central:
+
+> Dado um cliente, qual é o risco de inadimplência?
+
+Essa pergunta está por trás de decisões que afetam milhões de pessoas todos os dias.
+
+
+---
+
+## Por que isso é difícil?
+
+Considere dois clientes:
+
+- mesma renda  
+- mesma idade  
+- histórias diferentes  
+
+Um paga, outro não.
+
+Perguntas:
+
+> O que diferencia esses clientes?
+
+> Como transformar isso em uma regra de decisão?
+
+---
+
+## Uma decisão simples na aparência
+
+Uma instituição financeira recebe pedidos de crédito diariamente.
+
+- 1000 clientes solicitam crédito  
+- parte pagará corretamente  
+- parte atrasará  
+- parte não pagará  
+
+---
+
+## O problema
+
+A decisão precisa ser tomada antes de observar o resultado.
+
+> O comportamento futuro do cliente não é conhecido no momento da concessão.
+
+> A decisão é feita sob incerteza [@hand_henley_1997].
+
+---
+
+## A decisão
+
+Perguntas centrais:
+
+- Quem aprovar?  
+- Quem rejeitar?  
+- Em quais condições?  
+
+> Esse é o problema central da modelagem de risco de crédito.
+
+---
+
+## A decisão
+
+![](figuras/figura_03_fluxo_decisao.svg){width=100% fig-align="center"}
+
+Do dado à decisão, o modelo atua como uma ponte que transforma informação em estimativa de risco.
+
+---
+
+## Nem todo erro custa a mesma coisa
+
+Duas decisões incorretas possíveis:
+
+- Aprovar um cliente inadimplente → perda financeira direta  
+- Negar um cliente adimplente → perda de receita  
+
+Esses erros não são equivalentes.
+
+Exemplo real:
+
+- bancos preferem perder um bom cliente a assumir prejuízo com inadimplência  
+
+> Em crédito, errar faz parte — o importante é o custo do erro.
+
+---
+
+## Como organizar esses erros?
+
+Podemos representar essas decisões em uma estrutura simples:
+
+- o que aconteceu de fato  
+- o que o modelo decidiu  
+
+> Isso nos permite analisar os tipos de erro.
+
+---
+
+## 
+
+![](figuras/figura_04_matriz_erros.png){width=100% fig-align="center"}
+
+---
+
+## Então qual é o problema real?
+
+O ideal seria:
+
+- prever perfeitamente quem não paga  
+- eliminar completamente os erros  
+
+Mas isso não é possível.
+
+Então o objetivo passa a ser:
+
+> tomar decisões melhores em um cenário de incerteza
+
+> considerando o impacto de cada tipo de erro.
+
+---
+
+## Impacto econômico dos erros
+
+Podemos quantificar os erros:
+
+- Falso positivo (FP): aprovar quem não paga  
+- Falso negativo (FN): negar quem pagaria  
+
+Em termos de quantidade:
+
+- FP: número de inadimplentes aprovados  
+- FN: número de bons clientes rejeitados  
+
+Cada erro tem um custo associado:
+
+- $\text{custo}_{FP}$: perda média ao aprovar um cliente inadimplente  
+- $\text{custo}_{FN}$: lucro não realizado ao rejeitar um cliente adimplente  
+
+---
+
+## Interpretando os custos
+
+Exemplo:
+
+- aprovar um cliente inadimplente pode gerar perda de R$ 800  
+- rejeitar um cliente adimplente pode significar deixar de ganhar R$ 100  
+
+Ou seja:
+
+$$
+\text{custo}_{FP} > \text{custo}_{FN}
+$$
+
+O custo total das decisões pode ser representado por:
+
+$$
+\text{Custo} = \text{custo}_{FP} \cdot FP + \text{custo}_{FN} \cdot FN
+$$
+
+> O objetivo não é minimizar erros, mas minimizar o custo total.
+
+---
+
+## Como medir o risco?
+
+Vimos que decisões têm custos.
+
+Mas como quantificar esse risco antes de decidir?
+
+Precisamos responder:
+
+- qual a chance de inadimplência?  
+- quanto se perde se isso acontecer?  
+- quanto está em risco?  
+
+> O risco pode ser decomposto em componentes.
+
+---
+
+## A linguagem do risco de crédito
+
+$$
+\text{Perda Esperada} = PD \times LGD \times EAD
+$$
+
+- $PD$: probabilidade de inadimplência  
+- $LGD$: proporção da perda caso ocorra inadimplência  
+- $EAD$: valor exposto no momento do default  
+
+> Essa estrutura organiza o risco em três componentes principais.
+
+---
+
+## Como interpretar?
+
+A perda esperada combina:
+
+- chance de não pagar  
+- proporção da perda  
+- valor em risco  
+
+Ou seja:
+
+> perda esperada = chance × perda × exposição  
+
+> Essa estrutura é adotada em Basileia [@basel_framework; @eba_pd_lgd].
+
+---
+
+## 
+
+![](figuras/figura_05_pd_lgd_ead.svg){width=95% fig-align="center"}
+
+Exemplo:
+
+PD = 10%, LGD = 50%, EAD = R\$ 1000
+
+> perda esperada = $0,10 \times 0,50 \times  R\$ \ 1000 = R\$ \ 50$
+
+
+
+## Onde entra o modelo?
+
+Entre esses três componentes:
+
+- PD  
+- LGD  
+- EAD  
+
+Neste curso, vamos focar em:
+
+> modelar a probabilidade de inadimplência (PD)
+
+---
+
+## Por que esse problema é importante?
+
+- decisões financeiras reais  
+- impacto econômico direto  
+- milhões de clientes afetados  
+
+Contexto regulatório:
+
+- Basileia exige gestão estruturada de risco  
+
+> Modelos de crédito são fundamentais para o sistema financeiro [@basel2; @basel3final].
+
+---
+
+## 
+
+![](figuras/figura_06_importancia.svg){width=95% fig-align="center"}
+
+Modelar risco de crédito não é apenas um problema técnico:
+
+> é uma decisão com impacto econômico real.
+
+---
+
+## O problema estatístico
+
+$$
+Y =
+\begin{cases}
+1, & \text{inadimplente} \\
+0, & \text{adimplente}
+\end{cases}
+$$
+
+Objetivo:
+
+$$
+P(Y=1 \mid X)
+$$
+
+em que $X$ representa informações do cliente, como:
+
+- idade, renda, valor e duração do crédito  
+- histórico de pagamento, tipo de emprego ou estabilidade  
+
+> Queremos transformar esses dados em uma probabilidade de risco [@hand_henley_1997].
+
+---
+
+## 
+
+![](figuras/figura_07_problema_estatistico.svg){width=95% fig-align="center"}
+O problema de crédito pode ser formulado como a estimação da probabilidade de inadimplência.
+
+---
+
+## Tipos de modelos de crédito
+
+- Application scoring → antes da concessão  
+  (decidir se aprova ou não o crédito)
+
+- Behavioral scoring → durante o relacionamento  
+  (ajustar limite, risco ao longo do tempo)
+
+- Collection scoring → após atraso  
+  (definir estratégia de cobrança)
+
+Cada modelo responde a uma pergunta diferente.
+
+> O tipo de modelo depende do momento da decisão e dos dados disponíveis [@eba_loan_monitoring].
+
+---
+
+![](figuras/figura_08_tipos_modelos.svg){width=95% fig-align="center"}
+---
+
+## O que muda entre esses modelos?
+
+Ao longo do tempo, mudam:
+
+- o que sabemos sobre o cliente  
+- o que queremos decidir  
+- o nível de risco observado  
+
+Consequência:
+
+- modelos usam dados diferentes  
+- decisões são diferentes  
+
+> O modelo certo depende do momento do cliente.
+
+---
+
+## Como o problema vira análise
+
+1. coleta de dados  
+2. tratamento  
+3. transformação  
+4. modelagem  
+5. avaliação  
+6. decisão  
+
+> Agora: foco na preparação, estruturação e leitura inicial inicial da base.
+
+---
+
+## Base de dados utilizada
+
+Dataset: credit-g (OpenML)
+
+- acesso direto via Python  
+- classificação de crédito  
+- variáveis reais  
+
+```{python}
+#| label: chunk_1
+#| echo: true
+#| eval: false
+
+from sklearn.datasets import fetch_openml
+import pandas as pd
+
+# Carrega a base credit-g
+credit = fetch_openml(name="credit-g", version=1, as_frame=True)
+
+# Separando variáveis explicativas e alvo original
+X = credit.data.copy()
+y = credit.target.copy()
+
+# Juntando tudo
+dados = X.copy()
+dados["class"] = y
+
+# Visualização inicial
+dados.head()
+```
+
+---
+
+Dataset: credit-g (OpenML)
+
+```{python}
+#| label: chunk_1_visualizar
+#| echo: false
+#| eval: true
+
+from sklearn.datasets import fetch_openml
+import pandas as pd
+
+# Carrega a base credit-g
+credit = fetch_openml(name="credit-g", version=1, as_frame=True)
+
+# Separando variáveis explicativas e alvo original
+X = credit.data.copy()
+y = credit.target.copy()
+
+# Juntando tudo
+dados = X.copy()
+dados["class"] = y
+
+# Visualização inicial
+dados.head()
+```
+
+---
+
+## Algumas variáveis visualizadas
+
+- idade  
+- duração do crédito  
+- histórico  
+- valor  
+- propósito  
+- status  
+
+Cada variável pode indicar risco.
+
+---
+
+## 
+
+![](figuras/figura_10_variaveis_dados.svg){width=95% fig-align="center"}
+Cada variável carrega informação que pode ajudar a distinguir clientes com maior ou menor risco.
+
+---
+
+## Definição da variável alvo
+
+- 1 → inadimplente  
+- 0 → adimplente  
+
+Problema de classificação binária.
+
+```{python}
+#| label: chunk_2
+#| echo: true
+#| eval: false
+
+# Frequência da variável original
+dados["class"].value_counts()
+```
+
+```{python}
+#| echo: true
+#| eval: false
+
+# Criando variável binária
+# 1 = inadimplente (bad)
+# 0 = adimplente (good)
+
+dados["target"] = (dados["class"] == "bad").astype(int)
+
+dados[["class", "target"]].head(10)
+```
+---
+
+## Definição da variável alvo
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Frequência da variável original
+dados["class"].value_counts()
+
+# Criando variável binária
+# 1 = inadimplente (bad)
+# 0 = adimplente (good)
+
+dados["target"] = (dados["class"] == "bad").astype(int)
+
+dados[["class", "target"]].head(7)
+```
+
+---
+
+
+## Distribuição da variável alvo
+
+```{python}
+#| label: chunk_3
+#| echo: true
+#| eval: false
+
+import matplotlib.pyplot as plt
+
+freq = dados["target"].value_counts().sort_index()
+freq.index = ["Adimplente (0)", "Inadimplente (1)"]
+
+plt.figure(figsize=(7, 4))
+plt.bar(freq.index, freq.values)
+plt.title("Distribuição da variável alvo")
+plt.ylabel("Frequência")
+plt.show()
+```
+
+---
+
+## 
+
+![](figuras/figura_11_distribuicao_alvo.svg){width=95% fig-align="center"}
+
+---
+
+## Dados desbalanceados
+
+- maioria paga  
+- poucos entram em default  
+
+Problema:
+
+- métricas podem enganar  
+
+Exemplo:
+
+- prever sempre “bom” → alta acurácia  
+
+> Em classes raras, acurácia não é suficiente [@sklearn_model_eval].
+
+---
+
+## 
+
+![](figuras/figura_12_dados_desbalanceados.svg){width=95% fig-align="center"}
+
+Se a maioria dos clientes paga, o que acontece se o modelo prever sempre “vai pagar”?
+
+> Uma acurácia de 95% garante um modelo bom?
+
+---
+
+## Um modelo pode ser inútil
+
+Se 95% pagam:
+
+- prever sempre “bom” → 95% de acurácia  
+
+Mas:
+
+- não identifica clientes de risco  
+
+> Acurácia pode ser enganosa.
+
+---
+
+## Como lidar com desbalanceamento
+
+Existem diferentes estratégias:
+
+- reamostragem dos dados (under/over)  
+  
+- geração sintética (SMOTE)  
+
+- escolha de métricas adequadas  
+- ajuste do threshold (ponto de corte)  
+
+Não existe solução única.
+
+> A escolha depende do objetivo do modelo.
+
+---
+
+## 
+
+![](figuras/figura_13_estrategias_desbalanceamento.svg){width=95% fig-align="center"}
+
+O desbalanceamento pode ser tratado nos dados, nas métricas e nas regras de decisão, conforme o objetivo do modelo.
+
+---
+
+## Divisão da base de dados
+
+Para avaliar corretamente um modelo, separamos os dados em:
+
+- treino → ajuste do modelo  
+- validação → escolha e ajuste de parâmetros  
+- teste → avaliação final  
+
+Problema crítico:
+
+- avaliar no treino gera resultados otimistas  
+
+$$
+\text{Erro de treino} \leq \text{Erro real}
+$$
+
+> Avaliar fora da amostra é essencial para garantir que o modelo funcione na prática [@sklearn_cv].
+
+---
+
+## Uma proposta de divisão da base de dados
+
+![](figuras/figura_14_divisao_base.svg){width=95% fig-align="center"}
+
+---
+
+## Dividindo os dados
+
+A divisão é feita de forma estratificada:
+
+- mantém a proporção de inadimplentes  
+- evita distorções entre conjuntos  
+
+Parâmetros importantes:
+
+- `random_state` → reprodutibilidade  
+- `stratify` → preserva a distribuição da classe  
+
+---
+
+Dividindo os dados
+
+```{python}
+#| label: chunk_4
+#| echo: true
+#| eval: false
+
+from sklearn.model_selection import train_test_split
+# 1ª divisão: 80% para treino inicial e 20% para teste
+X_train, X_test, y_train, y_test = train_test_split(
+    dados.drop(columns=["class", "target"]),  # variáveis explicativas
+    dados["target"],                         # variável resposta
+    test_size=0.2,                           # 20% para teste
+    random_state=42,                         # reprodutibilidade
+    stratify=dados["target"]                 # mantém proporção das classes
+)
+# 2ª divisão: # dos 80% de treino: 75% → treino final e 25% → validação
+X_train, X_valid, y_train, y_valid = train_test_split(
+    X_train,
+    y_train,
+    test_size=0.25,        # 25% de 80% = 20% do total
+    random_state=42,
+    stratify=y_train       # mantém proporção das classes
+)
+# Resultado final: # Treino: 60%; Validação: 20%; Teste: 20%
+print("Treino:", len(X_train))
+print("Validação:", len(X_valid))
+print("Teste:", len(X_test))
+```
+
+Resultado: Treino: 600; Validação: 200; Teste: 200
+
+---
+
+## Transformação de variáveis
+
+Antes da modelagem, os dados precisam ser preparados:
+
+- tratar variáveis categóricas  
+- agrupar variáveis contínuas  
+- reduzir ruído  
+- facilitar interpretação  
+
+Exemplo:
+
+- idade → transformar em faixas  
+
+> Em crédito, interpretação é tão importante quanto desempenho.
+
+---
+
+![](figuras/figura_15_transformacao_variaveis.svg){width=95% fig-align="center"}
+
+---
+
+## Antes de modelar, precisamos preparar os dados
+
+Um modelo não corrige problemas nos dados.
+
+- dados inconsistentes → decisões ruins  
+- dados mal tratados → modelos enganosos  
+
+> Modelar bons dados é mais importante que escolher o modelo.
+
+---
+
+## O que precisamos verificar?
+
+- dados faltantes  
+- tipos de variáveis  
+- valores inconsistentes  
+- categorias mal definidas  
+- escalas diferentes  
+
+> Antes de modelar, precisamos confiar nos dados.
+
+---
+
+## Dados faltantes
+
+
+Exemplos:
+
+- renda não informada  
+- idade ausente  
+- histórico incompleto  
+
+O que fazer?
+
+- excluir  
+- imputar  
+- manter com cuidado  
+
+> A decisão depende do contexto.
+
+---
+
+## Variáveis categóricas
+
+Exemplo:
+
+- "Masculino", "M", "masc"  
+
+São a mesma coisa?
+
+Problema:
+
+- categorias inconsistentes confundem o modelo  
+
+> É necessário padronizar antes de modelar.
+
+---
+
+## Criação de variáveis
+
+Podemos criar novas informações a partir das existentes.
+
+Exemplos:
+
+- renda / dívida  
+- tempo de relacionamento  
+- frequência de uso  
+
+> Variáveis bem construídas podem ser mais importantes que o modelo.
+
+---
+
+## Discretização de variáveis
+
+Transformar variável contínua em faixas.
+
+Exemplo:
+
+- idade → faixas etárias  
+
+Por quê?
+
+- facilita interpretação  
+- captura não linearidade  
+- muito usado em crédito  
+
+> Nem sempre o modelo aprende melhor com valores contínuos.
+
+---
+
+## Exemplo: agrupando idade
+
+Variáveis contínuas podem ser transformadas em faixas.
+
+Objetivos:
+
+- facilitar interpretação  
+- capturar padrões não lineares  
+- reduzir sensibilidade a valores extremos  
+
+> Essa prática é comum em modelagem de crédito.
+
+---
+
+## Criando a variável idade em faixas
+
+```{python}
+#| echo: true
+#| eval: false
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# =========================
+# Criando faixas de idade
+# =========================
+dados["faixa_idade"] = pd.cut(
+    dados["age"],
+    bins=[0, 25, 35, 50, 100],
+    labels=["até 25", "26–35", "36–50", "50+"]
+)
+
+# Contagem das faixas
+faixas = dados["faixa_idade"].value_counts().sort_index()
+
+# Gráfico
+plt.figure(figsize=(7, 4))
+plt.bar(faixas.index.astype(str), faixas.values)
+plt.title("Distribuição das faixas de idade")
+plt.ylabel("Frequência")
+plt.show()
+```
+
+---
+
+## 
+![](figuras/figura_16_agrupando_idade.svg){width=95% fig-align="center"}
+
+
+Em modelos de crédito, variáveis agrupadas ajudam na interpretação e podem capturar melhor diferenças de risco entre perfis.
+
+---
+
+## As faixas ajudam a entender o risco?
+
+Dividimos a idade em grupos.
+
+Mas agora surge a pergunta:
+
+- essas faixas realmente separam clientes bons e maus?  
+
+> São apenas agrupamentos visuais?
+
+---
+
+## Considere duas formas de dividir idade:
+
+Divisão A:
+
+- até 30  
+- acima de 30 até 45  
+- acima de 45 até 60 
+- acima de 60   
+
+Divisão B:
+
+- até 25  
+- acima de 25 até 35  
+- acima de 25 até 50 
+- acima de 50  
+
+Qual separa melhor:
+
+> O objetivo não é agrupar, é separar risco.
+
+---
+
+## O que queremos observar?
+
+Para cada faixa, queremos saber:
+
+- quantos são adimplentes  
+- quantos são inadimplentes  
+
+Uma boa divisão:
+
+- concentra perfis semelhantes  
+- separa perfis diferentes  
+
+> Isso melhora a capacidade de previsão.
+
+---
+
+```{python}
+#| label: chunk_faixa_vs_target
+#| echo: true
+#| eval: true
+
+import pandas as pd
+# Divisão A 
+dados["faixa_A"] = pd.cut(
+    dados["age"],
+    bins=[0, 30, 45, 60, 100],
+    labels=["até 30", "31–45", "46–60", "60+"]
+)
+# Divisão B 
+dados["faixa_B"] = pd.cut(
+    dados["age"],
+    bins=[0, 25, 35, 50, 100],
+    labels=["até 25", "26–35", "36–50", "50+"]
+)
+# Tabelas de proporção
+tabela_A = pd.crosstab(dados["faixa_A"], dados["target"], normalize="index")
+print(tabela_A)
+tabela_B = pd.crosstab(dados["faixa_B"], dados["target"], normalize="index")
+print(tabela_B)
+```
+
+---
+
+## Observe a proporção de inadimplentes (classe 1):
+
+Divisão A:
+
+- até 30 → 36% 
+- 31–45 → 26%  
+- 46–60 → 26% 
+- 60+ → 22%  
+
+Divisão B:
+
+- até 25 → 42% 
+- 26–35 → 30% 
+- 36–50 → 24% 
+- 50+ → 27%  
+
+---
+
+## Qual divisão evidencia melhor a diferença de risco?
+
+> O objetivo não é agrupar, é separar bons e maus clientes.
+
+
+```{python}
+#| label: fig_comparacao_divisoes
+#| echo: false
+#| eval: true
+
+import matplotlib.pyplot as plt
+
+# Dados (inadimplência)
+faixas_A = ["até 30", "31–45", "46–60", "60+"]
+inad_A = [0.360, 0.261, 0.262, 0.222]
+
+faixas_B = ["até 25", "26–35", "36–50", "50+"]
+inad_B = [0.421, 0.296, 0.237, 0.274]
+
+plt.figure(figsize=(8, 4))
+
+plt.plot(faixas_A, inad_A, marker='o', label="Divisão A")
+plt.plot(faixas_B, inad_B, marker='o', label="Divisão B")
+
+plt.ylabel("Proporção de inadimplentes")
+plt.title("Comparação entre formas de discretização")
+plt.legend()
+plt.grid(alpha=0.2)
+
+plt.show()
+```
+
+---
+
+## O que temos até aqui?
+
+- a forma de dividir a variável influencia o resultado  
+- divisões diferentes geram níveis diferentes de separação  
+- escolher manualmente não é trivial  
+
+> Precisamos de um método que faça isso com base nos dados.
+
+---
+
+## Técnicas específicas de crédito
+
+Algumas técnicas são muito usadas:
+
+- WoE (Weight of Evidence)  
+- Information Value (IV)  
+- testes estatísticos  
+
+Essas técnicas ajudam a:
+
+- separar melhor bons e maus clientes  
+
+> Veremos isso mais à frente de forma prática.
+
+---
+
+## Weight of Evidence (WoE)
+
+Em credit scoring, cada faixa de uma variável pode ser transformada em um número.
+
+Para a faixa $j$:
+
+$$
+WoE_j=\ln\left(\frac{\%\,bons_j}{\%\,maus_j}\right)
+$$
+
+em que:
+
+- bons = adimplentes  
+- maus = inadimplentes  
+
+> O WoE mede o quanto uma faixa está associada a bons ou maus clientes.
+
+---
+
+## Como o Peso da Evidência (WoE) é calculado?
+
+Passos:
+
+1. dividir a variável em faixas  
+2. contar bons e maus em cada faixa  
+3. calcular proporções  
+4. aplicar o logaritmo da razão  
+
+Interpretação:
+
+- $WoE > 0$ → maior concentração de bons  
+- $WoE < 0$ → maior concentração de maus
+
+---
+
+## Information Value (IV)
+
+Depois do WoE, podemos medir a força preditiva da variável:
+
+$$
+IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
+$$
+
+Leitura prática:
+
+- IV pequeno → variável fraca  
+- IV maior → variável mais útil  
+
+> O IV ajuda a priorizar variáveis para o modelo.
+
+---
+
+### WoE — Divisão A  →  **IV total = 0.058**
+
+| Faixa   | Bons | Maus | Prop. Bons | Prop. Maus | WoE     | IV Parcial |
+|---------|------|------|------------|------------|---------|------------|
+| até 30  | 263  | 148  | 0.376      | 0.493      | -0.272  | 0.032      |
+| 31–45   | 298  | 105  | 0.426      | 0.350      |  0.196  | 0.015      |
+| 46–60   | 104  |  37  | 0.149      | 0.123      |  0.186  | 0.005      |
+| 60+     |  35  |  10  | 0.050      | 0.033      |  0.405  | 0.007      |
+
+### WoE — Divisão B  →  **IV total = 0.088**
+
+| Faixa   | Bons | Maus | Prop. Bons | Prop. Maus | WoE     | IV Parcial |
+|---------|------|------|------------|------------|---------|------------|
+| até 25  | 110  |  80  | 0.157      | 0.267      | -0.529  | 0.058      |
+| 26–35   | 280  | 118  | 0.400      | 0.393      |  0.017  | 0.000      |
+| 36–50   | 228  |  71  | 0.326      | 0.237      |  0.319  | 0.028      |
+| 50+     |  82  |  31  | 0.117      | 0.103      |  0.125  | 0.002      |
+
+---
+
+## Qual divisão é melhor?
+
+A Divisão B:
+
+- apresenta maior separação entre faixas  
+- possui WoE mais distintos  
+- tem maior poder preditivo (IV)
+
+Mas:
+
+- ainda não é perfeita  
+- algumas faixas não contribuem muito  
+
+> O desafio é encontrar a melhor divisão possível.
+
+---
+
+## Como escolher as faixas?
+
+As faixas podem ser definidas por:
+
+- regra de negócio  
+- quantis  
+- largura fixa  
+- métodos automáticos  
+
+Em crédito, métodos automáticos costumam usar:
+
+- qui-quadrado  
+- critérios de separação entre bons e maus  
+
+> A ideia é formar grupos com comportamento de risco diferente.
+
+---
+
+## Observação importante
+
+> Nem toda transformação melhora o modelo.
+
+Precisamos buscar:
+
+- faixas interpretáveis  
+- separação entre bons e maus  
+- estabilidade  
+- coerência com o negócio  
+
+> Em crédito, desempenho e interpretabilidade precisam caminhar juntos.
+
+---
+
+## Aplicando na base em Python
+
+Vamos usar a própria base do curso para:
+
+- discretizar variáveis  
+- calcular WoE  
+- observar IV  
+- gerar variáveis transformadas  
+
+---
+
+```{python}
+#| label: chunk_6a
+#| echo: true
+#| eval: false
+
+# Dados faltantes por coluna
+dados.isna().sum().sort_values(ascending=False).head(10)
+# Duplicatas
+print("Número de linhas duplicadas:", dados.duplicated().sum())
+# Tipos das variáveis
+dados.dtypes.head(15)
+```
+
+```{python}
+#| label: chunk_6b
+#| echo: true
+#| eval: false
+
+import numpy as np
+import pandas as pd
+
+# Transformações simples
+
+# Log do valor do crédito
+dados["log_credit_amount"] = np.log1p(dados["credit_amount"])
+
+# Crédito médio por mês
+dados["credit_per_month"] = dados["credit_amount"] / dados["duration"]
+
+# Faixas de idade
+dados["faixa_idade"] = pd.cut(
+    dados["age"],
+    bins=[0, 25, 35, 50, 100],
+    labels=["até 25", "26–35", "36–50", "50+"]
+)
+
+dados[["age", "faixa_idade", "credit_amount", "log_credit_amount", "credit_per_month"]].head()
+```
+
+---
+
+```{python}
+#| label: chunk_6b2
+#| echo: false
+#| eval: true
+
+import numpy as np
+import pandas as pd
+
+# =========================
+# Transformações simples
+# =========================
+
+# Log do valor do crédito
+dados["log_credit_amount"] = np.log1p(dados["credit_amount"])
+
+# Crédito médio por mês
+dados["credit_per_month"] = dados["credit_amount"] / dados["duration"]
+
+# Faixas de idade
+dados["faixa_idade"] = pd.cut(
+    dados["age"],
+    bins=[0, 25, 35, 50, 100],
+    labels=["até 25", "26–35", "36–50", "50+"]
+)
+
+dados[["age", "faixa_idade", "credit_amount", "log_credit_amount", "credit_per_month"]].head()
+```
+
+---
+
+```{python}
+#| label: chunk_6c
+#| echo: true
+#| eval: false
+
+
+## Observe o uso do pacote scorecardpy
+import scorecardpy as sc
+
+base_woe = dados.copy()
+base_woe["inad"] = base_woe["target"]
+
+# Seleção de algumas variáveis para exemplo
+vars_exemplo = [
+    "age",
+    "credit_amount",
+    "duration",
+    "credit_per_month",
+    "log_credit_amount",
+    "inad"
+]
+base_woe = base_woe[vars_exemplo]
+
+# Binning automático
+bins = sc.woebin(base_woe, y="inad")
+
+# Tabela de bins
+bins["age"]
+```
+
+---
+
+```{python}
+#| label: chunk_6c_de
+#| echo: false
+#| eval: true
+
+import scorecardpy as sc
+
+base_woe = dados.copy()
+base_woe["inad"] = base_woe["target"]
+
+# Seleção de algumas variáveis para exemplo
+vars_exemplo = [
+    "age",
+    "credit_amount",
+    "duration",
+    "credit_per_month",
+    "log_credit_amount",
+    "inad"
+]
+base_woe = base_woe[vars_exemplo]
+
+# Binning automático
+bins = sc.woebin(base_woe, y="inad")
+# Tabela de bins
+bins["age"]
+```
+
+---
+
+```{python}
+#| label: chunk_6d
+#| echo: true
+#| eval: true
+
+# Aplicando transformação WOE
+base_woe_transf = sc.woebin_ply(base_woe, bins)
+
+base_woe_transf.head()
+```
+
+---
+
+```{python}
+#| label: chunk_6e
+#| echo: true
+#| eval: true
+
+# Information Value de cada variável
+iv = sc.iv(base_woe, y="inad")
+iv.sort_values("info_value", ascending=False)
+```
+
+
+---
+
+## Exemplo de transformação de variável
+
+Além de discretizar, podemos criar novas variáveis.
+
+Exemplos:
+
+- crédito por mês = valor do crédito / duração  
+- log do valor do crédito  
+- faixas de idade  
+
+> Variáveis derivadas podem resumir melhor o risco do que as originais.
+
+---
+
+## Ideia central
+
+Antes de modelar, podemos:
+
+- tratar a base  
+- discretizar variáveis  
+- criar novas variáveis  
+- transformar informações em sinais de risco  
+
+> Modelos de crédito costumam depender fortemente dessa etapa.
+
+---
+
+
+## O que aprendemos hoje
+
+- risco de crédito é decisão sob incerteza  
+- erros têm impactos econômicos distintos  
+- os dados são naturalmente desbalanceados  
+- a divisão correta evita avaliações incorretas  
+- a transformação influencia diretamente o modelo  
+
+
+> Hoje estruturamos o problema.
+
+> Agora que sabemos como o problema é estruturado, a próxima pergunta é: como transformar isso em um modelo que realmente ajude a decidir?
+
+---
+
+## Referências essenciais
+ 

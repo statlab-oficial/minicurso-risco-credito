@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="100%" height="100%" fill="#081C3A"/>
+    <style>
+      .title { font: 700 42px 'Arial', sans-serif; fill: #F3F7FB; }
+      .subtitle { font: 400 24px 'Arial', sans-serif; fill: #C9D6E8; }
+      .label { font: 600 24px 'Arial', sans-serif; fill: #F3F7FB; }
+      .body { font: 400 22px 'Arial', sans-serif; fill: #F3F7FB; }
+      .small { font: 400 18px 'Arial', sans-serif; fill: #C9D6E8; }
+      .tiny { font: 400 15px 'Arial', sans-serif; fill: #C9D6E8; }
+      .box { fill: #0F2E5E; stroke: #5DA9E9; stroke-width: 2; rx: 20; }
+      .box2 { fill: #12376E; stroke: #F28C28; stroke-width: 2; rx: 20; }
+      .accent { fill: #F28C28; }
+      .light { fill: #5DA9E9; }
+      .good { fill: #66D17A; }
+      .bad { fill: #FF6B6B; }
+      .warn { fill: #FFD166; }
+      .line { stroke: #C9D6E8; stroke-width: 3; }
+      .arrow { stroke: #C9D6E8; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C9D6E8" />
+      </marker>
+    </defs>
+
+<text x="80" y="90" class="title">Figura 3 — A decisão vem antes do resultado</text>
+<text x="80" y="130" class="subtitle">A instituição precisa agir agora, mas o comportamento do cliente só será observado depois.</text>
+
+<rect x="110" y="270" width="350" height="220" class="box"/>
+<text x="180" y="330" class="label">1. Solicitação</text>
+<text x="155" y="390" class="body">Cliente pede crédito</text>
+<text x="155" y="430" class="body">e informa seus dados.</text>
+
+<rect x="625" y="270" width="350" height="220" class="box2"/>
+<text x="740" y="330" class="label">2. Decisão</text>
+<text x="680" y="390" class="body">Aprovar, negar ou</text>
+<text x="690" y="430" class="body">definir condições.</text>
+
+<rect x="1140" y="210" width="340" height="130" class="box"/>
+<text x="1220" y="275" class="label">3A. Pagou em dia</text>
+<rect x="1140" y="385" width="340" height="130" class="box"/>
+<text x="1255" y="450" class="label">3B. Atrasou</text>
+<rect x="1140" y="560" width="340" height="130" class="box"/>
+<text x="1230" y="625" class="label">3C. Não pagou</text>
+
+<line x1="460" y1="380" x2="610" y2="380" class="arrow"/>
+<line x1="975" y1="380" x2="1120" y2="275" class="arrow"/>
+<line x1="975" y1="380" x2="1120" y2="450" class="arrow"/>
+<line x1="975" y1="380" x2="1120" y2="625" class="arrow"/>
+</svg>
