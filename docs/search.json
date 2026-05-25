@@ -1,0 +1,828 @@
+[
+  {
+    "objectID": "minicurso.html#você-já-passou-por-isso",
+    "href": "minicurso.html#você-já-passou-por-isso",
+    "title": "",
+    "section": "Você já passou por isso?",
+    "text": "Você já passou por isso?\n\nlimite do cartão aumentado ou reduzido\n\ncrédito negado sem explicação clara\n\nfinanciamento aprovado para uns e não para outros\n\nPergunta:\n\nComo essas decisões são tomadas?\n\n\nExiste um critério? Um modelo? Ou é arbitrário?"
+  },
+  {
+    "objectID": "minicurso.html#perfis-diversos",
+    "href": "minicurso.html#perfis-diversos",
+    "title": "",
+    "section": "Perfis diversos",
+    "text": "Perfis diversos\n\nDecisões de crédito são tomadas com base em informações incompletas e envolvem incerteza sobre o comportamento futuro do cliente."
+  },
+  {
+    "objectID": "minicurso.html#o-que-é-risco",
+    "href": "minicurso.html#o-que-é-risco",
+    "title": "",
+    "section": "O que é risco?",
+    "text": "O que é risco?\nRisco está associado a duas coisas:\n\nincerteza sobre o futuro\n\npossibilidade de perda\n\nPodemos pensar risco como:\n\nchance de algo indesejado acontecer + impacto dessa ocorrência\n\nNo nosso contexto:\n\nrisco de crédito = inadimplência + perda financeira associada"
+  },
+  {
+    "objectID": "minicurso.html#onde-esse-problema-aparece",
+    "href": "minicurso.html#onde-esse-problema-aparece",
+    "title": "",
+    "section": "Onde esse problema aparece?",
+    "text": "Onde esse problema aparece?\nO risco de crédito está presente em diversas situações:\n\nempréstimos pessoais\n\ncartão de crédito\n\nfinanciamento\n\ncrédito estudantil\n\nfintechs\n\ncrediário\n\nanálise para empresas"
+  },
+  {
+    "objectID": "minicurso.html#onde-está-o-problema",
+    "href": "minicurso.html#onde-está-o-problema",
+    "title": "",
+    "section": "Onde está o problema?",
+    "text": "Onde está o problema?\nPergunta central:\n\nDado um cliente, qual é o risco de inadimplência?\n\nEssa pergunta está por trás de decisões que afetam milhões de pessoas todos os dias."
+  },
+  {
+    "objectID": "minicurso.html#por-que-isso-é-difícil",
+    "href": "minicurso.html#por-que-isso-é-difícil",
+    "title": "",
+    "section": "Por que isso é difícil?",
+    "text": "Por que isso é difícil?\nConsidere dois clientes:\n\nmesma renda\n\nmesma idade\n\nhistórias diferentes\n\nUm paga, outro não.\nPerguntas:\n\nO que diferencia esses clientes?\n\n\nComo transformar isso em uma regra de decisão?"
+  },
+  {
+    "objectID": "minicurso.html#uma-decisão-simples-na-aparência",
+    "href": "minicurso.html#uma-decisão-simples-na-aparência",
+    "title": "",
+    "section": "Uma decisão simples na aparência",
+    "text": "Uma decisão simples na aparência\nUma instituição financeira recebe pedidos de crédito diariamente.\n\n1000 clientes solicitam crédito\n\nparte pagará corretamente\n\nparte atrasará\n\nparte não pagará"
+  },
+  {
+    "objectID": "minicurso.html#o-problema",
+    "href": "minicurso.html#o-problema",
+    "title": "",
+    "section": "O problema",
+    "text": "O problema\nA decisão precisa ser tomada antes de observar o resultado.\n\nO comportamento futuro do cliente não é conhecido no momento da concessão.\n\n\nA decisão é feita sob incerteza (Hand & Henley, 1997)."
+  },
+  {
+    "objectID": "minicurso.html#a-decisão",
+    "href": "minicurso.html#a-decisão",
+    "title": "",
+    "section": "A decisão",
+    "text": "A decisão\nPerguntas centrais:\n\nQuem aprovar?\n\nQuem rejeitar?\n\nEm quais condições?\n\n\nEsse é o problema central da modelagem de risco de crédito."
+  },
+  {
+    "objectID": "minicurso.html#a-decisão-1",
+    "href": "minicurso.html#a-decisão-1",
+    "title": "",
+    "section": "A decisão",
+    "text": "A decisão\n\nDo dado à decisão, o modelo atua como uma ponte que transforma informação em estimativa de risco."
+  },
+  {
+    "objectID": "minicurso.html#nem-todo-erro-custa-a-mesma-coisa",
+    "href": "minicurso.html#nem-todo-erro-custa-a-mesma-coisa",
+    "title": "",
+    "section": "Nem todo erro custa a mesma coisa",
+    "text": "Nem todo erro custa a mesma coisa\nDuas decisões incorretas possíveis:\n\nAprovar um cliente inadimplente → perda financeira direta\n\nNegar um cliente adimplente → perda de receita\n\nEsses erros não são equivalentes.\nExemplo real:\n\nbancos preferem perder um bom cliente a assumir prejuízo com inadimplência\n\n\nEm crédito, errar faz parte — o importante é o custo do erro."
+  },
+  {
+    "objectID": "minicurso.html#como-organizar-esses-erros",
+    "href": "minicurso.html#como-organizar-esses-erros",
+    "title": "",
+    "section": "Como organizar esses erros?",
+    "text": "Como organizar esses erros?\nPodemos representar essas decisões em uma estrutura simples:\n\no que aconteceu de fato\n\no que o modelo decidiu\n\n\nIsso nos permite analisar os tipos de erro."
+  },
+  {
+    "objectID": "minicurso.html#então-qual-é-o-problema-real",
+    "href": "minicurso.html#então-qual-é-o-problema-real",
+    "title": "",
+    "section": "Então qual é o problema real?",
+    "text": "Então qual é o problema real?\nO ideal seria:\n\nprever perfeitamente quem não paga\n\neliminar completamente os erros\n\nMas isso não é possível.\nEntão o objetivo passa a ser:\n\ntomar decisões melhores em um cenário de incerteza\n\n\nconsiderando o impacto de cada tipo de erro."
+  },
+  {
+    "objectID": "minicurso.html#impacto-econômico-dos-erros",
+    "href": "minicurso.html#impacto-econômico-dos-erros",
+    "title": "",
+    "section": "Impacto econômico dos erros",
+    "text": "Impacto econômico dos erros\nPodemos quantificar os erros:\n\nFalso positivo (FP): aprovar quem não paga\n\nFalso negativo (FN): negar quem pagaria\n\nEm termos de quantidade:\n\nFP: número de inadimplentes aprovados\n\nFN: número de bons clientes rejeitados\n\nCada erro tem um custo associado:\n\n\\(\\text{custo}_{FP}\\): perda média ao aprovar um cliente inadimplente\n\n\\(\\text{custo}_{FN}\\): lucro não realizado ao rejeitar um cliente adimplente"
+  },
+  {
+    "objectID": "minicurso.html#interpretando-os-custos",
+    "href": "minicurso.html#interpretando-os-custos",
+    "title": "",
+    "section": "Interpretando os custos",
+    "text": "Interpretando os custos\nExemplo:\n\naprovar um cliente inadimplente pode gerar perda de R$ 800\n\nrejeitar um cliente adimplente pode significar deixar de ganhar R$ 100\n\nOu seja:\n\\[\n\\text{custo}_{FP} &gt; \\text{custo}_{FN}\n\\]\nO custo total das decisões pode ser representado por:\n\\[\n\\text{Custo} = \\text{custo}_{FP} \\cdot FP + \\text{custo}_{FN} \\cdot FN\n\\]\n\nO objetivo não é minimizar erros, mas minimizar o custo total."
+  },
+  {
+    "objectID": "minicurso.html#como-medir-o-risco",
+    "href": "minicurso.html#como-medir-o-risco",
+    "title": "",
+    "section": "Como medir o risco?",
+    "text": "Como medir o risco?\nVimos que decisões têm custos.\nMas como quantificar esse risco antes de decidir?\nPrecisamos responder:\n\nqual a chance de inadimplência?\n\nquanto se perde se isso acontecer?\n\nquanto está em risco?\n\n\nO risco pode ser decomposto em componentes."
+  },
+  {
+    "objectID": "minicurso.html#a-linguagem-do-risco-de-crédito",
+    "href": "minicurso.html#a-linguagem-do-risco-de-crédito",
+    "title": "",
+    "section": "A linguagem do risco de crédito",
+    "text": "A linguagem do risco de crédito\n\\[\n\\text{Perda Esperada} = PD \\times LGD \\times EAD\n\\]\nem que:\n\nProbability of Default (PD) → probabilidade de inadimplência\n\nLoss Given Default (LGD) → proporção da perda caso ocorra inadimplência\n\nExposure at Default (EAD) → valor exposto no momento do default\n\nInterpretação:\n\nEssa estrutura organiza o risco em três componentes principais."
+  },
+  {
+    "objectID": "minicurso.html#como-interpretar",
+    "href": "minicurso.html#como-interpretar",
+    "title": "",
+    "section": "Como interpretar?",
+    "text": "Como interpretar?\nA perda esperada combina:\n\nchance de não pagar\n\nproporção da perda\n\nvalor em risco\n\nOu seja:\n\nperda esperada = chance × perda × exposição\n\n\nEssa estrutura é adotada em Basileia (Bank for International Settlements, 2023; European Banking Authority, 2017)."
+  },
+  {
+    "objectID": "minicurso.html#onde-entra-o-modelo",
+    "href": "minicurso.html#onde-entra-o-modelo",
+    "title": "",
+    "section": "Onde entra o modelo?",
+    "text": "Onde entra o modelo?\nEntre esses três componentes:\n\nPD\n\nLGD\n\nEAD\n\nNeste curso, vamos focar em:\n\nmodelar a probabilidade de inadimplência (PD)"
+  },
+  {
+    "objectID": "minicurso.html#por-que-esse-problema-é-importante",
+    "href": "minicurso.html#por-que-esse-problema-é-importante",
+    "title": "",
+    "section": "Por que esse problema é importante?",
+    "text": "Por que esse problema é importante?\n\ndecisões financeiras reais\n\nimpacto econômico direto\n\nmilhões de clientes afetados\n\nContexto regulatório:\n\nBasileia exige gestão estruturada de risco\n\n\nModelos de crédito são fundamentais para o sistema financeiro (Basel Committee on Banking Supervision, 2006, 2017)."
+  },
+  {
+    "objectID": "minicurso.html#o-problema-estatístico",
+    "href": "minicurso.html#o-problema-estatístico",
+    "title": "",
+    "section": "O problema estatístico",
+    "text": "O problema estatístico\nDefinimos a variável resposta:\n\\[\nY =\n\\begin{cases}\n1, & \\text{se o cliente for inadimplente} \\\\\n0, & \\text{se o cliente for adimplente}\n\\end{cases}\n\\]\nNosso objetivo é modelar:\n\\[\nP(Y=1 \\mid X)\n\\]\n\na probabilidade de um cliente se tornar inadimplente dado seu perfil\n\nem que \\(X\\) representa informações do cliente, como:\n\nidade, renda, valor e duração do crédito\n\nhistórico de pagamento, tipo de emprego ou estabilidade"
+  },
+  {
+    "objectID": "minicurso.html#section",
+    "href": "minicurso.html#section",
+    "title": "",
+    "section": "",
+    "text": "O problema de crédito pode ser formulado como a estimação da probabilidade de inadimplência."
+  },
+  {
+    "objectID": "minicurso.html#tipos-de-modelos-de-crédito",
+    "href": "minicurso.html#tipos-de-modelos-de-crédito",
+    "title": "",
+    "section": "Tipos de modelos de crédito",
+    "text": "Tipos de modelos de crédito\n\nApplication scoring → antes da concessão\n(decidir se aprova ou não o crédito)\nBehavioral scoring → durante o relacionamento\n(ajustar limite, risco ao longo do tempo)\nCollection scoring → após atraso\n(definir estratégia de cobrança)\n\nCada modelo responde a uma pergunta diferente.\n\nO tipo de modelo depende do momento da decisão e dos dados disponíveis (European Banking Authority, 2020)."
+  },
+  {
+    "objectID": "minicurso.html#o-que-muda-entre-esses-modelos",
+    "href": "minicurso.html#o-que-muda-entre-esses-modelos",
+    "title": "",
+    "section": "O que muda entre esses modelos?",
+    "text": "O que muda entre esses modelos?\nAo longo do tempo, mudam:\n\no que sabemos sobre o cliente\n\no que queremos decidir\n\no nível de risco observado\n\nConsequência:\n\nmodelos usam dados diferentes\n\ndecisões são diferentes\n\n\nO modelo certo depende do momento do cliente."
+  },
+  {
+    "objectID": "minicurso.html#como-o-problema-vira-análise",
+    "href": "minicurso.html#como-o-problema-vira-análise",
+    "title": "",
+    "section": "Como o problema vira análise",
+    "text": "Como o problema vira análise\n\ncoleta de dados\n\ntratamento\n\ntransformação\n\nmodelagem\n\navaliação\n\ndecisão\n\n\nAgora: foco na preparação, estruturação e leitura inicial inicial da base."
+  },
+  {
+    "objectID": "minicurso.html#base-de-dados-utilizada",
+    "href": "minicurso.html#base-de-dados-utilizada",
+    "title": "",
+    "section": "Base de dados utilizada",
+    "text": "Base de dados utilizada\nDataset: credit-g (OpenML)\n\nacesso direto via Python\n\nclassificação de crédito\n\nvariáveis reais\n\n\nfrom sklearn.datasets import fetch_openml\nimport pandas as pd\n\n# Carrega a base credit-g\ncredit = fetch_openml(name=\"credit-g\", version=1, as_frame=True)\n\n# Separando variáveis explicativas e alvo original\nX = credit.data.copy()\ny = credit.target.copy()\n\n# Juntando tudo\ndados = X.copy()\ndados[\"class\"] = y\n\n# Visualização inicial\ndados.head()"
+  },
+  {
+    "objectID": "minicurso.html#algumas-variáveis-visualizadas",
+    "href": "minicurso.html#algumas-variáveis-visualizadas",
+    "title": "",
+    "section": "Algumas variáveis visualizadas",
+    "text": "Algumas variáveis visualizadas\n\nidade\n\nduração do crédito\n\nhistórico\n\nvalor\n\npropósito\n\nstatus\n\nCada variável pode indicar risco."
+  },
+  {
+    "objectID": "minicurso.html#definição-da-variável-alvo",
+    "href": "minicurso.html#definição-da-variável-alvo",
+    "title": "",
+    "section": "Definição da variável alvo",
+    "text": "Definição da variável alvo\n\n1 → inadimplente\n\n0 → adimplente\n\nProblema de classificação binária.\n\n# Frequência da variável original\ndados[\"class\"].value_counts()\n\n\n# Criando variável binária\n# 1 = inadimplente (bad)\n# 0 = adimplente (good)\n\ndados[\"target\"] = (dados[\"class\"] == \"bad\").astype(int)\n\ndados[[\"class\", \"target\"]].head(10)"
+  },
+  {
+    "objectID": "minicurso.html#definição-da-variável-alvo-1",
+    "href": "minicurso.html#definição-da-variável-alvo-1",
+    "title": "",
+    "section": "Definição da variável alvo",
+    "text": "Definição da variável alvo\n\n\n\n\n\n\n\n\n\nclass\ntarget\n\n\n\n\n0\ngood\n0\n\n\n1\nbad\n1\n\n\n2\ngood\n0\n\n\n3\ngood\n0\n\n\n4\nbad\n1\n\n\n5\ngood\n0\n\n\n6\ngood\n0"
+  },
+  {
+    "objectID": "minicurso.html#distribuição-da-variável-alvo",
+    "href": "minicurso.html#distribuição-da-variável-alvo",
+    "title": "",
+    "section": "Distribuição da variável alvo",
+    "text": "Distribuição da variável alvo\n\nimport matplotlib.pyplot as plt\n\nfreq = dados[\"target\"].value_counts().sort_index()\nfreq.index = [\"Adimplente (0)\", \"Inadimplente (1)\"]\n\nplt.figure(figsize=(7, 4))\nplt.bar(freq.index, freq.values)\nplt.title(\"Distribuição da variável alvo\")\nplt.ylabel(\"Frequência\")\nplt.show()"
+  },
+  {
+    "objectID": "minicurso.html#dados-desbalanceados",
+    "href": "minicurso.html#dados-desbalanceados",
+    "title": "",
+    "section": "Dados desbalanceados",
+    "text": "Dados desbalanceados\n\nmaioria paga\n\npoucos entram em default (tornam-se inadimplentes)\n\nProblema:\n\nmétricas podem enganar\n\nExemplo:\n\nprever sempre “bom” → alta acurácia\n\n\nEm classes raras, acurácia não é suficiente (scikit-learn developers, 2024b)."
+  },
+  {
+    "objectID": "minicurso.html#um-modelo-pode-ser-inútil",
+    "href": "minicurso.html#um-modelo-pode-ser-inútil",
+    "title": "",
+    "section": "Um modelo pode ser inútil",
+    "text": "Um modelo pode ser inútil\nSe 95% pagam:\n\nprever sempre “bom” → 95% de acurácia\n\nMas:\n\nnão identifica clientes de risco\n\n\nAcurácia pode ser enganosa."
+  },
+  {
+    "objectID": "minicurso.html#como-lidar-com-desbalanceamento",
+    "href": "minicurso.html#como-lidar-com-desbalanceamento",
+    "title": "",
+    "section": "Como lidar com desbalanceamento",
+    "text": "Como lidar com desbalanceamento\nExistem diferentes estratégias:\n\nreamostragem dos dados (under/over)\ngeração sintética (SMOTE)\nescolha de métricas adequadas\najuste do threshold (ponto de corte)\n\nNão existe solução única.\n\nA escolha depende do objetivo do modelo."
+  },
+  {
+    "objectID": "minicurso.html#divisão-da-base-de-dados",
+    "href": "minicurso.html#divisão-da-base-de-dados",
+    "title": "",
+    "section": "Divisão da base de dados",
+    "text": "Divisão da base de dados\nPara avaliar corretamente um modelo, separamos os dados em:\n\ntreino → ajuste do modelo\n\nvalidação → escolha e ajuste de parâmetros\n\nteste → avaliação final\n\nProblema crítico:\n\navaliar no treino gera resultados otimistas\n\n\\[\n\\text{Erro de treino} \\leq \\text{Erro real}\n\\]\n\nAvaliar fora da amostra é essencial para garantir que o modelo funcione na prática (scikit-learn developers, 2024a)."
+  },
+  {
+    "objectID": "minicurso.html#uma-proposta-de-divisão-da-base-de-dados",
+    "href": "minicurso.html#uma-proposta-de-divisão-da-base-de-dados",
+    "title": "",
+    "section": "Uma proposta de divisão da base de dados",
+    "text": "Uma proposta de divisão da base de dados"
+  },
+  {
+    "objectID": "minicurso.html#dividindo-os-dados",
+    "href": "minicurso.html#dividindo-os-dados",
+    "title": "",
+    "section": "Dividindo os dados",
+    "text": "Dividindo os dados\nA divisão é feita de forma estratificada:\n\nmantém a proporção de inadimplentes\n\nevita distorções entre conjuntos\n\nParâmetros importantes:\n\nrandom_state → reprodutibilidade\n\nstratify → preserva a distribuição da classe"
+  },
+  {
+    "objectID": "minicurso.html#transformação-de-variáveis",
+    "href": "minicurso.html#transformação-de-variáveis",
+    "title": "",
+    "section": "Transformação de variáveis",
+    "text": "Transformação de variáveis\nAntes da modelagem, os dados precisam ser preparados:\n\ntratar variáveis categóricas\n\nagrupar variáveis contínuas\n\nreduzir ruído\n\nfacilitar interpretação\n\nExemplo:\n\nidade → transformar em faixas\n\n\nEm crédito, interpretação é tão importante quanto desempenho."
+  },
+  {
+    "objectID": "minicurso.html#antes-de-modelar-precisamos-preparar-os-dados",
+    "href": "minicurso.html#antes-de-modelar-precisamos-preparar-os-dados",
+    "title": "",
+    "section": "Antes de modelar, precisamos preparar os dados",
+    "text": "Antes de modelar, precisamos preparar os dados\nUm modelo não corrige problemas nos dados.\n\ndados inconsistentes → decisões ruins\n\ndados mal tratados → modelos enganosos\n\n\nModelar bons dados é mais importante que escolher o modelo."
+  },
+  {
+    "objectID": "minicurso.html#o-que-precisamos-verificar",
+    "href": "minicurso.html#o-que-precisamos-verificar",
+    "title": "",
+    "section": "O que precisamos verificar?",
+    "text": "O que precisamos verificar?\n\ndados faltantes\n\ntipos de variáveis\n\nvalores inconsistentes\n\ncategorias mal definidas\n\nescalas diferentes\n\n\nAntes de modelar, precisamos confiar nos dados."
+  },
+  {
+    "objectID": "minicurso.html#dados-faltantes",
+    "href": "minicurso.html#dados-faltantes",
+    "title": "",
+    "section": "Dados faltantes",
+    "text": "Dados faltantes\nExemplos:\n\nrenda não informada\n\nidade ausente\n\nhistórico incompleto\n\nO que fazer?\n\nexcluir\n\nimputar\n\nmanter com cuidado\n\n\nA decisão depende do contexto."
+  },
+  {
+    "objectID": "minicurso.html#variáveis-categóricas",
+    "href": "minicurso.html#variáveis-categóricas",
+    "title": "",
+    "section": "Variáveis categóricas",
+    "text": "Variáveis categóricas\nExemplo:\n\n“Masculino”, “M”, “masc”\n\nSão a mesma coisa?\nProblema:\n\ncategorias inconsistentes confundem o modelo\n\n\nÉ necessário padronizar antes de modelar."
+  },
+  {
+    "objectID": "minicurso.html#criação-de-variáveis",
+    "href": "minicurso.html#criação-de-variáveis",
+    "title": "",
+    "section": "Criação de variáveis",
+    "text": "Criação de variáveis\nPodemos criar novas informações a partir das existentes.\nExemplos:\n\nrenda / dívida\n\ntempo de relacionamento\n\nfrequência de uso\n\n\nVariáveis bem construídas podem ser mais importantes que o modelo."
+  },
+  {
+    "objectID": "minicurso.html#discretização-de-variáveis",
+    "href": "minicurso.html#discretização-de-variáveis",
+    "title": "",
+    "section": "Discretização de variáveis",
+    "text": "Discretização de variáveis\nTransformar variável contínua em faixas.\nExemplo:\n\nidade → faixas etárias\n\nPor quê?\n\nfacilita interpretação\n\ncaptura não linearidade\n\nmuito usado em crédito\n\n\nNem sempre o modelo aprende melhor com valores contínuos."
+  },
+  {
+    "objectID": "minicurso.html#exemplo-agrupando-idade",
+    "href": "minicurso.html#exemplo-agrupando-idade",
+    "title": "",
+    "section": "Exemplo: agrupando idade",
+    "text": "Exemplo: agrupando idade\nVariáveis contínuas podem ser transformadas em faixas.\nObjetivos:\n\nfacilitar interpretação\n\ncapturar padrões não lineares\n\nreduzir sensibilidade a valores extremos\n\n\nEssa prática é comum em modelagem de crédito."
+  },
+  {
+    "objectID": "minicurso.html#criando-a-variável-idade-em-faixas",
+    "href": "minicurso.html#criando-a-variável-idade-em-faixas",
+    "title": "",
+    "section": "Criando a variável idade em faixas",
+    "text": "Criando a variável idade em faixas\n\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# =========================\n# Criando faixas de idade\n# =========================\ndados[\"faixa_idade\"] = pd.cut(\n    dados[\"age\"],\n    bins=[0, 25, 35, 50, 100],\n    labels=[\"até 25\", \"26–35\", \"36–50\", \"50+\"]\n)\n\n# Contagem das faixas\nfaixas = dados[\"faixa_idade\"].value_counts().sort_index()\n\n# Gráfico\nplt.figure(figsize=(7, 4))\nplt.bar(faixas.index.astype(str), faixas.values)\nplt.title(\"Distribuição das faixas de idade\")\nplt.ylabel(\"Frequência\")\nplt.show()"
+  },
+  {
+    "objectID": "minicurso.html#section-1",
+    "href": "minicurso.html#section-1",
+    "title": "",
+    "section": "",
+    "text": "Em modelos de crédito, variáveis agrupadas ajudam na interpretação e podem capturar melhor diferenças de risco entre perfis."
+  },
+  {
+    "objectID": "minicurso.html#as-faixas-ajudam-a-entender-o-risco",
+    "href": "minicurso.html#as-faixas-ajudam-a-entender-o-risco",
+    "title": "",
+    "section": "As faixas ajudam a entender o risco?",
+    "text": "As faixas ajudam a entender o risco?\nDividimos a idade em grupos.\nMas agora surge a pergunta:\n\nessas faixas realmente separam clientes bons e maus?\n\n\nSão apenas agrupamentos visuais?"
+  },
+  {
+    "objectID": "minicurso.html#considere-duas-formas-de-dividir-idade",
+    "href": "minicurso.html#considere-duas-formas-de-dividir-idade",
+    "title": "",
+    "section": "Considere duas formas de dividir idade:",
+    "text": "Considere duas formas de dividir idade:\nDivisão A:\n\naté 30\n\nacima de 30 até 45\n\nacima de 45 até 60\nacima de 60\n\nDivisão B:\n\naté 25\n\nacima de 25 até 35\n\nacima de 25 até 50\nacima de 50"
+  },
+  {
+    "objectID": "minicurso.html#o-que-queremos-observar",
+    "href": "minicurso.html#o-que-queremos-observar",
+    "title": "",
+    "section": "O que queremos observar?",
+    "text": "O que queremos observar?\nPara cada faixa, queremos saber:\n\nquantos são adimplentes\n\nquantos são inadimplentes\n\nUma boa divisão:\n\nconcentra perfis semelhantes\n\nsepara perfis diferentes\n\n\nIsso melhora a capacidade de previsão."
+  },
+  {
+    "objectID": "minicurso.html#observe-a-proporção-de-inadimplentes-classe-1",
+    "href": "minicurso.html#observe-a-proporção-de-inadimplentes-classe-1",
+    "title": "",
+    "section": "Observe a proporção de inadimplentes (classe 1):",
+    "text": "Observe a proporção de inadimplentes (classe 1):\nDivisão A:\n\naté 30 → 36%\n31–45 → 26%\n\n46–60 → 26%\n60+ → 22%\n\nDivisão B:\n\naté 25 → 42%\n26–35 → 30%\n36–50 → 24%\n50+ → 27%"
+  },
+  {
+    "objectID": "minicurso.html#qual-divisão-evidencia-melhor-a-diferença-de-risco",
+    "href": "minicurso.html#qual-divisão-evidencia-melhor-a-diferença-de-risco",
+    "title": "",
+    "section": "Qual divisão evidencia melhor a diferença de risco?",
+    "text": "Qual divisão evidencia melhor a diferença de risco?\n\nO objetivo não é agrupar, é separar bons e maus clientes."
+  },
+  {
+    "objectID": "minicurso.html#o-que-temos-até-aqui",
+    "href": "minicurso.html#o-que-temos-até-aqui",
+    "title": "",
+    "section": "O que temos até aqui?",
+    "text": "O que temos até aqui?\n\na forma de dividir a variável influencia o resultado\n\ndivisões diferentes geram níveis diferentes de separação\n\nescolher manualmente não é trivial\n\n\nPrecisamos de um método que faça isso com base nos dados."
+  },
+  {
+    "objectID": "minicurso.html#técnicas-específicas-de-crédito",
+    "href": "minicurso.html#técnicas-específicas-de-crédito",
+    "title": "",
+    "section": "Técnicas específicas de crédito",
+    "text": "Técnicas específicas de crédito\nAlgumas técnicas são muito utilizadas em modelagem de crédito:\n\nWeight of Evidence (WoE)\n\nInformation Value (IV)\n\ntestes estatísticos e medidas de divergência\n\nEssas técnicas ajudam a:\n\nseparar melhor bons e maus clientes\n\nidentificar variáveis mais informativas\n\nmelhorar a capacidade de discriminação do modelo"
+  },
+  {
+    "objectID": "minicurso.html#weight-of-evidence-woe",
+    "href": "minicurso.html#weight-of-evidence-woe",
+    "title": "",
+    "section": "Weight of Evidence (WoE)",
+    "text": "Weight of Evidence (WoE)\nEm credit scoring, cada faixa de uma variável pode ser transformada em um número.\nPara a faixa \\(j\\):\n\\[\nWoE_j=\\ln\\left(\\frac{\\%\\,bons_j}{\\%\\,maus_j}\\right)\n\\]\nem que:\n\nbons = adimplentes\n\nmaus = inadimplentes\n\n\nO WoE mede o quanto uma faixa está associada a bons ou maus clientes."
+  },
+  {
+    "objectID": "minicurso.html#como-o-peso-da-evidência-woe-é-calculado",
+    "href": "minicurso.html#como-o-peso-da-evidência-woe-é-calculado",
+    "title": "",
+    "section": "Como o Peso da Evidência (WoE) é calculado?",
+    "text": "Como o Peso da Evidência (WoE) é calculado?\nPassos:\n\ndividir a variável em faixas\n\ncontar bons e maus em cada faixa\n\ncalcular proporções\n\naplicar o logaritmo da razão\n\nInterpretação:\n\n\\(WoE &gt; 0\\) → maior concentração de bons\n\n\\(WoE &lt; 0\\) → maior concentração de maus"
+  },
+  {
+    "objectID": "minicurso.html#information-value-iv",
+    "href": "minicurso.html#information-value-iv",
+    "title": "",
+    "section": "Information Value (IV)",
+    "text": "Information Value (IV)\nDepois do WoE, podemos medir a força preditiva da variável:\n\\[\nIV=\\sum_j (\\%\\,bons_j-\\%\\,maus_j)\\cdot WoE_j\n\\]\nLeitura prática:\n\nIV pequeno → variável fraca\n\nIV maior → variável mais útil\n\n\nO IV ajuda a priorizar variáveis para o modelo."
+  },
+  {
+    "objectID": "minicurso.html#qual-divisão-é-melhor",
+    "href": "minicurso.html#qual-divisão-é-melhor",
+    "title": "",
+    "section": "Qual divisão é melhor?",
+    "text": "Qual divisão é melhor?\nA Divisão B:\n\napresenta maior separação entre faixas\n\npossui WoE mais distintos\n\ntem maior poder preditivo (IV)\n\nMas:\n\nainda não é perfeita\n\nalgumas faixas não contribuem muito\n\n\nO desafio é encontrar a melhor divisão possível."
+  },
+  {
+    "objectID": "minicurso.html#como-escolher-as-faixas",
+    "href": "minicurso.html#como-escolher-as-faixas",
+    "title": "",
+    "section": "Como escolher as faixas?",
+    "text": "Como escolher as faixas?\nAs faixas podem ser definidas por:\n\nregra de negócio\n\nquantis\n\nlargura fixa\n\nmétodos automáticos\n\nEm crédito, métodos automáticos costumam usar:\n\nqui-quadrado\n\ncritérios de separação entre bons e maus\n\n\nA ideia é formar grupos com comportamento de risco diferente."
+  },
+  {
+    "objectID": "minicurso.html#observação-importante",
+    "href": "minicurso.html#observação-importante",
+    "title": "",
+    "section": "Observação importante",
+    "text": "Observação importante\n\nNem toda transformação melhora o modelo.\n\nPrecisamos buscar:\n\nfaixas interpretáveis\n\nseparação entre bons e maus\n\nestabilidade\n\ncoerência com o negócio\n\n\nEm crédito, desempenho e interpretabilidade precisam caminhar juntos."
+  },
+  {
+    "objectID": "minicurso.html#aplicando-na-base-em-python",
+    "href": "minicurso.html#aplicando-na-base-em-python",
+    "title": "",
+    "section": "Aplicando na base em Python",
+    "text": "Aplicando na base em Python\nVamos usar a própria base do curso para:\n\ndiscretizar variáveis\n\ncalcular WoE\n\nobservar IV\n\ngerar variáveis transformadas"
+  },
+  {
+    "objectID": "minicurso.html#exemplo-de-transformação-de-variável",
+    "href": "minicurso.html#exemplo-de-transformação-de-variável",
+    "title": "",
+    "section": "Exemplo de transformação de variável",
+    "text": "Exemplo de transformação de variável\nAlém de discretizar, podemos criar novas variáveis.\nExemplos:\n\ncrédito por mês = valor do crédito / duração\n\nlog do valor do crédito\n\nfaixas de idade\n\n\nVariáveis derivadas podem resumir melhor o risco do que as originais."
+  },
+  {
+    "objectID": "minicurso.html#ideia-central",
+    "href": "minicurso.html#ideia-central",
+    "title": "",
+    "section": "Ideia central",
+    "text": "Ideia central\nAntes de modelar, podemos:\n\ntratar a base\n\ndiscretizar variáveis\n\ncriar novas variáveis\n\ntransformar informações em sinais de risco\n\n\nModelos de crédito costumam depender fortemente dessa etapa."
+  },
+  {
+    "objectID": "minicurso.html#o-que-aprendemos-hoje",
+    "href": "minicurso.html#o-que-aprendemos-hoje",
+    "title": "",
+    "section": "O que aprendemos hoje",
+    "text": "O que aprendemos hoje\n\nrisco de crédito é decisão sob incerteza\n\nerros têm impactos econômicos distintos\n\nos dados são naturalmente desbalanceados\n\na divisão correta evita avaliações incorretas\n\na transformação influencia diretamente o modelo\n\n\nHoje estruturamos o problema.\n\n\nAgora que sabemos como o problema é estruturado, a próxima pergunta é: como transformar isso em um modelo que realmente ajude a decidir?"
+  },
+  {
+    "objectID": "minicurso.html#referências-essenciais",
+    "href": "minicurso.html#referências-essenciais",
+    "title": "",
+    "section": "Referências essenciais",
+    "text": "Referências essenciais\n\n\nBank for International Settlements. (2023). Basel framework. https://www.bis.org/basel_framework/\n\n\nBasel Committee on Banking Supervision. (2006). International convergence of capital measurement and capital standards: A revised framework. https://www.bis.org/publ/bcbs128.htm\n\n\nBasel Committee on Banking Supervision. (2017). Basel III: Finalising post-crisis reforms. https://www.bis.org/bcbs/publ/d424.htm\n\n\nConsumer Financial Protection Bureau. (2022). Adverse action notification requirements in connection with credit decisions based on complex algorithms. https://www.consumerfinance.gov\n\n\nEuropean Banking Authority. (2017). Guidelines on PD estimation, LGD estimation and treatment of defaulted exposures. https://www.eba.europa.eu\n\n\nEuropean Banking Authority. (2020). Guidelines on loan origination and monitoring. https://www.eba.europa.eu\n\n\nFederal Reserve. (2011). Supervisory guidance on model risk management (SR 11-7). https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm\n\n\nHand, D. J., & Henley, W. E. (1997). Statistical classification methods in consumer credit scoring: A review. Journal of the Royal Statistical Society: Series A, 160(3), 523–541.\n\n\nLessmann, S., Baesens, B., Seow, H.-V., & Thomas, L. C. (2015). Benchmarking state-of-the-art classification algorithms for credit scoring. European Journal of Operational Research, 247(1), 124–136.\n\n\nscikit-learn developers. (2024a). Cross-validation documentation. https://scikit-learn.org/stable/modules/cross_validation.html\n\n\nscikit-learn developers. (2024b). Model evaluation documentation. https://scikit-learn.org/stable/modules/model_evaluation.html"
+  },
+  {
+    "objectID": "minicurso.html#vamos-continuar",
+    "href": "minicurso.html#vamos-continuar",
+    "title": "",
+    "section": "Vamos continuar",
+    "text": "Vamos continuar\nNa Parte 1:\n\nestruturamos o problema\n\ntrabalhamos com os dados\n\nCompreendemos o custo dos erros\n\nAgora:\n\ncomo usar isso para tomar decisões?"
+  },
+  {
+    "objectID": "minicurso.html#o-problema-que-queremos-resolver",
+    "href": "minicurso.html#o-problema-que-queremos-resolver",
+    "title": "",
+    "section": "O problema que queremos resolver",
+    "text": "O problema que queremos resolver\nQueremos estimar a probabilidade de um indivíduo se tornar inadimplente dado o seu histórico:\n\\[\nP(Y=1 \\mid X)\n\\]\nem que:\n\n\\(Y=1\\) → inadimplência\n\n\\(X\\) → características do cliente\n\nMas estimar não é suficiente.\n\nPrecisamos transformar probabilidade em decisão prática."
+  },
+  {
+    "objectID": "minicurso.html#do-dado-à-decisão",
+    "href": "minicurso.html#do-dado-à-decisão",
+    "title": "",
+    "section": "Do dado à decisão",
+    "text": "Do dado à decisão\nFluxo do processo:\n\nTrabalhar com os dados\n\nAjustar um modelo\n\nObter probabilidades individuais\n\nconstruir um critério de decisão\n\nO modelo gera probabilidades.\n\nA decisão depende de como usamos essas probabilidades."
+  },
+  {
+    "objectID": "minicurso.html#probabilidade-em-si-não-é-decisão",
+    "href": "minicurso.html#probabilidade-em-si-não-é-decisão",
+    "title": "",
+    "section": "Probabilidade em si não é decisão",
+    "text": "Probabilidade em si não é decisão\nConsidere dois clientes e suas respectivas probabilidades de se tornar inadimplente:\n\nCliente A: a probabilidade ESTIMADA de não quitar a dívida é 0,49\n\nCliente B: a probabilidade ESTIMADA de não quitar a dívida é 0,51\n\nPergunta:\n\nUm deve ser aprovado e o outro negado?\n\n\nEssa diferença é relevante?\n\n👉 O modelo não decide. Quem decide é a regra de negócio."
+  },
+  {
+    "objectID": "minicurso.html#por-que-regressão-logística",
+    "href": "minicurso.html#por-que-regressão-logística",
+    "title": "",
+    "section": "Por que regressão logística?",
+    "text": "Por que regressão logística?\nA regressão logística é amplamente usada porque:\n\nproduz probabilidades\n\né interpretável\n\né estável\n\né aceita em regulação\n\n\nEm crédito, é o principal modelo base (baseline) (Hand & Henley, 1997; Lessmann et al., 2015)."
+  },
+  {
+    "objectID": "minicurso.html#o-que-o-modelo-entrega",
+    "href": "minicurso.html#o-que-o-modelo-entrega",
+    "title": "",
+    "section": "O que o modelo entrega?",
+    "text": "O que o modelo entrega?\nPara cada cliente:\n\num valor entre 0 e 1\n\nIsso representa:\n\na probabilidade de inadimplência"
+  },
+  {
+    "objectID": "minicurso.html#como-transformar-o-histórico-do-cliente-em-probabilidade",
+    "href": "minicurso.html#como-transformar-o-histórico-do-cliente-em-probabilidade",
+    "title": "",
+    "section": "Como transformar o histórico do cliente em probabilidade?",
+    "text": "Como transformar o histórico do cliente em probabilidade?\n\nQueremos transformar uma combinação de variáveis em um valor entre 0 e 1.\n\nA ideia é usar uma função que:\n\nreceba qualquer valor\n\nproduza uma probabilidade\n\nUma escolha comum é:\n\\[\nP(Y=1 \\mid X) = \\frac{1}{1 + e^{-z}}\n\\] \\(z\\) representa uma combinação das variáveis \\(X's\\)."
+  },
+  {
+    "objectID": "minicurso.html#o-que-é-esse-z",
+    "href": "minicurso.html#o-que-é-esse-z",
+    "title": "",
+    "section": "O que é esse \\(z\\)?",
+    "text": "O que é esse \\(z\\)?\nO termo \\(z\\) representa uma combinação linear das variáveis:\n\\[\nz = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\ldots + \\beta_p X_p\n\\]\nNeste caso temos:\n\ncada variável contribui para o risco\n\nos coeficientes medem esse impacto\n\n\nO modelo transforma essa combinação em probabilidade."
+  },
+  {
+    "objectID": "minicurso.html#modelo-logístico",
+    "href": "minicurso.html#modelo-logístico",
+    "title": "",
+    "section": "Modelo logístico",
+    "text": "Modelo logístico\n\\[\nP(Y_i=1 \\mid X_i) = \\frac{1}{1 + \\exp\\{-\\eta_i\\}}\n\\]\nem que\n\\[\n\\eta_i = \\beta_0 + \\beta_1 X_{i1} + \\beta_2 X_{i2} + \\ldots + \\beta_p X_{ip}\n\\]\nIsso garante:\n\nvalores entre 0 e 1\n\ninterpretação probabilística\n\n\nÉ um modelo simples, mas muito eficaz em crédito."
+  },
+  {
+    "objectID": "minicurso.html#interpretação-dos-coeficientes",
+    "href": "minicurso.html#interpretação-dos-coeficientes",
+    "title": "",
+    "section": "Interpretação dos coeficientes",
+    "text": "Interpretação dos coeficientes\nNa regressão logística (\\(Y=1\\) → inadimplência):\n\ncoeficiente positivo → aumenta o risco\n\ncoeficiente negativo → reduz o risco\n\nCada variável influencia a probabilidade de inadimplência.\n\nO modelo permite entender o efeito de cada característica do cliente.\n\n\nAtenção: o tamanho dos coeficientes não deve ser comparado diretamente entre variáveis, pois elas podem estar em escalas diferentes.\nPara comparações, é necessário padronizar as variáveis ou analisar com cuidado."
+  },
+  {
+    "objectID": "minicurso.html#exemplo-renda",
+    "href": "minicurso.html#exemplo-renda",
+    "title": "",
+    "section": "Exemplo: renda",
+    "text": "Exemplo: renda\nConsidere a variável renda:\n\ncoeficiente negativo\n\nInterpretação:\n\nquanto maior a renda, menor o risco de inadimplência\n\nOu seja:\n\nclientes com maior renda tendem a ter menor probabilidade de não pagamento\n\nEm modelos de crédito, essa relação também pode ser analisada por meio de odds (chance relativa)."
+  },
+  {
+    "objectID": "minicurso.html#o-que-são-odds",
+    "href": "minicurso.html#o-que-são-odds",
+    "title": "",
+    "section": "O que são odds?",
+    "text": "O que são odds?\nOdds compara a chance de acontecer com a chance de não acontecer\nExemplo:\n\nprobabilidade de inadimplência = 20%\n\nprobabilidade de não inadimplência = 80%\n\nEntão a odds de inadimplência é:\n\\[\n\\text{odds} = \\frac{\\text{probabilidade de inadimplência}}{1-\\text{probabilidade de inadimplência}} = \\frac{0,20}{0,80} = \\frac{1}{4} = 0,25\n\\]\nInterpretação:\n\npara cada 1 cliente inadimplente, há cerca de 4 adimplentes"
+  },
+  {
+    "objectID": "minicurso.html#por-que-não-usar-odds-diretamente",
+    "href": "minicurso.html#por-que-não-usar-odds-diretamente",
+    "title": "",
+    "section": "Por que não usar odds diretamente?",
+    "text": "Por que não usar odds diretamente?\nOdds são úteis, mas:\n\nnão variam de forma linear\n\npequenas mudanças nas variáveis podem gerar variações difíceis de interpretar\n\nPrecisamos de uma transformação mais adequada para modelagem."
+  },
+  {
+    "objectID": "minicurso.html#por-que-usar-log-odds",
+    "href": "minicurso.html#por-que-usar-log-odds",
+    "title": "",
+    "section": "Por que usar log-odds?",
+    "text": "Por que usar log-odds?\nO modelo logístico trabalha com:\n\\[\n\\log\\left(\\frac{p}{1-p}\\right) = \\beta_0 + \\beta_1 X_{i1} + \\beta_2 X_{i2} + \\ldots + \\beta_p X_{ip},\n\\quad p = P(Y_i=1 \\mid X_i)\n\\]\nEssa transformação:\n\nleva as odds para uma escala linear\n\npermite modelar o efeito das variáveis de forma aditiva\n\n\nisso viabiliza o uso de um modelo log-linear"
+  },
+  {
+    "objectID": "minicurso.html#interpretando-o-efeito",
+    "href": "minicurso.html#interpretando-o-efeito",
+    "title": "",
+    "section": "Interpretando o efeito",
+    "text": "Interpretando o efeito\nCada coeficiente atua sobre o log-odds de inadimplência.\nNa prática:\n\ncoeficiente positivo → aumenta o log-odds → aumenta o risco\n\ncoeficiente negativo → reduz o log-odds → reduz o risco\n\nOu seja:\n\nas variáveis influenciam o risco por meio dos log-odds\n\n👉 Mesmo pequenas mudanças no log-odds podem gerar mudanças relevantes na probabilidade."
+  },
+  {
+    "objectID": "minicurso.html#relembrando-a-divisão-dos-dados",
+    "href": "minicurso.html#relembrando-a-divisão-dos-dados",
+    "title": "",
+    "section": "Relembrando a divisão dos dados",
+    "text": "Relembrando a divisão dos dados\nNa Parte 1, separamos a base em conjuntos diferentes.\nAgora vamos usar:\n\ntreino → para ajustar o modelo\n\nteste → para avaliar o desempenho\n\nPor quê?\n\no modelo aprende no treino\n\ne é avaliado em dados que não viu antes\n\n\nisso evita uma avaliação otimista do modelo"
+  },
+  {
+    "objectID": "minicurso.html#ajustando-o-modelo-no-python",
+    "href": "minicurso.html#ajustando-o-modelo-no-python",
+    "title": "",
+    "section": "Ajustando o modelo no Python",
+    "text": "Ajustando o modelo no Python\n\nfrom sklearn.linear_model import LogisticRegression\n\n# Transformar variáveis categóricas em numéricas\nX_train_dum = pd.get_dummies(X_train, drop_first=True)\nX_test_dum  = pd.get_dummies(X_test, drop_first=True)\n\n# Garantir mesmas colunas em treino e teste\nX_train_dum, X_test_dum = X_train_dum.align(X_test_dum, fill_value=0)\n\n# Ajustar o modelo usando os dados de treino\nmodelo_log = LogisticRegression(max_iter=1000)\nmodelo_log.fit(X_train_dum, y_train)\n\n# Obter probabilidades de inadimplência no teste\ny_prob_log = modelo_log.predict_proba(X_test_dum)[:, 1]"
+  },
+  {
+    "objectID": "minicurso.html#o-que-o-código-faz",
+    "href": "minicurso.html#o-que-o-código-faz",
+    "title": "",
+    "section": "O que o código faz?",
+    "text": "O que o código faz?\nEtapas principais:\n\ntransforma variáveis categóricas em numéricas\n\najusta o modelo usando os dados de treino\n\naplica o modelo aos dados de teste\n\nResultado:\n\npara cada cliente no teste, o modelo retorna uma probabilidade de inadimplência\n\n\nessas probabilidades serão usadas para avaliar o modelo"
+  },
+  {
+    "objectID": "minicurso.html#probabilidades-previstas",
+    "href": "minicurso.html#probabilidades-previstas",
+    "title": "",
+    "section": "Probabilidades previstas",
+    "text": "Probabilidades previstas\nCada cliente recebe um score:\n\nvalor entre 0 e 1\n\ninterpretação probabilística\n\nExemplo:\n\n0,8 → alto risco\n\n0,1 → baixo risco\n\n\no modelo quantifica risco, não toma decisão"
+  },
+  {
+    "objectID": "minicurso.html#a-distribuição-mostra-como-o-modelo-diferencia-níveis-de-risco-entre-os-clientes.",
+    "href": "minicurso.html#a-distribuição-mostra-como-o-modelo-diferencia-níveis-de-risco-entre-os-clientes.",
+    "title": "",
+    "section": "A distribuição mostra como o modelo diferencia níveis de risco entre os clientes.",
+    "text": "A distribuição mostra como o modelo diferencia níveis de risco entre os clientes."
+  },
+  {
+    "objectID": "minicurso.html#da-probabilidade-para-a-decisão",
+    "href": "minicurso.html#da-probabilidade-para-a-decisão",
+    "title": "",
+    "section": "Da probabilidade para a decisão",
+    "text": "Da probabilidade para a decisão\nO modelo retorna probabilidades de inadimplência.\nMas precisamos tomar uma decisão:\n\naprovar\n\nrejeitar\n\nPara isso, usamos um ponto de corte (threshold).\nExemplo:\n\nse probabilidade ≥ 0,5 → classifica como inadimplente\n\ncaso contrário → adimplente\n\n\no valor 0,5 é uma escolha inicial, não necessariamente a melhor"
+  },
+  {
+    "objectID": "minicurso.html#classificando-os-clientes",
+    "href": "minicurso.html#classificando-os-clientes",
+    "title": "",
+    "section": "Classificando os clientes",
+    "text": "Classificando os clientes\nPonto de corte (threshold)\n\n# Classificação usando threshold de 0.5\ny_pred_log = (y_prob_log &gt;= 0.5).astype(int)\n\nMatriz de Confusão\n\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay\n\ncm = confusion_matrix(y_test, y_pred_log)\ndisp = ConfusionMatrixDisplay(confusion_matrix=cm)\ndisp.plot()\nplt.title(\"Matriz de Confusão\")\nplt.show()\n\n\ntransformando probabilidades em classes\ndefinindo quem é considerado inadimplente\n\n\nagora podemos comparar com a realidade"
+  },
+  {
+    "objectID": "minicurso.html#matriz-de-confusão",
+    "href": "minicurso.html#matriz-de-confusão",
+    "title": "",
+    "section": "Matriz de confusão",
+    "text": "Matriz de confusão\nQueremos comparar o que realmente aconteceu com o que o modelo previu\n\n\n\n\n\n\n\n\n\nPrevê adimplente (0)\nPrevê inadimplente (1)\n\n\n\n\nReal 0 (adimplente)\nacertou cliente bom (VN)\nclassificou como risco sem ser (FP)\n\n\nReal 1 (inadimplente)\ndeixou passar um cliente de risco (FN)\nacertou cliente de risco (VP)\n\n\n\nNem todos os erros têm o mesmo impacto:\n\nFP → perda financeira direta\n\nFN → perda de oportunidade\n\n\nmudar o threshold muda os erros do modelo"
+  },
+  {
+    "objectID": "minicurso.html#visualização-dos-acertos-e-erros-do-modelo.",
+    "href": "minicurso.html#visualização-dos-acertos-e-erros-do-modelo.",
+    "title": "",
+    "section": "Visualização dos acertos e erros do modelo.",
+    "text": "Visualização dos acertos e erros do modelo."
+  },
+  {
+    "objectID": "minicurso.html#como-avaliar-um-modelo",
+    "href": "minicurso.html#como-avaliar-um-modelo",
+    "title": "",
+    "section": "Como avaliar um modelo?",
+    "text": "Como avaliar um modelo?\nDepois de ajustar o modelo, precisamos entender se ele é útil.\n\nEle consegue separar clientes bons e maus?\n\nAs probabilidades estimadas fazem sentido?\n\nEle ajuda na tomada de decisão?\n\nEm outras palavras:\n\no modelo distingue bem os perfis?\n\nas previsões são coerentes?\n\nas decisões geradas são adequadas?\n\n\nmétricas são ferramentas para responder essas perguntas"
+  },
+  {
+    "objectID": "minicurso.html#métricas-de-avaliação",
+    "href": "minicurso.html#métricas-de-avaliação",
+    "title": "",
+    "section": "Métricas de avaliação",
+    "text": "Métricas de avaliação\nPara responder essas perguntas, usamos métricas.\n\nacurácia → proporção total de acertos\n\nsensibilidade (recall) → capacidade de identificar inadimplentes\n\nprecisão → entre os classificados como inadimplentes, quantos realmente são\n\nCada métrica destaca um aspecto diferente do desempenho.\n\na escolha da métrica depende do objetivo da análise"
+  },
+  {
+    "objectID": "minicurso.html#curva-roc",
+    "href": "minicurso.html#curva-roc",
+    "title": "",
+    "section": "Curva ROC",
+    "text": "Curva ROC\nA curva ROC avalia o desempenho do modelo para diferentes valores de threshold.\nEla relaciona:\n\nTPR (taxa de verdadeiros positivos) → proporção de inadimplentes corretamente identificados\n\nFPR (taxa de falsos positivos) → proporção de clientes bons classificados como inadimplentes\n\nOu seja:\n\nTPR mede a capacidade de identificar risco\n\nFPR mede o erro com clientes bons\n\n\na curva mostra o equilíbrio entre acertos e erros ao variar o threshold"
+  },
+  {
+    "objectID": "minicurso.html#curva-roc-no-python",
+    "href": "minicurso.html#curva-roc-no-python",
+    "title": "",
+    "section": "Curva ROC no Python",
+    "text": "Curva ROC no Python\n\nfrom sklearn.metrics import roc_curve, roc_auc_score\nimport matplotlib.pyplot as plt\n\nfpr, tpr, _ = roc_curve(y_test, y_prob_log)\nauc = roc_auc_score(y_test, y_prob_log)\n\nplt.figure()\nplt.plot(fpr, tpr, label=f\"AUC = {auc:.3f}\")\nplt.plot([0,1], [0,1], linestyle=\"--\")\nplt.xlabel(\"FPR (taxa de falsos positivos)\")\nplt.ylabel(\"TPR (sensibilidade)\")\nplt.title(\"Curva ROC\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "minicurso.html#auc-área-sob-a-curva",
+    "href": "minicurso.html#auc-área-sob-a-curva",
+    "title": "",
+    "section": "AUC (Área sob a curva)",
+    "text": "AUC (Área sob a curva)\nA AUC mede a capacidade do modelo de separar bons e maus clientes.\n\\[\nAUC = P(\\text{cliente inadimplente receber maior probabilidade que cliente adimplente})\n\\]\nOu seja:\n\nescolhemos um cliente inadimplente e um adimplente ao acaso\n\nverificamos se o modelo atribui maior risco ao inadimplente\nquanto maior a AUC → melhor a separação\n\n\na AUC avalia ordenação, não garante boa decisão nem boas probabilidades (scikit-learn developers, 2024b)"
+  },
+  {
+    "objectID": "minicurso.html#precisionrecall",
+    "href": "minicurso.html#precisionrecall",
+    "title": "",
+    "section": "Precision–Recall",
+    "text": "Precision–Recall\nImportante quando a inadimplência é rara.\nFoco na classe positiva (inadimplentes):\n\nprecisão → entre os clientes classificados como inadimplentes, quantos realmente são\n\nrecall (sensibilidade) → quantos inadimplentes o modelo consegue identificar\n\nEm contextos com poucos inadimplentes:\n\na precisão reduz falsos alarmes\n\no recall reduz clientes de risco não identificados\n\n\nmais adequado quando a classe de interesse é rara"
+  },
+  {
+    "objectID": "minicurso.html#o-papel-do-threshold",
+    "href": "minicurso.html#o-papel-do-threshold",
+    "title": "",
+    "section": "O papel do threshold",
+    "text": "O papel do threshold\nAqui, \\(p\\) representa:\n\na probabilidade de inadimplência do cliente\n\nA classificação depende de um ponto de corte \\(t\\):\n\n\\(p &gt; t\\) → classifica como cliente de risco (inadimplente)\n\n\\(p \\leq t\\) → classifica como cliente sem risco (adimplente)\n\nNa prática, esse valor define:\n\nquais clientes são considerados de risco\n\nquais clientes são aprovados\n\n\no threshold controla a decisão do modelo"
+  },
+  {
+    "objectID": "minicurso.html#efeito-do-ponto-de-corte-threshold",
+    "href": "minicurso.html#efeito-do-ponto-de-corte-threshold",
+    "title": "",
+    "section": "Efeito do ponto de corte (threshold)",
+    "text": "Efeito do ponto de corte (threshold)\n\nthreshold baixo → mais clientes classificados como risco\n\nthreshold alto → menos clientes classificados como risco\n\nConsequência:\n\nmais clientes podem ser aprovados ou rejeitados\n\naumentam ou diminuem os erros do modelo\n\nEm particular:\n\nfalsos positivos (FP) → clientes bons classificados como risco\n\nfalsos negativos (FN) → clientes de risco não identificados\n\n\no threshold determina o tipo de erro mais frequente"
+  },
+  {
+    "objectID": "minicurso.html#custo-e-decisão",
+    "href": "minicurso.html#custo-e-decisão",
+    "title": "",
+    "section": "Custo e decisão",
+    "text": "Custo e decisão\nDa 1ª Parte:\n\\[\n\\text{Custo} = c_{FP} \\cdot FP + c_{FN} \\cdot FN\n\\]\nEm crédito:\n\n\\(c_{FP}\\) → perda financeira direta (aprovar quem não paga)\n\n\\(c_{FN}\\) → perda de oportunidade (rejeitar quem pagaria)\n\nComo o threshold altera FP e FN:\n\nele também altera o custo total das decisões\n\n\no melhor modelo não é o mais preciso, é o que gera menor custo"
+  },
+  {
+    "objectID": "minicurso.html#então-qual-é-o-melhor-modelo",
+    "href": "minicurso.html#então-qual-é-o-melhor-modelo",
+    "title": "",
+    "section": "Então qual é o melhor modelo?",
+    "text": "Então qual é o melhor modelo?\nNão é necessariamente:\n\no de maior AUC\n\no mais complexo\n\nMas sim:\n\no que leva à melhor decisão prática\n\n👉 isso depende do contexto e dos custos envolvidos"
+  },
+  {
+    "objectID": "minicurso.html#decisão-ótima",
+    "href": "minicurso.html#decisão-ótima",
+    "title": "",
+    "section": "Decisão ótima",
+    "text": "Decisão ótima\nA escolha do threshold deve:\n\nminimizar o custo esperado\n\nconsiderar o contexto do negócio\n\n\\[\n\\min \\left(c_{FP} \\cdot FP + c_{FN} \\cdot FN\\right)\n\\]\n\num bom modelo não garante uma boa decisão\na decisão depende de como usamos o modelo"
+  },
+  {
+    "objectID": "minicurso.html#outros-modelos",
+    "href": "minicurso.html#outros-modelos",
+    "title": "",
+    "section": "Outros modelos",
+    "text": "Outros modelos\nAlém da regressão logística, podemos usar outros modelos para estimar o risco de crédito. Exemplos:\n\nÁrvore de decisão\n\nRandom Forest\n\nGradient Boosting\n\nEsses modelos:\n\ncapturam relações não lineares\n\nidentificam interações entre variáveis automaticamente\n\n\ntodos têm o mesmo objetivo: estimar a probabilidade de inadimplência"
+  },
+  {
+    "objectID": "minicurso.html#intuição-dos-modelos",
+    "href": "minicurso.html#intuição-dos-modelos",
+    "title": "",
+    "section": "Intuição dos modelos",
+    "text": "Intuição dos modelos\n\nLogística → relação linear com log-odds e interpretação direta\n\nÁrvore → decisões baseadas em regras (“se… então…”)\n\nRandom Forest → combinação de várias árvores para reduzir instabilidade\n\nBoosting → sequência de modelos que corrige erros anteriores\n\n\ncada modelo aprende padrões diferentes nos dados"
+  },
+  {
+    "objectID": "minicurso.html#comparação-de-modelos",
+    "href": "minicurso.html#comparação-de-modelos",
+    "title": "",
+    "section": "Comparação de modelos",
+    "text": "Comparação de modelos\n\n\n\n\n\n\n\n\nModelo\nVantagem\nLimitação\n\n\n\n\nLogística\ninterpretável e estável\nassume relação linear com log-odds\n\n\nÁrvore\nfácil de explicar\nalta variabilidade\n\n\nRandom Forest\nrobusto e reduz overfitting\nmenor interpretabilidade\n\n\nBoosting\nalto poder preditivo\nmaior complexidade\n\n\n\n\nnão existe modelo universalmente melhor (Lessmann et al., 2015)"
+  },
+  {
+    "objectID": "minicurso.html#na-prática",
+    "href": "minicurso.html#na-prática",
+    "title": "",
+    "section": "Na prática",
+    "text": "Na prática\nEm crédito:\n\nregressão logística → modelo padrão (baseline)\n\nmodelos mais complexos → usados para comparação e ganho de desempenho\n\nPor quê?\n\ninterpretabilidade é essencial\n\nexigências regulatórias favorecem modelos explicáveis\n\n\nmodelos mais complexos podem melhorar desempenho,\nmas exigem maior cuidado na interpretação e validação"
+  },
+  {
+    "objectID": "minicurso.html#o-que-não-muda",
+    "href": "minicurso.html#o-que-não-muda",
+    "title": "",
+    "section": "O que não muda",
+    "text": "O que não muda\nIndependentemente do modelo:\n\ntodos estimam probabilidade de inadimplência\n\ntodos dependem de dados e variáveis\n\ntodos precisam de um threshold para decisão\n\n\no modelo muda, mas o problema continua o mesmo"
+  },
+  {
+    "objectID": "minicurso.html#overfitting-sobreajuste",
+    "href": "minicurso.html#overfitting-sobreajuste",
+    "title": "",
+    "section": "Overfitting (sobreajuste)",
+    "text": "Overfitting (sobreajuste)\nO modelo pode se ajustar demais aos dados de treino:\n\naprende padrões reais\n\nmas também aprende ruído\n\nResultado:\n\ndesempenho ótimo no treino\n\ndesempenho pior em dados novos\n\n\no objetivo não é ajustar bem o treino,\né generalizar para novos dados"
+  },
+  {
+    "objectID": "minicurso.html#por-que-isso-importa",
+    "href": "minicurso.html#por-que-isso-importa",
+    "title": "",
+    "section": "Por que isso importa?",
+    "text": "Por que isso importa?\nUm modelo com overfitting pode:\n\nparecer ótimo nos dados de treino\n\nmas tomar decisões ruins na prática\n\n\navaliar corretamente é essencial para tomar boas decisões"
+  },
+  {
+    "objectID": "minicurso.html#validação",
+    "href": "minicurso.html#validação",
+    "title": "",
+    "section": "Validação",
+    "text": "Validação\nPara avaliar corretamente o modelo:\n\nusar dados que não foram usados no ajuste\n\nutilizar validação cruzada\n\nIsso permite:\n\nestimar o desempenho em novos dados\n\nreduzir o risco de overfitting"
+  },
+  {
+    "objectID": "minicurso.html#validação-no-python",
+    "href": "minicurso.html#validação-no-python",
+    "title": "",
+    "section": "Validação no Python",
+    "text": "Validação no Python\n\nfrom sklearn.model_selection import cross_val_score\n\nscores = cross_val_score(\n    modelo_log,\n    X_train,\n    y_train,\n    cv=5,\n    scoring=\"roc_auc\"\n)\n\nprint(\"AUC média (validação):\", scores.mean())\n\n\nAvaliação fora da amostra é essencial (scikit-learn developers, 2024a)."
+  },
+  {
+    "objectID": "minicurso.html#e-se-mudarmos-o-modelo",
+    "href": "minicurso.html#e-se-mudarmos-o-modelo",
+    "title": "",
+    "section": "E se mudarmos o modelo?",
+    "text": "E se mudarmos o modelo?\nAté agora usamos regressão logística.\nMas outros modelos podem capturar padrões mais complexos:\n\nrelações não lineares\n\ninterações entre variáveis\n\n\nvamos comparar diferentes modelos"
+  },
+  {
+    "objectID": "minicurso.html#árvore-de-decisão",
+    "href": "minicurso.html#árvore-de-decisão",
+    "title": "",
+    "section": "Árvore de Decisão",
+    "text": "Árvore de Decisão\n\nmodelo baseado em regras\ndivide os dados em grupos mais homogêneos\n\n\nfácil de interpretar, mas pode variar bastante\n\n\nfrom sklearn.tree import DecisionTreeClassifier\n\nmodelo_tree = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", DecisionTreeClassifier(max_depth=5, random_state=42))\n])\n\nmodelo_tree.fit(X_train, y_train)\ny_prob_tree = modelo_tree.predict_proba(X_test)[:, 1]"
+  },
+  {
+    "objectID": "minicurso.html#floresta-aleatória-random-forest",
+    "href": "minicurso.html#floresta-aleatória-random-forest",
+    "title": "",
+    "section": "Floresta Aleatória (Random Forest)",
+    "text": "Floresta Aleatória (Random Forest)\n\ncombina várias árvores\nreduz variabilidade do modelo\n\n\nmais robusto, porém menos interpretável\n\n\nfrom sklearn.ensemble import RandomForestClassifier\n\nmodelo_rf = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", RandomForestClassifier(n_estimators=100, random_state=42))\n])\n\nmodelo_rf.fit(X_train, y_train)\ny_prob_rf = modelo_rf.predict_proba(X_test)[:, 1]"
+  },
+  {
+    "objectID": "minicurso.html#comparação-de-modelos-1",
+    "href": "minicurso.html#comparação-de-modelos-1",
+    "title": "",
+    "section": "Comparação de modelos",
+    "text": "Comparação de modelos\n\n\n\nModelo\nVantagem\nLimitação\n\n\n\n\nLogística\ninterpretável e estável\nassume relação linear\n\n\nÁrvore\nfácil de explicar\nalta variabilidade\n\n\nRandom Forest\nrobusto\nmenor interpretabilidade\n\n\n\n\nnão existe modelo universalmente melhor (Lessmann et al., 2015)\n\n\nfrom sklearn.metrics import roc_auc_score\n\nauc_log = roc_auc_score(y_test, y_prob_log)\nauc_tree = roc_auc_score(y_test, y_prob_tree)\nauc_rf = roc_auc_score(y_test, y_prob_rf)\n\nprint(\"AUC Logística:\", auc_log)\nprint(\"AUC Árvore:\", auc_tree)\nprint(\"AUC Random Forest:\", auc_rf)"
+  },
+  {
+    "objectID": "minicurso.html#comparando-modelos-na-prática",
+    "href": "minicurso.html#comparando-modelos-na-prática",
+    "title": "",
+    "section": "Comparando modelos na prática",
+    "text": "Comparando modelos na prática\n\nfpr_log, tpr_log, _ = roc_curve(y_test, y_prob_log)\nfpr_tree, tpr_tree, _ = roc_curve(y_test, y_prob_tree)\nfpr_rf, tpr_rf, _ = roc_curve(y_test, y_prob_rf)\n\nplt.figure()\nplt.plot(fpr_log, tpr_log, label=\"Logística\")\nplt.plot(fpr_tree, tpr_tree, label=\"Árvore\")\nplt.plot(fpr_rf, tpr_rf, label=\"Random Forest\")\nplt.plot([0,1], [0,1], linestyle=\"--\")\n\nplt.xlabel(\"FPR\")\nplt.ylabel(\"TPR\")\nplt.title(\"Comparação de Modelos\")\nplt.legend()\nplt.show()\n\n\nmodelos diferentes podem ter desempenhos diferentes\nmas isso não garante melhor decisão final"
+  },
+  {
+    "objectID": "minicurso.html#modelo-vs-decisão",
+    "href": "minicurso.html#modelo-vs-decisão",
+    "title": "",
+    "section": "Modelo vs decisão",
+    "text": "Modelo vs decisão\nUm modelo pode ter:\n\nmaior AUC\n\nmelhor separação\n\nMas ainda assim:\n\nnão gerar a melhor decisão\n\n\na decisão depende do threshold e dos custos"
+  },
+  {
+    "objectID": "minicurso.html#quando-usar-cada-modelo",
+    "href": "minicurso.html#quando-usar-cada-modelo",
+    "title": "",
+    "section": "Quando usar cada modelo?",
+    "text": "Quando usar cada modelo?\n\nLogística → quando precisa explicar decisões\n\nÁrvore → quando quer regras simples\n\nRandom Forest → quando busca robustez\n\nBoosting → quando busca maior desempenho\n\nMas:\n\na escolha depende do contexto, dos dados e do objetivo da decisão"
+  },
+  {
+    "objectID": "minicurso.html#e-na-prática-do-mercado",
+    "href": "minicurso.html#e-na-prática-do-mercado",
+    "title": "",
+    "section": "E na prática do mercado?",
+    "text": "E na prática do mercado?\nEm instituições financeiras:\n\nmodelos podem ser adquiridos de bureaus de crédito\n\nmodelos internos são desenvolvidos e ajustados\n\nmodelos precisam ser monitorados continuamente\n\nAlém disso:\n\ndecisões devem ser justificáveis\n\nmodelos precisam ser auditáveis\n\n\na instituição continua responsável pelas decisões (Consumer Financial Protection Bureau, 2022; Federal Reserve, 2011)"
+  },
+  {
+    "objectID": "minicurso.html#o-que-aprendemos-hoje-1",
+    "href": "minicurso.html#o-que-aprendemos-hoje-1",
+    "title": "",
+    "section": "O que aprendemos hoje",
+    "text": "O que aprendemos hoje\n\nmodelos geram probabilidades de risco\n\nmétricas avaliam desempenho\n\no threshold define a decisão\n\no custo define a melhor escolha\n\ndiferentes modelos podem ser comparados\n\n\nmodelar é importante\ndecidir é essencial"
+  },
+  {
+    "objectID": "minicurso.html#referências-essenciais-1",
+    "href": "minicurso.html#referências-essenciais-1",
+    "title": "",
+    "section": "Referências essenciais",
+    "text": "Referências essenciais\n\n\nBank for International Settlements. (2023). Basel framework. https://www.bis.org/basel_framework/\n\n\nBasel Committee on Banking Supervision. (2006). International convergence of capital measurement and capital standards: A revised framework. https://www.bis.org/publ/bcbs128.htm\n\n\nBasel Committee on Banking Supervision. (2017). Basel III: Finalising post-crisis reforms. https://www.bis.org/bcbs/publ/d424.htm\n\n\nConsumer Financial Protection Bureau. (2022). Adverse action notification requirements in connection with credit decisions based on complex algorithms. https://www.consumerfinance.gov\n\n\nEuropean Banking Authority. (2017). Guidelines on PD estimation, LGD estimation and treatment of defaulted exposures. https://www.eba.europa.eu\n\n\nEuropean Banking Authority. (2020). Guidelines on loan origination and monitoring. https://www.eba.europa.eu\n\n\nFederal Reserve. (2011). Supervisory guidance on model risk management (SR 11-7). https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm\n\n\nHand, D. J., & Henley, W. E. (1997). Statistical classification methods in consumer credit scoring: A review. Journal of the Royal Statistical Society: Series A, 160(3), 523–541.\n\n\nLessmann, S., Baesens, B., Seow, H.-V., & Thomas, L. C. (2015). Benchmarking state-of-the-art classification algorithms for credit scoring. European Journal of Operational Research, 247(1), 124–136.\n\n\nscikit-learn developers. (2024a). Cross-validation documentation. https://scikit-learn.org/stable/modules/cross_validation.html\n\n\nscikit-learn developers. (2024b). Model evaluation documentation. https://scikit-learn.org/stable/modules/model_evaluation.html\n\n\n\nEssas referências sustentam os conceitos apresentados neste módulo."
+  }
+]
