@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="Dia1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Dia1_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Dia1_files/libs/quarto-html/popper.min.js"></script>
-<script src="Dia1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Dia1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Dia1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Dia1_files/libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.24">
 
-  <title>dia1</title>
+  <title>Minicurso de Risco de Crédito – dia1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Dia1_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Dia1_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -114,12 +114,12 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="Dia1_files/libs/revealjs/dist/theme/quarto-0c7f9e105b0f67cd542dfde4e77ebf03.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-0c7f9e105b0f67cd542dfde4e77ebf03.css">
   <link rel="stylesheet" href="estilos-dark.css">
-  <link href="Dia1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Dia1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Dia1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Dia1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -636,22 +636,22 @@ P(Y=1 \mid X)
 <li>variáveis reais</li>
 </ul>
 <div id="chunk_1" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href=""></a></span>
-<span id="cb1-4"><a href=""></a><span class="co"># Carrega a base credit-g</span></span>
-<span id="cb1-5"><a href=""></a>credit <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"credit-g"</span>, version<span class="op">=</span><span class="dv">1</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-6"><a href=""></a></span>
-<span id="cb1-7"><a href=""></a><span class="co"># Separando variáveis explicativas e alvo original</span></span>
-<span id="cb1-8"><a href=""></a>X <span class="op">=</span> credit.data.copy()</span>
-<span id="cb1-9"><a href=""></a>y <span class="op">=</span> credit.target.copy()</span>
-<span id="cb1-10"><a href=""></a></span>
-<span id="cb1-11"><a href=""></a><span class="co"># Juntando tudo</span></span>
-<span id="cb1-12"><a href=""></a>dados <span class="op">=</span> X.copy()</span>
-<span id="cb1-13"><a href=""></a>dados[<span class="st">"class"</span>] <span class="op">=</span> y</span>
-<span id="cb1-14"><a href=""></a></span>
-<span id="cb1-15"><a href=""></a><span class="co"># Visualização inicial</span></span>
-<span id="cb1-16"><a href=""></a>dados.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
+<span id="cb1-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co"># Carrega a base credit-g</span></span>
+<span id="cb1-5"><a></a>credit <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"credit-g"</span>, version<span class="op">=</span><span class="dv">1</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co"># Separando variáveis explicativas e alvo original</span></span>
+<span id="cb1-8"><a></a>X <span class="op">=</span> credit.data.copy()</span>
+<span id="cb1-9"><a></a>y <span class="op">=</span> credit.target.copy()</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># Juntando tudo</span></span>
+<span id="cb1-12"><a></a>dados <span class="op">=</span> X.copy()</span>
+<span id="cb1-13"><a></a>dados[<span class="st">"class"</span>] <span class="op">=</span> y</span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a><span class="co"># Visualização inicial</span></span>
+<span id="cb1-16"><a></a>dados.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section class="slide level2">
@@ -860,22 +860,22 @@ P(Y=1 \mid X)
 </ul>
 <p>Problema de classificação binária.</p>
 <div id="chunk_2" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># Frequência da variável original</span></span>
-<span id="cb2-2"><a href=""></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Frequência da variável original</span></span>
+<span id="cb2-2"><a></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="1cc28007" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Criando variável binária</span></span>
-<span id="cb3-2"><a href=""></a><span class="co"># 1 = inadimplente (bad)</span></span>
-<span id="cb3-3"><a href=""></a><span class="co"># 0 = adimplente (good)</span></span>
-<span id="cb3-4"><a href=""></a></span>
-<span id="cb3-5"><a href=""></a>dados[<span class="st">"target"</span>] <span class="op">=</span> (dados[<span class="st">"class"</span>] <span class="op">==</span> <span class="st">"bad"</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a>dados[[<span class="st">"class"</span>, <span class="st">"target"</span>]].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="27537e00" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Criando variável binária</span></span>
+<span id="cb3-2"><a></a><span class="co"># 1 = inadimplente (bad)</span></span>
+<span id="cb3-3"><a></a><span class="co"># 0 = adimplente (good)</span></span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>dados[<span class="st">"target"</span>] <span class="op">=</span> (dados[<span class="st">"class"</span>] <span class="op">==</span> <span class="st">"bad"</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a>dados[[<span class="st">"class"</span>, <span class="st">"target"</span>]].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="definição-da-variável-alvo-1" class="slide level2">
 <h2>Definição da variável alvo</h2>
-<div id="19b039ef" class="cell" data-execution_count="6">
+<div id="2c2052c9" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -946,16 +946,16 @@ P(Y=1 \mid X)
 <section id="distribuição-da-variável-alvo" class="slide level2">
 <h2>Distribuição da variável alvo</h2>
 <div id="chunk_3" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a>freq <span class="op">=</span> dados[<span class="st">"target"</span>].value_counts().sort_index()</span>
-<span id="cb4-4"><a href=""></a>freq.index <span class="op">=</span> [<span class="st">"Adimplente (0)"</span>, <span class="st">"Inadimplente (1)"</span>]</span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb4-7"><a href=""></a>plt.bar(freq.index, freq.values)</span>
-<span id="cb4-8"><a href=""></a>plt.title(<span class="st">"Distribuição da variável alvo"</span>)</span>
-<span id="cb4-9"><a href=""></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
-<span id="cb4-10"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a>freq <span class="op">=</span> dados[<span class="st">"target"</span>].value_counts().sort_index()</span>
+<span id="cb4-4"><a></a>freq.index <span class="op">=</span> [<span class="st">"Adimplente (0)"</span>, <span class="st">"Inadimplente (1)"</span>]</span>
+<span id="cb4-5"><a></a></span>
+<span id="cb4-6"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb4-7"><a></a>plt.bar(freq.index, freq.values)</span>
+<span id="cb4-8"><a></a>plt.title(<span class="st">"Distribuição da variável alvo"</span>)</span>
+<span id="cb4-9"><a></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
+<span id="cb4-10"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="section-8" class="slide level2">
@@ -1067,27 +1067,27 @@ P(Y=1 \mid X)
 
 <p>Dividindo os dados</p>
 <div id="chunk_4" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb5-2"><a href=""></a><span class="co"># 1ª divisão: 80% para treino inicial e 20% para teste</span></span>
-<span id="cb5-3"><a href=""></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb5-4"><a href=""></a>    dados.drop(columns<span class="op">=</span>[<span class="st">"class"</span>, <span class="st">"target"</span>]),  <span class="co"># variáveis explicativas</span></span>
-<span id="cb5-5"><a href=""></a>    dados[<span class="st">"target"</span>],                         <span class="co"># variável resposta</span></span>
-<span id="cb5-6"><a href=""></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,                           <span class="co"># 20% para teste</span></span>
-<span id="cb5-7"><a href=""></a>    random_state<span class="op">=</span><span class="dv">42</span>,                         <span class="co"># reprodutibilidade</span></span>
-<span id="cb5-8"><a href=""></a>    stratify<span class="op">=</span>dados[<span class="st">"target"</span>]                 <span class="co"># mantém proporção das classes</span></span>
-<span id="cb5-9"><a href=""></a>)</span>
-<span id="cb5-10"><a href=""></a><span class="co"># 2ª divisão: # dos 80% de treino: 75% → treino final e 25% → validação</span></span>
-<span id="cb5-11"><a href=""></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(</span>
-<span id="cb5-12"><a href=""></a>    X_train,</span>
-<span id="cb5-13"><a href=""></a>    y_train,</span>
-<span id="cb5-14"><a href=""></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,        <span class="co"># 25% de 80% = 20% do total</span></span>
-<span id="cb5-15"><a href=""></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb5-16"><a href=""></a>    stratify<span class="op">=</span>y_train       <span class="co"># mantém proporção das classes</span></span>
-<span id="cb5-17"><a href=""></a>)</span>
-<span id="cb5-18"><a href=""></a><span class="co"># Resultado final: # Treino: 60%; Validação: 20%; Teste: 20%</span></span>
-<span id="cb5-19"><a href=""></a><span class="bu">print</span>(<span class="st">"Treino:"</span>, <span class="bu">len</span>(X_train))</span>
-<span id="cb5-20"><a href=""></a><span class="bu">print</span>(<span class="st">"Validação:"</span>, <span class="bu">len</span>(X_valid))</span>
-<span id="cb5-21"><a href=""></a><span class="bu">print</span>(<span class="st">"Teste:"</span>, <span class="bu">len</span>(X_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb5-2"><a></a><span class="co"># 1ª divisão: 80% para treino inicial e 20% para teste</span></span>
+<span id="cb5-3"><a></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb5-4"><a></a>    dados.drop(columns<span class="op">=</span>[<span class="st">"class"</span>, <span class="st">"target"</span>]),  <span class="co"># variáveis explicativas</span></span>
+<span id="cb5-5"><a></a>    dados[<span class="st">"target"</span>],                         <span class="co"># variável resposta</span></span>
+<span id="cb5-6"><a></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,                           <span class="co"># 20% para teste</span></span>
+<span id="cb5-7"><a></a>    random_state<span class="op">=</span><span class="dv">42</span>,                         <span class="co"># reprodutibilidade</span></span>
+<span id="cb5-8"><a></a>    stratify<span class="op">=</span>dados[<span class="st">"target"</span>]                 <span class="co"># mantém proporção das classes</span></span>
+<span id="cb5-9"><a></a>)</span>
+<span id="cb5-10"><a></a><span class="co"># 2ª divisão: # dos 80% de treino: 75% → treino final e 25% → validação</span></span>
+<span id="cb5-11"><a></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(</span>
+<span id="cb5-12"><a></a>    X_train,</span>
+<span id="cb5-13"><a></a>    y_train,</span>
+<span id="cb5-14"><a></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,        <span class="co"># 25% de 80% = 20% do total</span></span>
+<span id="cb5-15"><a></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb5-16"><a></a>    stratify<span class="op">=</span>y_train       <span class="co"># mantém proporção das classes</span></span>
+<span id="cb5-17"><a></a>)</span>
+<span id="cb5-18"><a></a><span class="co"># Resultado final: # Treino: 60%; Validação: 20%; Teste: 20%</span></span>
+<span id="cb5-19"><a></a><span class="bu">print</span>(<span class="st">"Treino:"</span>, <span class="bu">len</span>(X_train))</span>
+<span id="cb5-20"><a></a><span class="bu">print</span>(<span class="st">"Validação:"</span>, <span class="bu">len</span>(X_valid))</span>
+<span id="cb5-21"><a></a><span class="bu">print</span>(<span class="st">"Teste:"</span>, <span class="bu">len</span>(X_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Resultado: Treino: 600; Validação: 200; Teste: 200</p>
 </section>
@@ -1232,28 +1232,28 @@ P(Y=1 \mid X)
 </section>
 <section id="criando-a-variável-idade-em-faixas" class="slide level2">
 <h2>Criando a variável idade em faixas</h2>
-<div id="42f0f10e" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-3"><a href=""></a></span>
-<span id="cb6-4"><a href=""></a><span class="co"># =========================</span></span>
-<span id="cb6-5"><a href=""></a><span class="co"># Criando faixas de idade</span></span>
-<span id="cb6-6"><a href=""></a><span class="co"># =========================</span></span>
-<span id="cb6-7"><a href=""></a>dados[<span class="st">"faixa_idade"</span>] <span class="op">=</span> pd.cut(</span>
-<span id="cb6-8"><a href=""></a>    dados[<span class="st">"age"</span>],</span>
-<span id="cb6-9"><a href=""></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
-<span id="cb6-10"><a href=""></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
-<span id="cb6-11"><a href=""></a>)</span>
-<span id="cb6-12"><a href=""></a></span>
-<span id="cb6-13"><a href=""></a><span class="co"># Contagem das faixas</span></span>
-<span id="cb6-14"><a href=""></a>faixas <span class="op">=</span> dados[<span class="st">"faixa_idade"</span>].value_counts().sort_index()</span>
-<span id="cb6-15"><a href=""></a></span>
-<span id="cb6-16"><a href=""></a><span class="co"># Gráfico</span></span>
-<span id="cb6-17"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb6-18"><a href=""></a>plt.bar(faixas.index.astype(<span class="bu">str</span>), faixas.values)</span>
-<span id="cb6-19"><a href=""></a>plt.title(<span class="st">"Distribuição das faixas de idade"</span>)</span>
-<span id="cb6-20"><a href=""></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
-<span id="cb6-21"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e6b2d3d1" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="co"># =========================</span></span>
+<span id="cb6-5"><a></a><span class="co"># Criando faixas de idade</span></span>
+<span id="cb6-6"><a></a><span class="co"># =========================</span></span>
+<span id="cb6-7"><a></a>dados[<span class="st">"faixa_idade"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb6-8"><a></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb6-9"><a></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
+<span id="cb6-10"><a></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
+<span id="cb6-11"><a></a>)</span>
+<span id="cb6-12"><a></a></span>
+<span id="cb6-13"><a></a><span class="co"># Contagem das faixas</span></span>
+<span id="cb6-14"><a></a>faixas <span class="op">=</span> dados[<span class="st">"faixa_idade"</span>].value_counts().sort_index()</span>
+<span id="cb6-15"><a></a></span>
+<span id="cb6-16"><a></a><span class="co"># Gráfico</span></span>
+<span id="cb6-17"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb6-18"><a></a>plt.bar(faixas.index.astype(<span class="bu">str</span>), faixas.values)</span>
+<span id="cb6-19"><a></a>plt.title(<span class="st">"Distribuição das faixas de idade"</span>)</span>
+<span id="cb6-20"><a></a>plt.ylabel(<span class="st">"Frequência"</span>)</span>
+<span id="cb6-21"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="section-11" class="slide level2">
@@ -1318,24 +1318,24 @@ P(Y=1 \mid X)
 <section class="slide level2">
 
 <div id="chunk_faixa_vs_target" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-2"><a href=""></a><span class="co"># Divisão A </span></span>
-<span id="cb7-3"><a href=""></a>dados[<span class="st">"faixa_A"</span>] <span class="op">=</span> pd.cut(</span>
-<span id="cb7-4"><a href=""></a>    dados[<span class="st">"age"</span>],</span>
-<span id="cb7-5"><a href=""></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">100</span>],</span>
-<span id="cb7-6"><a href=""></a>    labels<span class="op">=</span>[<span class="st">"até 30"</span>, <span class="st">"31–45"</span>, <span class="st">"46–60"</span>, <span class="st">"60+"</span>]</span>
-<span id="cb7-7"><a href=""></a>)</span>
-<span id="cb7-8"><a href=""></a><span class="co"># Divisão B </span></span>
-<span id="cb7-9"><a href=""></a>dados[<span class="st">"faixa_B"</span>] <span class="op">=</span> pd.cut(</span>
-<span id="cb7-10"><a href=""></a>    dados[<span class="st">"age"</span>],</span>
-<span id="cb7-11"><a href=""></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
-<span id="cb7-12"><a href=""></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
-<span id="cb7-13"><a href=""></a>)</span>
-<span id="cb7-14"><a href=""></a><span class="co"># Tabelas de proporção</span></span>
-<span id="cb7-15"><a href=""></a>tabela_A <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_A"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
-<span id="cb7-16"><a href=""></a><span class="bu">print</span>(tabela_A)</span>
-<span id="cb7-17"><a href=""></a>tabela_B <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_B"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
-<span id="cb7-18"><a href=""></a><span class="bu">print</span>(tabela_B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a></a><span class="co"># Divisão A </span></span>
+<span id="cb7-3"><a></a>dados[<span class="st">"faixa_A"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb7-4"><a></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb7-5"><a></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">100</span>],</span>
+<span id="cb7-6"><a></a>    labels<span class="op">=</span>[<span class="st">"até 30"</span>, <span class="st">"31–45"</span>, <span class="st">"46–60"</span>, <span class="st">"60+"</span>]</span>
+<span id="cb7-7"><a></a>)</span>
+<span id="cb7-8"><a></a><span class="co"># Divisão B </span></span>
+<span id="cb7-9"><a></a>dados[<span class="st">"faixa_B"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb7-10"><a></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb7-11"><a></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
+<span id="cb7-12"><a></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
+<span id="cb7-13"><a></a>)</span>
+<span id="cb7-14"><a></a><span class="co"># Tabelas de proporção</span></span>
+<span id="cb7-15"><a></a>tabela_A <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_A"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="cb7-16"><a></a><span class="bu">print</span>(tabela_A)</span>
+<span id="cb7-17"><a></a>tabela_B <span class="op">=</span> pd.crosstab(dados[<span class="st">"faixa_B"</span>], dados[<span class="st">"target"</span>], normalize<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="cb7-18"><a></a><span class="bu">print</span>(tabela_B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>target          0         1
 faixa_A                    
@@ -1670,33 +1670,33 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <section class="slide level2">
 
 <div id="chunk_6a" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="co"># Dados faltantes por coluna</span></span>
-<span id="cb9-2"><a href=""></a>dados.isna().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
-<span id="cb9-3"><a href=""></a><span class="co"># Duplicatas</span></span>
-<span id="cb9-4"><a href=""></a><span class="bu">print</span>(<span class="st">"Número de linhas duplicadas:"</span>, dados.duplicated().<span class="bu">sum</span>())</span>
-<span id="cb9-5"><a href=""></a><span class="co"># Tipos das variáveis</span></span>
-<span id="cb9-6"><a href=""></a>dados.dtypes.head(<span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Dados faltantes por coluna</span></span>
+<span id="cb9-2"><a></a>dados.isna().<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb9-3"><a></a><span class="co"># Duplicatas</span></span>
+<span id="cb9-4"><a></a><span class="bu">print</span>(<span class="st">"Número de linhas duplicadas:"</span>, dados.duplicated().<span class="bu">sum</span>())</span>
+<span id="cb9-5"><a></a><span class="co"># Tipos das variáveis</span></span>
+<span id="cb9-6"><a></a>dados.dtypes.head(<span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="chunk_6b" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-3"><a href=""></a></span>
-<span id="cb10-4"><a href=""></a><span class="co"># Transformações simples</span></span>
-<span id="cb10-5"><a href=""></a></span>
-<span id="cb10-6"><a href=""></a><span class="co"># Log do valor do crédito</span></span>
-<span id="cb10-7"><a href=""></a>dados[<span class="st">"log_credit_amount"</span>] <span class="op">=</span> np.log1p(dados[<span class="st">"credit_amount"</span>])</span>
-<span id="cb10-8"><a href=""></a></span>
-<span id="cb10-9"><a href=""></a><span class="co"># Crédito médio por mês</span></span>
-<span id="cb10-10"><a href=""></a>dados[<span class="st">"credit_per_month"</span>] <span class="op">=</span> dados[<span class="st">"credit_amount"</span>] <span class="op">/</span> dados[<span class="st">"duration"</span>]</span>
-<span id="cb10-11"><a href=""></a></span>
-<span id="cb10-12"><a href=""></a><span class="co"># Faixas de idade</span></span>
-<span id="cb10-13"><a href=""></a>dados[<span class="st">"faixa_idade"</span>] <span class="op">=</span> pd.cut(</span>
-<span id="cb10-14"><a href=""></a>    dados[<span class="st">"age"</span>],</span>
-<span id="cb10-15"><a href=""></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
-<span id="cb10-16"><a href=""></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
-<span id="cb10-17"><a href=""></a>)</span>
-<span id="cb10-18"><a href=""></a></span>
-<span id="cb10-19"><a href=""></a>dados[[<span class="st">"age"</span>, <span class="st">"faixa_idade"</span>, <span class="st">"credit_amount"</span>, <span class="st">"log_credit_amount"</span>, <span class="st">"credit_per_month"</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a><span class="co"># Transformações simples</span></span>
+<span id="cb10-5"><a></a></span>
+<span id="cb10-6"><a></a><span class="co"># Log do valor do crédito</span></span>
+<span id="cb10-7"><a></a>dados[<span class="st">"log_credit_amount"</span>] <span class="op">=</span> np.log1p(dados[<span class="st">"credit_amount"</span>])</span>
+<span id="cb10-8"><a></a></span>
+<span id="cb10-9"><a></a><span class="co"># Crédito médio por mês</span></span>
+<span id="cb10-10"><a></a>dados[<span class="st">"credit_per_month"</span>] <span class="op">=</span> dados[<span class="st">"credit_amount"</span>] <span class="op">/</span> dados[<span class="st">"duration"</span>]</span>
+<span id="cb10-11"><a></a></span>
+<span id="cb10-12"><a></a><span class="co"># Faixas de idade</span></span>
+<span id="cb10-13"><a></a>dados[<span class="st">"faixa_idade"</span>] <span class="op">=</span> pd.cut(</span>
+<span id="cb10-14"><a></a>    dados[<span class="st">"age"</span>],</span>
+<span id="cb10-15"><a></a>    bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">100</span>],</span>
+<span id="cb10-16"><a></a>    labels<span class="op">=</span>[<span class="st">"até 25"</span>, <span class="st">"26–35"</span>, <span class="st">"36–50"</span>, <span class="st">"50+"</span>]</span>
+<span id="cb10-17"><a></a>)</span>
+<span id="cb10-18"><a></a></span>
+<span id="cb10-19"><a></a>dados[[<span class="st">"age"</span>, <span class="st">"faixa_idade"</span>, <span class="st">"credit_amount"</span>, <span class="st">"log_credit_amount"</span>, <span class="st">"credit_per_month"</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section class="slide level2">
@@ -1780,28 +1780,28 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <section class="slide level2">
 
 <div id="chunk_6c" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="co">## Observe o uso do pacote scorecardpy</span></span>
-<span id="cb11-2"><a href=""></a><span class="im">import</span> scorecardpy <span class="im">as</span> sc</span>
-<span id="cb11-3"><a href=""></a></span>
-<span id="cb11-4"><a href=""></a>base_woe <span class="op">=</span> dados.copy()</span>
-<span id="cb11-5"><a href=""></a>base_woe[<span class="st">"inad"</span>] <span class="op">=</span> base_woe[<span class="st">"target"</span>]</span>
-<span id="cb11-6"><a href=""></a></span>
-<span id="cb11-7"><a href=""></a><span class="co"># Seleção de algumas variáveis para exemplo</span></span>
-<span id="cb11-8"><a href=""></a>vars_exemplo <span class="op">=</span> [</span>
-<span id="cb11-9"><a href=""></a>    <span class="st">"age"</span>,</span>
-<span id="cb11-10"><a href=""></a>    <span class="st">"credit_amount"</span>,</span>
-<span id="cb11-11"><a href=""></a>    <span class="st">"duration"</span>,</span>
-<span id="cb11-12"><a href=""></a>    <span class="st">"credit_per_month"</span>,</span>
-<span id="cb11-13"><a href=""></a>    <span class="st">"log_credit_amount"</span>,</span>
-<span id="cb11-14"><a href=""></a>    <span class="st">"inad"</span></span>
-<span id="cb11-15"><a href=""></a>]</span>
-<span id="cb11-16"><a href=""></a>base_woe <span class="op">=</span> base_woe[vars_exemplo]</span>
-<span id="cb11-17"><a href=""></a></span>
-<span id="cb11-18"><a href=""></a><span class="co"># Binning automático</span></span>
-<span id="cb11-19"><a href=""></a>bins <span class="op">=</span> sc.woebin(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span>
-<span id="cb11-20"><a href=""></a></span>
-<span id="cb11-21"><a href=""></a><span class="co"># Tabela de bins</span></span>
-<span id="cb11-22"><a href=""></a>bins[<span class="st">"age"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co">## Observe o uso do pacote scorecardpy</span></span>
+<span id="cb11-2"><a></a><span class="im">import</span> scorecardpy <span class="im">as</span> sc</span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a>base_woe <span class="op">=</span> dados.copy()</span>
+<span id="cb11-5"><a></a>base_woe[<span class="st">"inad"</span>] <span class="op">=</span> base_woe[<span class="st">"target"</span>]</span>
+<span id="cb11-6"><a></a></span>
+<span id="cb11-7"><a></a><span class="co"># Seleção de algumas variáveis para exemplo</span></span>
+<span id="cb11-8"><a></a>vars_exemplo <span class="op">=</span> [</span>
+<span id="cb11-9"><a></a>    <span class="st">"age"</span>,</span>
+<span id="cb11-10"><a></a>    <span class="st">"credit_amount"</span>,</span>
+<span id="cb11-11"><a></a>    <span class="st">"duration"</span>,</span>
+<span id="cb11-12"><a></a>    <span class="st">"credit_per_month"</span>,</span>
+<span id="cb11-13"><a></a>    <span class="st">"log_credit_amount"</span>,</span>
+<span id="cb11-14"><a></a>    <span class="st">"inad"</span></span>
+<span id="cb11-15"><a></a>]</span>
+<span id="cb11-16"><a></a>base_woe <span class="op">=</span> base_woe[vars_exemplo]</span>
+<span id="cb11-17"><a></a></span>
+<span id="cb11-18"><a></a><span class="co"># Binning automático</span></span>
+<span id="cb11-19"><a></a>bins <span class="op">=</span> sc.woebin(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span>
+<span id="cb11-20"><a></a></span>
+<span id="cb11-21"><a></a><span class="co"># Tabela de bins</span></span>
+<span id="cb11-22"><a></a>bins[<span class="st">"age"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section class="slide level2">
@@ -1930,10 +1930,10 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <section class="slide level2">
 
 <div id="cell-chunk_6d" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="co"># Aplicando transformação WOE</span></span>
-<span id="cb13-2"><a href=""></a>base_woe_transf <span class="op">=</span> sc.woebin_ply(base_woe, bins)</span>
-<span id="cb13-3"><a href=""></a></span>
-<span id="cb13-4"><a href=""></a>base_woe_transf.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># Aplicando transformação WOE</span></span>
+<span id="cb13-2"><a></a>base_woe_transf <span class="op">=</span> sc.woebin_ply(base_woe, bins)</span>
+<span id="cb13-3"><a></a></span>
+<span id="cb13-4"><a></a>base_woe_transf.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[INFO] converting into woe values ...</code></pre>
 </div>
@@ -1958,58 +1958,58 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">inad</th>
-<th data-quarto-table-cell-role="th">age_woe</th>
-<th data-quarto-table-cell-role="th">credit_per_month_woe</th>
-<th data-quarto-table-cell-role="th">duration_woe</th>
 <th data-quarto-table-cell-role="th">log_credit_amount_woe</th>
+<th data-quarto-table-cell-role="th">credit_per_month_woe</th>
+<th data-quarto-table-cell-role="th">age_woe</th>
 <th data-quarto-table-cell-role="th">credit_amount_woe</th>
+<th data-quarto-table-cell-role="th">duration_woe</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>-0.287682</td>
-<td>-1.312186</td>
 <td>0.037891</td>
+<td>-0.287682</td>
+<td>-0.212371</td>
 <td>0.033661</td>
+<td>-1.312186</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>1</td>
-<td>0.528844</td>
-<td>-0.092881</td>
-<td>1.134980</td>
 <td>0.375583</td>
+<td>-0.092881</td>
+<td>0.528844</td>
 <td>0.390539</td>
+<td>1.134980</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>-0.287682</td>
-<td>-0.346625</td>
 <td>-0.244346</td>
+<td>-0.287682</td>
+<td>-0.212371</td>
 <td>-0.258307</td>
+<td>-0.346625</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>-0.287682</td>
-<td>0.524524</td>
 <td>0.375583</td>
+<td>-0.287682</td>
+<td>-0.212371</td>
 <td>0.390539</td>
+<td>0.524524</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>1</td>
-<td>-0.212371</td>
-<td>-0.287682</td>
-<td>0.108688</td>
 <td>0.375583</td>
+<td>-0.287682</td>
+<td>-0.212371</td>
 <td>0.390539</td>
+<td>0.108688</td>
 </tr>
 </tbody>
 </table>
@@ -2021,9 +2021,9 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <section class="slide level2">
 
 <div id="cell-chunk_6e" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># Information Value de cada variável</span></span>
-<span id="cb15-2"><a href=""></a>iv <span class="op">=</span> sc.iv(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span>
-<span id="cb15-3"><a href=""></a>iv.sort_values(<span class="st">"info_value"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="co"># Information Value de cada variável</span></span>
+<span id="cb15-2"><a></a>iv <span class="op">=</span> sc.iv(base_woe, y<span class="op">=</span><span class="st">"inad"</span>)</span>
+<span id="cb15-3"><a></a>iv.sort_values(<span class="st">"info_value"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="chunk_6e" class="cell-output cell-output-display" data-execution_count="8">
 <div>
 <style scoped="">
@@ -2050,22 +2050,22 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">4</th>
 <td>duration</td>
 <td>0.337572</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">2</th>
 <td>age</td>
 <td>0.260453</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>log_credit_amount</td>
 <td>0.054639</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">3</th>
 <td>credit_amount</td>
 <td>0.054639</td>
 </tr>
@@ -2135,6 +2135,7 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <section id="referências-essenciais" class="slide level2 smaller scrollable">
 <h2>Referências essenciais</h2>
 
+
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-basel_framework" class="csl-entry" role="listitem">
 Bank for International Settlements. (2023). <em>Basel framework</em>. <a href="https://www.bis.org/basel_framework/">https://www.bis.org/basel_framework/</a>
@@ -2170,19 +2171,19 @@ scikit-learn developers. (2024b). <em>Model evaluation documentation</em>. <a hr
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Dia1_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Dia1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Dia1_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Dia1_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

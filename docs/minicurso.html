@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.24">
 
-  <title>minicurso</title>
+  <title>Minicurso de Risco de Crédito – minicurso</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -868,7 +868,7 @@ P(Y=1 \mid X)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Frequência da variável original</span></span>
 <span id="cb2-2"><a></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="47151677" class="cell" data-execution_count="5">
+<div id="f75487a2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Criando variável binária</span></span>
 <span id="cb3-2"><a></a><span class="co"># 1 = inadimplente (bad)</span></span>
 <span id="cb3-3"><a></a><span class="co"># 0 = adimplente (good)</span></span>
@@ -880,7 +880,7 @@ P(Y=1 \mid X)
 </section>
 <section id="definição-da-variável-alvo-1" class="slide level2">
 <h2>Definição da variável alvo</h2>
-<div id="b78f1c99" class="cell" data-execution_count="6">
+<div id="d324227f" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -1236,7 +1236,7 @@ P(Y=1 \mid X)
 </section>
 <section id="criando-a-variável-idade-em-faixas" class="slide level2">
 <h2>Criando a variável idade em faixas</h2>
-<div id="74a99a8d" class="cell" data-execution_count="9">
+<div id="2d3f1788" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a></a></span>
@@ -1959,58 +1959,58 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">inad</th>
-<th data-quarto-table-cell-role="th">age_woe</th>
-<th data-quarto-table-cell-role="th">duration_woe</th>
-<th data-quarto-table-cell-role="th">credit_amount_woe</th>
 <th data-quarto-table-cell-role="th">credit_per_month_woe</th>
+<th data-quarto-table-cell-role="th">duration_woe</th>
+<th data-quarto-table-cell-role="th">age_woe</th>
 <th data-quarto-table-cell-role="th">log_credit_amount_woe</th>
+<th data-quarto-table-cell-role="th">credit_amount_woe</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>-1.312186</td>
-<td>0.033661</td>
 <td>-0.287682</td>
+<td>-1.312186</td>
+<td>-0.212371</td>
 <td>0.037891</td>
+<td>0.033661</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>1</td>
-<td>0.528844</td>
-<td>1.134980</td>
-<td>0.390539</td>
 <td>-0.092881</td>
+<td>1.134980</td>
+<td>0.528844</td>
 <td>0.375583</td>
+<td>0.390539</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>-0.346625</td>
-<td>-0.258307</td>
 <td>-0.287682</td>
+<td>-0.346625</td>
+<td>-0.212371</td>
 <td>-0.244346</td>
+<td>-0.258307</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>0</td>
-<td>-0.212371</td>
-<td>0.524524</td>
-<td>0.390539</td>
 <td>-0.287682</td>
+<td>0.524524</td>
+<td>-0.212371</td>
 <td>0.375583</td>
+<td>0.390539</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>1</td>
-<td>-0.212371</td>
-<td>0.108688</td>
-<td>0.390539</td>
 <td>-0.287682</td>
+<td>0.108688</td>
+<td>-0.212371</td>
 <td>0.375583</td>
+<td>0.390539</td>
 </tr>
 </tbody>
 </table>
@@ -2056,22 +2056,22 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <td>0.337572</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">2</th>
 <td>age</td>
 <td>0.260453</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>credit_amount</td>
+<th data-quarto-table-cell-role="th">3</th>
+<td>log_credit_amount</td>
 <td>0.054639</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">4</th>
-<td>log_credit_amount</td>
+<td>credit_amount</td>
 <td>0.054639</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>credit_per_month</td>
 <td>0.030922</td>
 </tr>
