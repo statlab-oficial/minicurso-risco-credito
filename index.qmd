@@ -2352,16 +2352,54 @@ Mas ainda assim:
 
 ---
 
-## Quando usar cada modelo?
+## Modelos e regulação
 
-- Logística → quando precisa explicar decisões  
-- Árvore → quando quer regras simples  
-- *Random Forest* → quando busca robustez  
-- *Boosting* → quando busca maior desempenho  
+Em risco de crédito, não basta apenas prever bem.
+
+Os modelos precisam ser:
+
+- interpretáveis  
+- estáveis  
+- monitoráveis  
+- auditáveis  
+
+Por isso, modelos mais simples, como regressão logística, continuam amplamente utilizados em instituições financeiras.
+
+> desempenho preditivo e governança são igualmente importantes
+
+---
+
+## Modelos modernos em crédito
+
+Instituições financeiras também utilizam:
+
+- Árvores de decisão  
+- *Random Forest*  
+- *Gradient Boosting* (*XGBoost*, *LightGBM*)  
+
+Esses modelos podem melhorar a capacidade preditiva, especialmente em relações complexas e não lineares.
 
 Mas:
 
-> a escolha depende do contexto, dos dados e do objetivo da decisão
+- modelos mais complexos exigem maior cuidado com validação, monitoramento e explicabilidade  
+
+> o regulador não exige um algoritmo específico, mas exige robustez e justificativa técnica
+
+---
+
+## Quando usar cada modelo?
+
+- Regressão logística → interpretabilidade e estabilidade  
+- Árvores → regras simples e segmentação  
+- *Random Forest* → maior robustez preditiva  
+- *Boosting* → alta capacidade de discriminação  
+
+Na prática:
+
+- desempenho não é o único critério  
+- interpretação, monitoramento e governança também importam  
+
+> a escolha do modelo depende do contexto, dos dados e do objetivo da decisão
 
 ---
 
@@ -2369,28 +2407,30 @@ Mas:
 
 Em instituições financeiras:
 
-- modelos podem ser adquiridos de bureaus de crédito  
-- modelos internos são desenvolvidos e ajustados  
-- modelos precisam ser monitorados continuamente  
+- modelos são desenvolvidos, validados e monitorados continuamente  
+- decisões precisam ser justificáveis e auditáveis  
+- mudanças no comportamento da carteira exigem recalibração dos modelos  
 
 Além disso:
 
-- decisões devem ser justificáveis  
-- modelos precisam ser auditáveis  
+- modelos regulatórios tendem a priorizar estabilidade e interpretabilidade  
+- modelos mais complexos costumam atuar como complemento analítico  
 
-> a instituição continua responsável pelas decisões [@sr117; @cfpb_2022]
+> a instituição permanece responsável pelas decisões tomadas com auxílio dos modelos [@sr117; @cfpb_2022]
+
 
 ---
 
 ## Foi apresentado até aqui
 
-- modelos geram probabilidades de risco  
-- métricas avaliam desempenho  
-- o threshold define a decisão  
-- o custo define a melhor escolha  
-- diferentes modelos podem ser comparados  
+- risco de crédito como problema estatístico  
+- preparação e transformação dos dados  
+- regressão logística e modelos alternativos  
+- métricas de avaliação e comparação  
+- threshold, custo e tomada de decisão  
 
-> modelar é importante  → decidir é essencial
+> modelar é importante  
+> decidir é essencial
 
 📘 Para fixação e prática em Python:
 

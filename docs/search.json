@@ -966,25 +966,39 @@
     "text": "Modelo vs decisão\nUm modelo pode ter:\n\nmaior AUC\n\nmelhor separação\n\nMas ainda assim:\n\nnão gerar a melhor decisão\n\n\na decisão depende do threshold e dos custos"
   },
   {
+    "objectID": "index.html#modelos-e-regulação",
+    "href": "index.html#modelos-e-regulação",
+    "title": "Minicurso de Risco de Crédito",
+    "section": "Modelos e regulação",
+    "text": "Modelos e regulação\nEm risco de crédito, não basta apenas prever bem.\nOs modelos precisam ser:\n\ninterpretáveis\n\nestáveis\n\nmonitoráveis\n\nauditáveis\n\nPor isso, modelos mais simples, como regressão logística, continuam amplamente utilizados em instituições financeiras.\n\ndesempenho preditivo e governança são igualmente importantes"
+  },
+  {
+    "objectID": "index.html#modelos-modernos-em-crédito",
+    "href": "index.html#modelos-modernos-em-crédito",
+    "title": "Minicurso de Risco de Crédito",
+    "section": "Modelos modernos em crédito",
+    "text": "Modelos modernos em crédito\nInstituições financeiras também utilizam:\n\nÁrvores de decisão\n\nRandom Forest\n\nGradient Boosting (XGBoost, LightGBM)\n\nEsses modelos podem melhorar a capacidade preditiva, especialmente em relações complexas e não lineares.\nMas:\n\nmodelos mais complexos exigem maior cuidado com validação, monitoramento e explicabilidade\n\n\no regulador não exige um algoritmo específico, mas exige robustez e justificativa técnica"
+  },
+  {
     "objectID": "index.html#quando-usar-cada-modelo",
     "href": "index.html#quando-usar-cada-modelo",
     "title": "Minicurso de Risco de Crédito",
     "section": "Quando usar cada modelo?",
-    "text": "Quando usar cada modelo?\n\nLogística → quando precisa explicar decisões\n\nÁrvore → quando quer regras simples\n\nRandom Forest → quando busca robustez\n\nBoosting → quando busca maior desempenho\n\nMas:\n\na escolha depende do contexto, dos dados e do objetivo da decisão"
+    "text": "Quando usar cada modelo?\n\nRegressão logística → interpretabilidade e estabilidade\n\nÁrvores → regras simples e segmentação\n\nRandom Forest → maior robustez preditiva\n\nBoosting → alta capacidade de discriminação\n\nNa prática:\n\ndesempenho não é o único critério\n\ninterpretação, monitoramento e governança também importam\n\n\na escolha do modelo depende do contexto, dos dados e do objetivo da decisão"
   },
   {
     "objectID": "index.html#e-na-prática-do-mercado",
     "href": "index.html#e-na-prática-do-mercado",
     "title": "Minicurso de Risco de Crédito",
     "section": "E na prática do mercado?",
-    "text": "E na prática do mercado?\nEm instituições financeiras:\n\nmodelos podem ser adquiridos de bureaus de crédito\n\nmodelos internos são desenvolvidos e ajustados\n\nmodelos precisam ser monitorados continuamente\n\nAlém disso:\n\ndecisões devem ser justificáveis\n\nmodelos precisam ser auditáveis\n\n\na instituição continua responsável pelas decisões (Consumer Financial Protection Bureau, 2022; Federal Reserve, 2011)"
+    "text": "E na prática do mercado?\nEm instituições financeiras:\n\nmodelos são desenvolvidos, validados e monitorados continuamente\n\ndecisões precisam ser justificáveis e auditáveis\n\nmudanças no comportamento da carteira exigem recalibração dos modelos\n\nAlém disso:\n\nmodelos regulatórios tendem a priorizar estabilidade e interpretabilidade\n\nmodelos mais complexos costumam atuar como complemento analítico\n\n\na instituição permanece responsável pelas decisões tomadas com auxílio dos modelos (Consumer Financial Protection Bureau, 2022; Federal Reserve, 2011)"
   },
   {
     "objectID": "index.html#foi-apresentado-até-aqui-1",
     "href": "index.html#foi-apresentado-até-aqui-1",
     "title": "Minicurso de Risco de Crédito",
     "section": "Foi apresentado até aqui",
-    "text": "Foi apresentado até aqui\n\nmodelos geram probabilidades de risco\n\nmétricas avaliam desempenho\n\no threshold define a decisão\n\no custo define a melhor escolha\n\ndiferentes modelos podem ser comparados\n\n\nmodelar é importante → decidir é essencial\n\n📘 Para fixação e prática em Python:\n🔗 Acessar notebook no Google Colab"
+    "text": "Foi apresentado até aqui\n\nrisco de crédito como problema estatístico\n\npreparação e transformação dos dados\n\nregressão logística e modelos alternativos\n\nmétricas de avaliação e comparação\n\nthreshold, custo e tomada de decisão\n\n\nmodelar é importante\ndecidir é essencial\n\n📘 Para fixação e prática em Python:\n🔗 Acessar notebook no Google Colab"
   },
   {
     "objectID": "index.html#referências-essenciais-1",

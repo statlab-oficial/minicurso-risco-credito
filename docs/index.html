@@ -868,7 +868,7 @@ P(Y=1 \mid X)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Frequência da variável original</span></span>
 <span id="cb2-2"><a></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f62607c9" class="cell" data-execution_count="5">
+<div id="41bf5630" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Criando variável binária</span></span>
 <span id="cb3-2"><a></a><span class="co"># 1 = inadimplente (bad)</span></span>
 <span id="cb3-3"><a></a><span class="co"># 0 = adimplente (good)</span></span>
@@ -880,7 +880,7 @@ P(Y=1 \mid X)
 </section>
 <section id="definição-da-variável-alvo-1" class="slide level2">
 <h2>Definição da variável alvo</h2>
-<div id="af8f6d88" class="cell" data-execution_count="6">
+<div id="acdf5644" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 <style scoped="">
@@ -1236,7 +1236,7 @@ P(Y=1 \mid X)
 </section>
 <section id="criando-a-variável-idade-em-faixas" class="slide level2">
 <h2>Criando a variável idade em faixas</h2>
-<div id="9ae82fea" class="cell" data-execution_count="9">
+<div id="ada690ce" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a></a></span>
@@ -1959,58 +1959,58 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">inad</th>
+<th data-quarto-table-cell-role="th">age_woe</th>
 <th data-quarto-table-cell-role="th">duration_woe</th>
 <th data-quarto-table-cell-role="th">credit_amount_woe</th>
 <th data-quarto-table-cell-role="th">log_credit_amount_woe</th>
 <th data-quarto-table-cell-role="th">credit_per_month_woe</th>
-<th data-quarto-table-cell-role="th">age_woe</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>0</td>
+<td>-0.212371</td>
 <td>-1.312186</td>
 <td>0.033661</td>
 <td>0.037891</td>
 <td>-0.287682</td>
-<td>-0.212371</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>1</td>
+<td>0.528844</td>
 <td>1.134980</td>
 <td>0.390539</td>
 <td>0.375583</td>
 <td>-0.092881</td>
-<td>0.528844</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>0</td>
+<td>-0.212371</td>
 <td>-0.346625</td>
 <td>-0.258307</td>
 <td>-0.244346</td>
 <td>-0.287682</td>
-<td>-0.212371</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>0</td>
+<td>-0.212371</td>
 <td>0.524524</td>
 <td>0.390539</td>
 <td>0.375583</td>
 <td>-0.287682</td>
-<td>-0.212371</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>1</td>
+<td>-0.212371</td>
 <td>0.108688</td>
 <td>0.390539</td>
 <td>0.375583</td>
 <td>-0.287682</td>
-<td>-0.212371</td>
 </tr>
 </tbody>
 </table>
@@ -2051,27 +2051,27 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
 <td>duration</td>
 <td>0.337572</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>age</td>
 <td>0.260453</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
 <td>credit_amount</td>
 <td>0.054639</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
 <td>log_credit_amount</td>
 <td>0.054639</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
 <td>credit_per_month</td>
 <td>0.030922</td>
 </tr>
@@ -3159,57 +3159,100 @@ mas isso não garante melhor decisão final</p>
 <p>a decisão depende do threshold e dos custos</p>
 </blockquote>
 </section>
+<section id="modelos-e-regulação" class="slide level2">
+<h2>Modelos e regulação</h2>
+<p>Em risco de crédito, não basta apenas prever bem.</p>
+<p>Os modelos precisam ser:</p>
+<ul>
+<li>interpretáveis<br>
+</li>
+<li>estáveis<br>
+</li>
+<li>monitoráveis<br>
+</li>
+<li>auditáveis</li>
+</ul>
+<p>Por isso, modelos mais simples, como regressão logística, continuam amplamente utilizados em instituições financeiras.</p>
+<blockquote>
+<p>desempenho preditivo e governança são igualmente importantes</p>
+</blockquote>
+</section>
+<section id="modelos-modernos-em-crédito" class="slide level2">
+<h2>Modelos modernos em crédito</h2>
+<p>Instituições financeiras também utilizam:</p>
+<ul>
+<li>Árvores de decisão<br>
+</li>
+<li><em>Random Forest</em><br>
+</li>
+<li><em>Gradient Boosting</em> (<em>XGBoost</em>, <em>LightGBM</em>)</li>
+</ul>
+<p>Esses modelos podem melhorar a capacidade preditiva, especialmente em relações complexas e não lineares.</p>
+<p>Mas:</p>
+<ul>
+<li>modelos mais complexos exigem maior cuidado com validação, monitoramento e explicabilidade</li>
+</ul>
+<blockquote>
+<p>o regulador não exige um algoritmo específico, mas exige robustez e justificativa técnica</p>
+</blockquote>
+</section>
 <section id="quando-usar-cada-modelo" class="slide level2">
 <h2>Quando usar cada modelo?</h2>
 <ul>
-<li>Logística → quando precisa explicar decisões<br>
+<li>Regressão logística → interpretabilidade e estabilidade<br>
 </li>
-<li>Árvore → quando quer regras simples<br>
+<li>Árvores → regras simples e segmentação<br>
 </li>
-<li><em>Random Forest</em> → quando busca robustez<br>
+<li><em>Random Forest</em> → maior robustez preditiva<br>
 </li>
-<li><em>Boosting</em> → quando busca maior desempenho</li>
+<li><em>Boosting</em> → alta capacidade de discriminação</li>
 </ul>
-<p>Mas:</p>
+<p>Na prática:</p>
+<ul>
+<li>desempenho não é o único critério<br>
+</li>
+<li>interpretação, monitoramento e governança também importam</li>
+</ul>
 <blockquote>
-<p>a escolha depende do contexto, dos dados e do objetivo da decisão</p>
+<p>a escolha do modelo depende do contexto, dos dados e do objetivo da decisão</p>
 </blockquote>
 </section>
 <section id="e-na-prática-do-mercado" class="slide level2">
 <h2>E na prática do mercado?</h2>
 <p>Em instituições financeiras:</p>
 <ul>
-<li>modelos podem ser adquiridos de bureaus de crédito<br>
+<li>modelos são desenvolvidos, validados e monitorados continuamente<br>
 </li>
-<li>modelos internos são desenvolvidos e ajustados<br>
+<li>decisões precisam ser justificáveis e auditáveis<br>
 </li>
-<li>modelos precisam ser monitorados continuamente</li>
+<li>mudanças no comportamento da carteira exigem recalibração dos modelos</li>
 </ul>
 <p>Além disso:</p>
 <ul>
-<li>decisões devem ser justificáveis<br>
+<li>modelos regulatórios tendem a priorizar estabilidade e interpretabilidade<br>
 </li>
-<li>modelos precisam ser auditáveis</li>
+<li>modelos mais complexos costumam atuar como complemento analítico</li>
 </ul>
 <blockquote>
-<p>a instituição continua responsável pelas decisões <span class="citation" data-cites="sr117 cfpb_2022">(<a href="#/referências-essenciais" role="doc-biblioref" onclick="">Consumer Financial Protection Bureau, 2022</a>; <a href="#/referências-essenciais" role="doc-biblioref" onclick="">Federal Reserve, 2011</a>)</span></p>
+<p>a instituição permanece responsável pelas decisões tomadas com auxílio dos modelos <span class="citation" data-cites="sr117 cfpb_2022">(<a href="#/referências-essenciais" role="doc-biblioref" onclick="">Consumer Financial Protection Bureau, 2022</a>; <a href="#/referências-essenciais" role="doc-biblioref" onclick="">Federal Reserve, 2011</a>)</span></p>
 </blockquote>
 </section>
 <section id="foi-apresentado-até-aqui-1" class="slide level2">
 <h2>Foi apresentado até aqui</h2>
 <ul>
-<li>modelos geram probabilidades de risco<br>
+<li>risco de crédito como problema estatístico<br>
 </li>
-<li>métricas avaliam desempenho<br>
+<li>preparação e transformação dos dados<br>
 </li>
-<li>o threshold define a decisão<br>
+<li>regressão logística e modelos alternativos<br>
 </li>
-<li>o custo define a melhor escolha<br>
+<li>métricas de avaliação e comparação<br>
 </li>
-<li>diferentes modelos podem ser comparados</li>
+<li>threshold, custo e tomada de decisão</li>
 </ul>
 <blockquote>
-<p>modelar é importante → decidir é essencial</p>
+<p>modelar é importante<br>
+decidir é essencial</p>
 </blockquote>
 <p>📘 Para fixação e prática em Python:</p>
 <p>🔗 <a href="https://colab.research.google.com/drive/19x02exZUtXJwD1lTX8aVZnX-LR8yDzct">Acessar notebook no Google Colab</a></p>
