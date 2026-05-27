@@ -1,45 +1,38 @@
 [
   {
-    "objectID": "minicurso_risco_credito_parte_2.html",
-    "href": "minicurso_risco_credito_parte_2.html",
-    "title": "Introdução à Modelagem de Risco de Crédito",
-    "section": "",
-    "text": "Este notebook é a continuação prática da Parte 1. Na Parte 1, estruturamos o problema, preparamos os dados, criamos variáveis e discutimos discretização, WoE e IV.\nNesta parte, vamos usar os dados preparados para:\n\najustar uma regressão logística;\ntransformar probabilidades em classificações;\navaliar o modelo com matriz de confusão, ROC, AUC e Precision–Recall;\ndiscutir o papel do threshold;\ncomparar a logística com modelos alternativos.\n\n\nIdeia central: o modelo estima risco, mas a decisão depende de como usamos esse risco."
-  },
-  {
     "objectID": "minicurso_risco_credito_parte_2.html#parte-2-do-modelo-à-decisão",
     "href": "minicurso_risco_credito_parte_2.html#parte-2-do-modelo-à-decisão",
     "title": "Introdução à Modelagem de Risco de Crédito",
-    "section": "",
-    "text": "Este notebook é a continuação prática da Parte 1. Na Parte 1, estruturamos o problema, preparamos os dados, criamos variáveis e discutimos discretização, WoE e IV.\nNesta parte, vamos usar os dados preparados para:\n\najustar uma regressão logística;\ntransformar probabilidades em classificações;\navaliar o modelo com matriz de confusão, ROC, AUC e Precision–Recall;\ndiscutir o papel do threshold;\ncomparar a logística com modelos alternativos.\n\n\nIdeia central: o modelo estima risco, mas a decisão depende de como usamos esse risco."
+    "section": "Parte 2 — do modelo à decisão",
+    "text": "Parte 2 — do modelo à decisão\nEste notebook é a continuação prática da Parte 1. Na Parte 1, estruturamos o problema, preparamos os dados, criamos variáveis e discutimos discretização, WoE e IV.\nNesta parte, vamos usar os dados preparados para:\n\najustar uma regressão logística;\ntransformar probabilidades em classificações;\navaliar o modelo com matriz de confusão, ROC, AUC e Precision–Recall;\ndiscutir o papel do threshold;\ncomparar a logística com modelos alternativos.\n\n\nIdeia central: o modelo estima risco, mas a decisão depende de como usamos esse risco."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#preparação-do-ambiente",
     "href": "minicurso_risco_credito_parte_2.html#preparação-do-ambiente",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "1. Preparação do ambiente",
-    "text": "1. Preparação do ambiente\nVamos carregar os pacotes necessários. O notebook é autocontido: ele carrega a base novamente para que possa ser executado no Colab sem depender da Parte 1 aberta.\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\n\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier\n\nfrom sklearn.metrics import (\n    confusion_matrix,\n    ConfusionMatrixDisplay,\n    classification_report,\n    roc_curve,\n    roc_auc_score,\n    precision_recall_curve,\n    average_precision_score,\n    brier_score_loss\n)\n\nRANDOM_STATE = 42"
+    "text": "1. Preparação do ambiente\nVamos carregar os pacotes necessários. O notebook é autocontido: ele carrega a base novamente para que possa ser executado no Colab sem depender da Parte 1 aberta."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#carregando-a-base",
     "href": "minicurso_risco_credito_parte_2.html#carregando-a-base",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "2. Carregando a base",
-    "text": "2. Carregando a base\nUsaremos a base credit-g, disponível no OpenML. A variável original class tem dois níveis:\n\ngood: cliente adimplente;\nbad: cliente inadimplente.\n\nVamos criar a variável target:\n\ntarget = 1: inadimplente;\ntarget = 0: adimplente.\n\n\ncredit = fetch_openml(name=\"credit-g\", version=1, as_frame=True)\n\nX_original = credit.data.copy()\ny_original = credit.target.copy()\n\ndados = X_original.copy()\ndados[\"class\"] = y_original\n\n# Variável alvo: 1 = inadimplente, 0 = adimplente\ndados[\"target\"] = (dados[\"class\"] == \"bad\").astype(int)\n\ndados.head()\n\n\nConferência rápida da variável alvo\nAntes de modelar, sempre confira a distribuição da resposta. Isso ajuda a lembrar que o problema é desbalanceado: normalmente há mais clientes adimplentes do que inadimplentes.\n\ncontagem = dados[\"target\"].value_counts().sort_index()\nproporcao = dados[\"target\"].value_counts(normalize=True).sort_index()\n\nresumo_alvo = pd.DataFrame({\n    \"classe\": [\"Adimplente (0)\", \"Inadimplente (1)\"],\n    \"quantidade\": contagem.values,\n    \"proporcao\": proporcao.values\n})\n\nresumo_alvo"
+    "text": "2. Carregando a base\nUsaremos a base credit-g, disponível no OpenML. A variável original class tem dois níveis:\n\ngood: cliente adimplente;\nbad: cliente inadimplente.\n\nVamos criar a variável target:\n\ntarget = 1: inadimplente;\ntarget = 0: adimplente.\n\nConferência rápida da variável alvo\nAntes de modelar, sempre confira a distribuição da resposta. Isso ajuda a lembrar que o problema é desbalanceado: normalmente há mais clientes adimplentes do que inadimplentes."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#retomando-a-preparação-feita-na-parte-1",
     "href": "minicurso_risco_credito_parte_2.html#retomando-a-preparação-feita-na-parte-1",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "3. Retomando a preparação feita na Parte 1",
-    "text": "3. Retomando a preparação feita na Parte 1\nNa Parte 1, discutimos que modelar não começa no algoritmo. Antes disso, precisamos preparar os dados.\nAqui vamos manter duas transformações simples:\n\nlog_credit_amount: logaritmo do valor do crédito;\ncredit_per_month: valor médio do crédito por mês.\n\nEssas variáveis ajudam a representar melhor o risco associado ao valor e à duração do crédito.\n\ndados[\"log_credit_amount\"] = np.log1p(dados[\"credit_amount\"])\ndados[\"credit_per_month\"] = dados[\"credit_amount\"] / dados[\"duration\"]\n\ndados[[\"credit_amount\", \"duration\", \"log_credit_amount\", \"credit_per_month\"]].head()\n\n\nChecagens mínimas antes do modelo\nMesmo em uma base didática, é importante verificar:\n\ndados faltantes;\nduplicatas;\ntipos das variáveis.\n\n\nprint(\"Dados faltantes nas 10 primeiras colunas com mais ausências:\")\ndisplay(dados.isna().sum().sort_values(ascending=False).head(10))\n\nprint(\"\\nNúmero de linhas duplicadas:\", dados.duplicated().sum())\n\nprint(\"\\nTipos das primeiras variáveis:\")\ndisplay(dados.dtypes.head(15))"
+    "text": "3. Retomando a preparação feita na Parte 1\nNa Parte 1, discutimos que modelar não começa no algoritmo. Antes disso, precisamos preparar os dados.\nAqui vamos manter duas transformações simples:\n\nlog_credit_amount: logaritmo do valor do crédito;\ncredit_per_month: valor médio do crédito por mês.\n\nEssas variáveis ajudam a representar melhor o risco associado ao valor e à duração do crédito.\nChecagens mínimas antes do modelo\nMesmo em uma base didática, é importante verificar:\n\ndados faltantes;\nduplicatas;\ntipos das variáveis."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#divisão-dos-dados",
     "href": "minicurso_risco_credito_parte_2.html#divisão-dos-dados",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "4. Divisão dos dados",
-    "text": "4. Divisão dos dados\nVamos repetir a divisão discutida na Parte 1.\nA base será dividida em:\n\ntreino: usado para ajustar o modelo;\nvalidação: útil para comparação e ajuste de decisões;\nteste: usado para avaliação final.\n\nNeste notebook, usaremos principalmente treino e teste para manter o fluxo simples, mas manteremos a validação disponível.\n\nX = dados.drop(columns=[\"class\", \"target\"])\ny = dados[\"target\"]\n\n# 1ª divisão: 80% treino inicial, 20% teste\nX_train_full, X_test, y_train_full, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.20,\n    random_state=RANDOM_STATE,\n    stratify=y\n)\n\n# 2ª divisão: dos 80%, separar 75% treino e 25% validação\n# Resultado final aproximado: 60% treino, 20% validação, 20% teste\nX_train, X_valid, y_train, y_valid = train_test_split(\n    X_train_full,\n    y_train_full,\n    test_size=0.25,\n    random_state=RANDOM_STATE,\n    stratify=y_train_full\n)\n\nprint(\"Treino:\", X_train.shape[0])\nprint(\"Validação:\", X_valid.shape[0])\nprint(\"Teste:\", X_test.shape[0])\n\n\nConferindo a estratificação\nComo o problema é desbalanceado, usamos stratify para preservar a proporção de inadimplentes nos conjuntos.\n\nproporcoes = pd.DataFrame({\n    \"conjunto\": [\"treino\", \"validação\", \"teste\"],\n    \"proporcao_inadimplentes\": [y_train.mean(), y_valid.mean(), y_test.mean()]\n})\n\nproporcoes"
+    "text": "4. Divisão dos dados\nVamos repetir a divisão discutida na Parte 1.\nA base será dividida em:\n\ntreino: usado para ajustar o modelo;\nvalidação: útil para comparação e ajuste de decisões;\nteste: usado para avaliação final.\n\nNeste notebook, usaremos principalmente treino e teste para manter o fluxo simples, mas manteremos a validação disponível.\nConferindo a estratificação\nComo o problema é desbalanceado, usamos stratify para preservar a proporção de inadimplentes nos conjuntos."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#modelo-logístico-ideia-prática",
@@ -53,105 +46,105 @@
     "href": "minicurso_risco_credito_parte_2.html#ajustando-a-regressão-logística",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "6. Ajustando a regressão logística",
-    "text": "6. Ajustando a regressão logística\nComo a base tem variáveis numéricas e categóricas, precisamos transformar as categóricas em variáveis numéricas.\nNo notebook, vamos usar um Pipeline, que organiza:\n\ntratamento das variáveis categóricas;\nmanutenção das variáveis numéricas;\najuste da regressão logística.\n\nEsse fluxo é mais robusto e evita erros entre treino e teste.\n\n# Identificar colunas categóricas e numéricas\ncat_cols = X_train.select_dtypes(include=[\"object\", \"category\"]).columns.tolist()\nnum_cols = X_train.select_dtypes(exclude=[\"object\", \"category\"]).columns.tolist()\n\npreprocess = ColumnTransformer(\n    transformers=[\n        (\"cat\", OneHotEncoder(handle_unknown=\"ignore\"), cat_cols),\n        (\"num\", \"passthrough\", num_cols)\n    ]\n)\n\nmodelo_log = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", LogisticRegression(max_iter=2000))\n])\n\nmodelo_log.fit(X_train, y_train)\n\ny_prob_log = modelo_log.predict_proba(X_test)[:, 1]\n\nprint(\"Primeiras probabilidades previstas:\")\nprint(y_prob_log[:10])\n\n\nO que o código fez?\n\ntransformou variáveis categóricas em numéricas;\najustou o modelo usando os dados de treino;\naplicou o modelo aos dados de teste;\nretornou uma probabilidade de inadimplência para cada cliente no teste.\n\n\nAgora podemos avaliar se essas probabilidades são úteis."
+    "text": "6. Ajustando a regressão logística\nComo a base tem variáveis numéricas e categóricas, precisamos transformar as categóricas em variáveis numéricas.\nNo notebook, vamos usar um Pipeline, que organiza:\n\ntratamento das variáveis categóricas;\nmanutenção das variáveis numéricas;\najuste da regressão logística.\n\nEsse fluxo é mais robusto e evita erros entre treino e teste.\nO que o código fez?\n\ntransformou variáveis categóricas em numéricas;\najustou o modelo usando os dados de treino;\naplicou o modelo aos dados de teste;\nretornou uma probabilidade de inadimplência para cada cliente no teste.\n\n\nAgora podemos avaliar se essas probabilidades são úteis."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#visualizando-as-probabilidades-previstas",
     "href": "minicurso_risco_credito_parte_2.html#visualizando-as-probabilidades-previstas",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "7. Visualizando as probabilidades previstas",
-    "text": "7. Visualizando as probabilidades previstas\nVamos observar a distribuição das probabilidades estimadas pelo modelo.\nA ideia é verificar se o modelo atribui probabilidades diferentes para clientes adimplentes e inadimplentes.\n\nplt.figure(figsize=(8, 4.5))\nplt.hist(y_prob_log[y_test.values == 0], bins=20, alpha=0.65, label=\"Adimplentes (0)\")\nplt.hist(y_prob_log[y_test.values == 1], bins=20, alpha=0.65, label=\"Inadimplentes (1)\")\nplt.xlabel(\"Probabilidade prevista de inadimplência\")\nplt.ylabel(\"Frequência\")\nplt.title(\"Distribuição das probabilidades previstas\")\nplt.legend()\nplt.show()\n\n\nAtividade de leitura\nObserve o gráfico anterior e responda:\n\nAs distribuições de adimplentes e inadimplentes estão bem separadas?\nHá sobreposição entre os grupos?\nO que essa sobreposição significa para a decisão de crédito?"
+    "text": "7. Visualizando as probabilidades previstas\nVamos observar a distribuição das probabilidades estimadas pelo modelo.\nA ideia é verificar se o modelo atribui probabilidades diferentes para clientes adimplentes e inadimplentes.\nAtividade de leitura\nObserve o gráfico anterior e responda:\n\nAs distribuições de adimplentes e inadimplentes estão bem separadas?\nHá sobreposição entre os grupos?\nO que essa sobreposição significa para a decisão de crédito?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#da-probabilidade-para-a-classificação",
     "href": "minicurso_risco_credito_parte_2.html#da-probabilidade-para-a-classificação",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "8. Da probabilidade para a classificação",
-    "text": "8. Da probabilidade para a classificação\nPara construir uma matriz de confusão, precisamos transformar probabilidades em classes.\nUsaremos inicialmente o ponto de corte 0,5:\n\nprobabilidade maior ou igual a 0,5 → classifica como inadimplente;\nprobabilidade menor que 0,5 → classifica como adimplente.\n\nEsse ponto de corte é apenas uma escolha inicial.\n\nthreshold = 0.5\ny_pred_log = (y_prob_log &gt;= threshold).astype(int)\n\nprint(\"Quantidade prevista como adimplente (0):\", (y_pred_log == 0).sum())\nprint(\"Quantidade prevista como inadimplente (1):\", (y_pred_log == 1).sum())"
+    "text": "8. Da probabilidade para a classificação\nPara construir uma matriz de confusão, precisamos transformar probabilidades em classes.\nUsaremos inicialmente o ponto de corte 0,5:\n\nprobabilidade maior ou igual a 0,5 → classifica como inadimplente;\nprobabilidade menor que 0,5 → classifica como adimplente.\n\nEsse ponto de corte é apenas uma escolha inicial."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#matriz-de-confusão",
     "href": "minicurso_risco_credito_parte_2.html#matriz-de-confusão",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "9. Matriz de confusão",
-    "text": "9. Matriz de confusão\nA matriz de confusão compara:\n\no que realmente aconteceu;\no que o modelo previu.\n\nEla permite visualizar acertos e erros.\n\ncm = confusion_matrix(y_test, y_pred_log)\n\ndisp = ConfusionMatrixDisplay(\n    confusion_matrix=cm,\n    display_labels=[\"Adimplente (0)\", \"Inadimplente (1)\"]\n)\n\ndisp.plot(values_format=\"d\")\nplt.title(\"Matriz de confusão - Regressão logística\")\nplt.show()\n\n\nInterpretando a matriz\n\nVerdadeiro negativo: cliente adimplente corretamente classificado como adimplente.\nVerdadeiro positivo: cliente inadimplente corretamente classificado como inadimplente.\nFalso positivo: cliente adimplente classificado como inadimplente.\nFalso negativo: cliente inadimplente classificado como adimplente.\n\nEm crédito, esses erros têm impactos diferentes."
+    "text": "9. Matriz de confusão\nA matriz de confusão compara:\n\no que realmente aconteceu;\no que o modelo previu.\n\nEla permite visualizar acertos e erros.\nInterpretando a matriz\n\nVerdadeiro negativo: cliente adimplente corretamente classificado como adimplente.\nVerdadeiro positivo: cliente inadimplente corretamente classificado como inadimplente.\nFalso positivo: cliente adimplente classificado como inadimplente.\nFalso negativo: cliente inadimplente classificado como adimplente.\n\nEm crédito, esses erros têm impactos diferentes."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#métricas-básicas",
     "href": "minicurso_risco_credito_parte_2.html#métricas-básicas",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "10. Métricas básicas",
-    "text": "10. Métricas básicas\nVamos calcular algumas métricas a partir da classificação com threshold 0,5.\n\nprint(classification_report(\n    y_test,\n    y_pred_log,\n    target_names=[\"Adimplente (0)\", \"Inadimplente (1)\"],\n    digits=3\n))\n\n\nComo ler essas métricas?\n\nacurácia: proporção total de acertos;\nprecisão: entre os classificados como inadimplentes, quantos realmente eram inadimplentes;\nrecall: entre os inadimplentes reais, quantos foram identificados.\n\n\nEm crédito, a classe inadimplente costuma ser a mais importante para a análise de risco."
+    "text": "10. Métricas básicas\nVamos calcular algumas métricas a partir da classificação com threshold 0,5.\nComo ler essas métricas?\n\nacurácia: proporção total de acertos;\nprecisão: entre os classificados como inadimplentes, quantos realmente eram inadimplentes;\nrecall: entre os inadimplentes reais, quantos foram identificados.\n\n\nEm crédito, a classe inadimplente costuma ser a mais importante para a análise de risco."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#curva-roc-e-auc",
     "href": "minicurso_risco_credito_parte_2.html#curva-roc-e-auc",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "11. Curva ROC e AUC",
-    "text": "11. Curva ROC e AUC\nA curva ROC avalia o desempenho do modelo para diferentes valores de threshold.\nEla relaciona:\n\nTPR: taxa de verdadeiros positivos;\nFPR: taxa de falsos positivos.\n\nA AUC resume a capacidade de separação do modelo.\n\nfpr_log, tpr_log, thresholds_log = roc_curve(y_test, y_prob_log)\nauc_log = roc_auc_score(y_test, y_prob_log)\n\nplt.figure(figsize=(7, 5))\nplt.plot(fpr_log, tpr_log, label=f\"Logística (AUC = {auc_log:.3f})\")\nplt.plot([0, 1], [0, 1], linestyle=\"--\", label=\"Aleatório\")\nplt.xlabel(\"FPR - taxa de falsos positivos\")\nplt.ylabel(\"TPR - taxa de verdadeiros positivos\")\nplt.title(\"Curva ROC\")\nplt.legend()\nplt.show()\n\nprint(\"AUC:\", round(auc_log, 3))\n\n\nInterpretação da AUC\nA AUC mede a capacidade do modelo de ordenar clientes por risco.\nUma interpretação útil:\n\nse escolhermos um cliente inadimplente e um adimplente ao acaso, a AUC mede a chance de o modelo atribuir maior risco ao inadimplente.\n\nImportante: AUC avalia separação, não garante boa decisão nem boa calibração."
+    "text": "11. Curva ROC e AUC\nA curva ROC avalia o desempenho do modelo para diferentes valores de threshold.\nEla relaciona:\n\nTPR: taxa de verdadeiros positivos;\nFPR: taxa de falsos positivos.\n\nA AUC resume a capacidade de separação do modelo.\nInterpretação da AUC\nA AUC mede a capacidade do modelo de ordenar clientes por risco.\nUma interpretação útil:\n\nse escolhermos um cliente inadimplente e um adimplente ao acaso, a AUC mede a chance de o modelo atribuir maior risco ao inadimplente.\n\nImportante: AUC avalia separação, não garante boa decisão nem boa calibração."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#precisionrecall",
     "href": "minicurso_risco_credito_parte_2.html#precisionrecall",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "12. Precision–Recall",
-    "text": "12. Precision–Recall\nA curva Precision–Recall é útil quando a classe de interesse é rara.\nNo nosso caso, a classe positiva é:\n\ntarget = 1: inadimplente.\n\n\nprecision_log, recall_log, thresholds_pr_log = precision_recall_curve(y_test, y_prob_log)\nap_log = average_precision_score(y_test, y_prob_log)\n\nplt.figure(figsize=(7, 5))\nplt.plot(recall_log, precision_log, label=f\"Logística (AP = {ap_log:.3f})\")\nplt.xlabel(\"Recall - inadimplentes identificados\")\nplt.ylabel(\"Precisão - acerto entre os classificados como risco\")\nplt.title(\"Curva Precision–Recall\")\nplt.legend()\nplt.show()\n\nprint(\"Average Precision:\", round(ap_log, 3))\n\n\nAtividade de interpretação\nCompare ROC e Precision–Recall:\n\nQual delas parece mais conectada à classe inadimplente?\nPor que Precision–Recall pode ser útil em dados desbalanceados?\nUma boa AUC garante uma boa decisão de crédito?"
+    "text": "12. Precision–Recall\nA curva Precision–Recall é útil quando a classe de interesse é rara.\nNo nosso caso, a classe positiva é:\n\ntarget = 1: inadimplente.\n\nAtividade de interpretação\nCompare ROC e Precision–Recall:\n\nQual delas parece mais conectada à classe inadimplente?\nPor que Precision–Recall pode ser útil em dados desbalanceados?\nUma boa AUC garante uma boa decisão de crédito?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#calibração-e-brier-score",
     "href": "minicurso_risco_credito_parte_2.html#calibração-e-brier-score",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "13. Calibração e Brier score",
-    "text": "13. Calibração e Brier score\nAlém de separar bons e maus clientes, queremos saber se as probabilidades fazem sentido.\nO Brier score mede o erro médio quadrático das probabilidades previstas:\n\nmenor Brier → probabilidades mais próximas dos valores observados;\nmaior Brier → probabilidades piores.\n\n\nUm modelo pode ranquear bem, mas ainda produzir probabilidades mal calibradas.\n\n\nbrier_log = brier_score_loss(y_test, y_prob_log)\nprint(\"Brier score - Logística:\", round(brier_log, 4))"
+    "text": "13. Calibração e Brier score\nAlém de separar bons e maus clientes, queremos saber se as probabilidades fazem sentido.\nO Brier score mede o erro médio quadrático das probabilidades previstas:\n\nmenor Brier → probabilidades mais próximas dos valores observados;\nmaior Brier → probabilidades piores.\n\n\nUm modelo pode ranquear bem, mas ainda produzir probabilidades mal calibradas."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#efeito-do-threshold",
     "href": "minicurso_risco_credito_parte_2.html#efeito-do-threshold",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "14. Efeito do threshold",
-    "text": "14. Efeito do threshold\nO threshold controla quantos clientes serão classificados como risco.\nVamos comparar alguns pontos de corte.\n\ndef resumo_threshold(y_true, y_prob, threshold):\n    y_pred = (y_prob &gt;= threshold).astype(int)\n    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()\n    return {\n        \"threshold\": threshold,\n        \"TN\": tn,\n        \"FP\": fp,\n        \"FN\": fn,\n        \"TP\": tp,\n        \"classificados_risco\": int((y_pred == 1).sum()),\n        \"recall_inad\": tp / (tp + fn) if (tp + fn) &gt; 0 else np.nan,\n        \"precisao_inad\": tp / (tp + fp) if (tp + fp) &gt; 0 else np.nan\n    }\n\nthresholds = [0.2, 0.3, 0.4, 0.5, 0.6]\nresumo = pd.DataFrame([resumo_threshold(y_test, y_prob_log, t) for t in thresholds])\nresumo\n\n\nComo interpretar?\nAo reduzir o threshold:\n\nmais clientes são classificados como risco;\naumenta a chance de identificar inadimplentes;\ntambém pode aumentar falsos alarmes.\n\nAo aumentar o threshold:\n\nmenos clientes são classificados como risco;\na decisão fica mais restritiva;\nalguns inadimplentes podem passar sem identificação."
+    "text": "14. Efeito do threshold\nO threshold controla quantos clientes serão classificados como risco.\nVamos comparar alguns pontos de corte.\nComo interpretar?\nAo reduzir o threshold:\n\nmais clientes são classificados como risco;\naumenta a chance de identificar inadimplentes;\ntambém pode aumentar falsos alarmes.\n\nAo aumentar o threshold:\n\nmenos clientes são classificados como risco;\na decisão fica mais restritiva;\nalguns inadimplentes podem passar sem identificação."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#threshold-erro-e-custo",
     "href": "minicurso_risco_credito_parte_2.html#threshold-erro-e-custo",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "15. Threshold, erro e custo",
-    "text": "15. Threshold, erro e custo\nNa Parte 1, discutimos a ideia:\n[ = c_{FP} FP + c_{FN} FN ]\nAgora vamos transformar essa ideia em cálculo simples.\nSuponha:\n\ncusto de falso positivo: 100;\ncusto de falso negativo: 800.\n\nEsses valores são apenas ilustrativos.\n\ndef custo_threshold(y_true, y_prob, threshold, custo_fp=100, custo_fn=800):\n    y_pred = (y_prob &gt;= threshold).astype(int)\n    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()\n    custo = custo_fp * fp + custo_fn * fn\n    return {\n        \"threshold\": threshold,\n        \"FP\": fp,\n        \"FN\": fn,\n        \"custo_total\": custo\n    }\n\ncustos = pd.DataFrame([\n    custo_threshold(y_test, y_prob_log, t, custo_fp=100, custo_fn=800)\n    for t in np.arange(0.1, 0.91, 0.1)\n])\n\ncustos\n\n\nplt.figure(figsize=(7, 4.5))\nplt.plot(custos[\"threshold\"], custos[\"custo_total\"], marker=\"o\")\nplt.xlabel(\"Threshold\")\nplt.ylabel(\"Custo total\")\nplt.title(\"Custo total para diferentes thresholds\")\nplt.show()\n\nmelhor = custos.loc[custos[\"custo_total\"].idxmin()]\nprint(\"Threshold com menor custo:\", melhor[\"threshold\"])\nprint(\"Custo mínimo:\", melhor[\"custo_total\"])\n\n\nAtividade\nAltere os custos no código anterior e responda:\n\nO melhor threshold mudou?\nO que acontece quando o custo de deixar passar inadimplentes aumenta?\nPor que o threshold 0,5 pode não ser adequado em crédito?"
+    "text": "15. Threshold, erro e custo\nNa Parte 1, discutimos a ideia:\n[ = c_{FP} FP + c_{FN} FN ]\nAgora vamos transformar essa ideia em cálculo simples.\nSuponha:\n\ncusto de falso positivo: 100;\ncusto de falso negativo: 800.\n\nEsses valores são apenas ilustrativos.\nAtividade\nAltere os custos no código anterior e responda:\n\nO melhor threshold mudou?\nO que acontece quando o custo de deixar passar inadimplentes aumenta?\nPor que o threshold 0,5 pode não ser adequado em crédito?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#outros-modelos",
     "href": "minicurso_risco_credito_parte_2.html#outros-modelos",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "16. Outros modelos",
-    "text": "16. Outros modelos\nAgora vamos comparar a regressão logística com modelos alternativos:\n\nárvore de decisão;\nrandom forest;\ngradient boosting.\n\nA pergunta não é apenas “qual tem maior métrica?”, mas:\n\nqual modelo ajuda a tomar uma decisão melhor?\n\n\nmodelo_tree = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", DecisionTreeClassifier(max_depth=5, random_state=RANDOM_STATE))\n])\n\nmodelo_rf = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", RandomForestClassifier(n_estimators=300, random_state=RANDOM_STATE))\n])\n\nmodelo_gb = Pipeline(steps=[\n    (\"prep\", preprocess),\n    (\"model\", GradientBoostingClassifier(random_state=RANDOM_STATE))\n])\n\nmodelos = {\n    \"Logística\": modelo_log,\n    \"Árvore\": modelo_tree,\n    \"Random Forest\": modelo_rf,\n    \"Gradient Boosting\": modelo_gb\n}\n\nprobs = {}\n\nfor nome, modelo in modelos.items():\n    modelo.fit(X_train, y_train)\n    probs[nome] = modelo.predict_proba(X_test)[:, 1]\n\nprint(\"Modelos ajustados com sucesso.\")"
+    "text": "16. Outros modelos\nAgora vamos comparar a regressão logística com modelos alternativos:\n\nárvore de decisão;\nrandom forest;\ngradient boosting.\n\nA pergunta não é apenas “qual tem maior métrica?”, mas:\n\nqual modelo ajuda a tomar uma decisão melhor?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#comparando-modelos-por-auc-e-brier",
     "href": "minicurso_risco_credito_parte_2.html#comparando-modelos-por-auc-e-brier",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "17. Comparando modelos por AUC e Brier",
-    "text": "17. Comparando modelos por AUC e Brier\nVamos comparar duas dimensões:\n\nAUC: capacidade de separação;\nBrier score: qualidade das probabilidades.\n\n\ncomparacao = []\n\nfor nome, y_prob in probs.items():\n    comparacao.append({\n        \"modelo\": nome,\n        \"AUC\": roc_auc_score(y_test, y_prob),\n        \"Brier\": brier_score_loss(y_test, y_prob)\n    })\n\ncomparacao = pd.DataFrame(comparacao).sort_values(\"AUC\", ascending=False)\ncomparacao\n\n\nAtenção\nO modelo com maior AUC nem sempre será o melhor para decisão.\nA escolha também depende de:\n\ninterpretabilidade;\nestabilidade;\ncusto dos erros;\nexigências de governança."
+    "text": "17. Comparando modelos por AUC e Brier\nVamos comparar duas dimensões:\n\nAUC: capacidade de separação;\nBrier score: qualidade das probabilidades.\n\nAtenção\nO modelo com maior AUC nem sempre será o melhor para decisão.\nA escolha também depende de:\n\ninterpretabilidade;\nestabilidade;\ncusto dos erros;\nexigências de governança."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#curvas-roc-comparadas",
     "href": "minicurso_risco_credito_parte_2.html#curvas-roc-comparadas",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "18. Curvas ROC comparadas",
-    "text": "18. Curvas ROC comparadas\nAgora vamos visualizar a capacidade de separação dos modelos.\n\nplt.figure(figsize=(7, 5))\n\nfor nome, y_prob in probs.items():\n    fpr, tpr, _ = roc_curve(y_test, y_prob)\n    auc = roc_auc_score(y_test, y_prob)\n    plt.plot(fpr, tpr, label=f\"{nome} (AUC = {auc:.3f})\")\n\nplt.plot([0, 1], [0, 1], linestyle=\"--\", label=\"Aleatório\")\nplt.xlabel(\"FPR - taxa de falsos positivos\")\nplt.ylabel(\"TPR - taxa de verdadeiros positivos\")\nplt.title(\"Comparação de modelos - Curva ROC\")\nplt.legend()\nplt.show()"
+    "text": "18. Curvas ROC comparadas\nAgora vamos visualizar a capacidade de separação dos modelos."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#comparação-com-threshold-fixo",
     "href": "minicurso_risco_credito_parte_2.html#comparação-com-threshold-fixo",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "19. Comparação com threshold fixo",
-    "text": "19. Comparação com threshold fixo\nVamos comparar os modelos usando o mesmo threshold inicial: 0,5.\nIsso mostra como a escolha do modelo afeta a matriz de confusão.\n\nlinhas = []\n\nfor nome, y_prob in probs.items():\n    y_pred = (y_prob &gt;= 0.5).astype(int)\n    tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()\n    linhas.append({\n        \"modelo\": nome,\n        \"TN\": tn,\n        \"FP\": fp,\n        \"FN\": fn,\n        \"TP\": tp,\n        \"AUC\": roc_auc_score(y_test, y_prob)\n    })\n\npd.DataFrame(linhas).sort_values(\"AUC\", ascending=False)\n\n\nAtividade\nCom base na tabela anterior:\n\nO modelo com maior AUC teve também menos erros relevantes?\nQual modelo você escolheria se o principal objetivo fosse reduzir FN?\nQual modelo parece mais simples de justificar para uma decisão de crédito?"
+    "text": "19. Comparação com threshold fixo\nVamos comparar os modelos usando o mesmo threshold inicial: 0,5.\nIsso mostra como a escolha do modelo afeta a matriz de confusão.\nAtividade\nCom base na tabela anterior:\n\nO modelo com maior AUC teve também menos erros relevantes?\nQual modelo você escolheria se o principal objetivo fosse reduzir FN?\nQual modelo parece mais simples de justificar para uma decisão de crédito?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#overfitting-e-validação-cruzada",
     "href": "minicurso_risco_credito_parte_2.html#overfitting-e-validação-cruzada",
     "title": "Introdução à Modelagem de Risco de Crédito",
     "section": "20. Overfitting e validação cruzada",
-    "text": "20. Overfitting e validação cruzada\nModelos mais flexíveis podem se ajustar demais aos dados de treino.\nPara avaliar melhor a estabilidade, usamos validação cruzada.\n\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)\n\ncv_resultados = []\n\nfor nome, modelo in modelos.items():\n    scores = cross_val_score(\n        modelo,\n        X_train,\n        y_train,\n        cv=cv,\n        scoring=\"roc_auc\"\n    )\n    cv_resultados.append({\n        \"modelo\": nome,\n        \"AUC_media_CV\": scores.mean(),\n        \"AUC_dp_CV\": scores.std()\n    })\n\npd.DataFrame(cv_resultados).sort_values(\"AUC_media_CV\", ascending=False)\n\n\nInterpretação\nA validação cruzada ajuda a verificar se o desempenho é estável.\nUm modelo pode apresentar:\n\nalta AUC média;\nmas grande variação entre folds.\n\nIsso indica menor estabilidade."
+    "text": "20. Overfitting e validação cruzada\nModelos mais flexíveis podem se ajustar demais aos dados de treino.\nPara avaliar melhor a estabilidade, usamos validação cruzada.\nInterpretação\nA validação cruzada ajuda a verificar se o desempenho é estável.\nUm modelo pode apresentar:\n\nalta AUC média;\nmas grande variação entre folds.\n\nIsso indica menor estabilidade."
   },
   {
     "objectID": "minicurso_risco_credito_parte_2.html#quando-usar-cada-modelo",
@@ -1001,13 +994,6 @@
     "text": "Referências essenciais\n\n\nBank for International Settlements. (2023). Basel framework. https://www.bis.org/basel_framework/\n\n\nBasel Committee on Banking Supervision. (2006). International convergence of capital measurement and capital standards: A revised framework. https://www.bis.org/publ/bcbs128.htm\n\n\nBasel Committee on Banking Supervision. (2017). Basel III: Finalising post-crisis reforms. https://www.bis.org/bcbs/publ/d424.htm\n\n\nConsumer Financial Protection Bureau. (2022). Adverse action notification requirements in connection with credit decisions based on complex algorithms. https://www.consumerfinance.gov\n\n\nEuropean Banking Authority. (2017). Guidelines on PD estimation, LGD estimation and treatment of defaulted exposures. https://www.eba.europa.eu\n\n\nEuropean Banking Authority. (2020). Guidelines on loan origination and monitoring. https://www.eba.europa.eu\n\n\nFederal Reserve. (2011). Supervisory guidance on model risk management (SR 11-7). https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm\n\n\nHand, D. J., & Henley, W. E. (1997). Statistical classification methods in consumer credit scoring: A review. Journal of the Royal Statistical Society: Series A, 160(3), 523–541.\n\n\nLessmann, S., Baesens, B., Seow, H.-V., & Thomas, L. C. (2015). Benchmarking state-of-the-art classification algorithms for credit scoring. European Journal of Operational Research, 247(1), 124–136.\n\n\nscikit-learn developers. (2024a). Cross-validation documentation. https://scikit-learn.org/stable/modules/cross_validation.html\n\n\nscikit-learn developers. (2024b). Model evaluation documentation. https://scikit-learn.org/stable/modules/model_evaluation.html\n\n\n\nEssas referências sustentam os conceitos apresentados neste módulo."
   },
   {
-    "objectID": "minicurso_risco_credito_parte_1.html",
-    "href": "minicurso_risco_credito_parte_1.html",
-    "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
-    "section": "",
-    "text": "Este notebook acompanha o Dia 1 do minicurso e foi pensado para ser usado após a apresentação dos slides."
-  },
-  {
     "objectID": "minicurso_risco_credito_parte_1.html#objetivos-do-notebook",
     "href": "minicurso_risco_credito_parte_1.html#objetivos-do-notebook",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
@@ -1026,119 +1012,119 @@
     "href": "minicurso_risco_credito_parte_1.html#importação-de-bibliotecas",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "1. Importação de bibliotecas",
-    "text": "1. Importação de bibliotecas\n\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.model_selection import train_test_split"
+    "text": "1. Importação de bibliotecas"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#carregando-a-base-de-dados",
     "href": "minicurso_risco_credito_parte_1.html#carregando-a-base-de-dados",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "2. Carregando a base de dados",
-    "text": "2. Carregando a base de dados\nUsaremos a base credit-g, disponível no OpenML. Ela é uma base clássica em ensino de risco de crédito.\n\ncredit = fetch_openml(name=\"credit-g\", version=1, as_frame=True)\n\nX = credit.data.copy()\ny = credit.target.copy()\n\ndados = X.copy()\ndados[\"class\"] = y\n\ndados.head()"
+    "text": "2. Carregando a base de dados\nUsaremos a base credit-g, disponível no OpenML. Ela é uma base clássica em ensino de risco de crédito."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#primeira-inspeção-da-base",
     "href": "minicurso_risco_credito_parte_1.html#primeira-inspeção-da-base",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "3. Primeira inspeção da base",
-    "text": "3. Primeira inspeção da base\nAqui queremos responder perguntas simples:\n\nquantas linhas e colunas temos?\nquais variáveis existem?\nquais parecem numéricas ou categóricas?\n\n\nprint(\"Dimensão da base:\", dados.shape)\nprint(\"\\nColunas:\")\nprint(dados.columns.tolist())\n\n\ndados.dtypes"
+    "text": "3. Primeira inspeção da base\nAqui queremos responder perguntas simples:\n\nquantas linhas e colunas temos?\nquais variáveis existem?\nquais parecem numéricas ou categóricas?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#olhando-a-base-de-forma-mais-concreta",
     "href": "minicurso_risco_credito_parte_1.html#olhando-a-base-de-forma-mais-concreta",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "4. Olhando a base de forma mais concreta",
-    "text": "4. Olhando a base de forma mais concreta\nAlém do head(), vale observar algumas linhas aleatórias para perceber a variedade dos perfis.\n\ndados.sample(5, random_state=42)"
+    "text": "4. Olhando a base de forma mais concreta\nAlém do head(), vale observar algumas linhas aleatórias para perceber a variedade dos perfis."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#explorando-algumas-variáveis",
     "href": "minicurso_risco_credito_parte_1.html#explorando-algumas-variáveis",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "5. Explorando algumas variáveis",
-    "text": "5. Explorando algumas variáveis\nAntes de pensar em modelo, precisamos entender o que existe na base.\n\ndados[[\"duration\", \"credit_amount\", \"age\"]].describe()\n\n\ndados[\"purpose\"].value_counts()\n\n\ndados[\"housing\"].value_counts()\n\n\nAtividade de leitura 1\nSem fazer conta ainda, observe as saídas acima e responda mentalmente:\n\nquais variáveis parecem numéricas?\nquais parecem categóricas?\nquais podem carregar informação sobre risco?"
+    "text": "5. Explorando algumas variáveis\nAntes de pensar em modelo, precisamos entender o que existe na base.\nAtividade de leitura 1\nSem fazer conta ainda, observe as saídas acima e responda mentalmente:\n\nquais variáveis parecem numéricas?\nquais parecem categóricas?\nquais podem carregar informação sobre risco?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#definindo-a-variável-alvo",
     "href": "minicurso_risco_credito_parte_1.html#definindo-a-variável-alvo",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "6. Definindo a variável alvo",
-    "text": "6. Definindo a variável alvo\nA variável original class assume os valores good e bad. Vamos transformá-la em uma variável binária:\n\n0 → adimplente\n1 → inadimplente\n\n\ndados[\"class\"].value_counts()\n\n\ndados[\"target\"] = (dados[\"class\"] == \"bad\").astype(int)\n\ndados[[\"class\", \"target\"]].head(10)"
+    "text": "6. Definindo a variável alvo\nA variável original class assume os valores good e bad. Vamos transformá-la em uma variável binária:\n\n0 → adimplente\n1 → inadimplente"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#distribuição-da-variável-alvo",
     "href": "minicurso_risco_credito_parte_1.html#distribuição-da-variável-alvo",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "7. Distribuição da variável alvo",
-    "text": "7. Distribuição da variável alvo\nAgora queremos ver quantos clientes estão em cada classe.\n\ndados[\"target\"].value_counts()\n\n\ndados[\"target\"].value_counts(normalize=True)\n\n\nfreq = dados[\"target\"].value_counts().sort_index()\nfreq.index = [\"Adimplente (0)\", \"Inadimplente (1)\"]\n\nplt.figure(figsize=(7, 4))\nplt.bar(freq.index, freq.values)\nplt.title(\"Distribuição da variável alvo\")\nplt.ylabel(\"Frequência\")\nplt.show()\n\n\nAtividade de leitura 2\nObserve a distribuição da variável alvo e responda:\n\nA base parece balanceada?\nQual classe parece mais rara?\nEm risco de crédito, qual classe tende a ser mais importante identificar?"
+    "text": "7. Distribuição da variável alvo\nAgora queremos ver quantos clientes estão em cada classe.\nAtividade de leitura 2\nObserve a distribuição da variável alvo e responda:\n\nA base parece balanceada?\nQual classe parece mais rara?\nEm risco de crédito, qual classe tende a ser mais importante identificar?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#por-que-isso-importa",
     "href": "minicurso_risco_credito_parte_1.html#por-que-isso-importa",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "8. Por que isso importa?",
-    "text": "8. Por que isso importa?\nQuando a classe de interesse é rara, métricas simples como acurácia podem enganar.\nUm modelo pode parecer bom apenas por prever quase sempre a classe majoritária.\n\nQuestão para reflexão\nSe a maioria dos clientes é adimplente, o que acontece se um modelo prever sempre “adimplente”?\n\nEle teria alta acurácia?\nEle seria útil para risco de crédito?"
+    "text": "8. Por que isso importa?\nQuando a classe de interesse é rara, métricas simples como acurácia podem enganar.\nUm modelo pode parecer bom apenas por prever quase sempre a classe majoritária.\nQuestão para reflexão\nSe a maioria dos clientes é adimplente, o que acontece se um modelo prever sempre “adimplente”?\n\nEle teria alta acurácia?\nEle seria útil para risco de crédito?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#divisão-da-base-em-treino-validação-e-teste",
     "href": "minicurso_risco_credito_parte_1.html#divisão-da-base-em-treino-validação-e-teste",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "9. Divisão da base em treino, validação e teste",
-    "text": "9. Divisão da base em treino, validação e teste\nVamos dividir a base em duas etapas:\n\n80% treino inicial + 20% teste\ndos 80% de treino inicial, separar 75% para treino final e 25% para validação\n\nResultado final esperado: - treino: 60% - validação: 20% - teste: 20%\n\n# 1ª divisão: 80% treino inicial e 20% teste\nX_train, X_test, y_train, y_test = train_test_split(\n    dados.drop(columns=[\"class\", \"target\"]),\n    dados[\"target\"],\n    test_size=0.2,\n    random_state=42,\n    stratify=dados[\"target\"]\n)\n\n# 2ª divisão: dos 80% iniciais, 75% ficam em treino final e 25% em validação\nX_train, X_valid, y_train, y_valid = train_test_split(\n    X_train,\n    y_train,\n    test_size=0.25,\n    random_state=42,\n    stratify=y_train\n)\n\nprint(\"Treino:\", len(X_train))\nprint(\"Validação:\", len(X_valid))\nprint(\"Teste:\", len(X_test))"
+    "text": "9. Divisão da base em treino, validação e teste\nVamos dividir a base em duas etapas:\n\n80% treino inicial + 20% teste\ndos 80% de treino inicial, separar 75% para treino final e 25% para validação\n\nResultado final esperado: - treino: 60% - validação: 20% - teste: 20%"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#verificando-a-estratificação",
     "href": "minicurso_risco_credito_parte_1.html#verificando-a-estratificação",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "10. Verificando a estratificação",
-    "text": "10. Verificando a estratificação\nComo usamos stratify, esperamos que a proporção de inadimplentes fique parecida nos três conjuntos.\n\nprint(\"Proporção de inadimplentes no treino:    \", round(y_train.mean(), 4))\nprint(\"Proporção de inadimplentes na validação:\", round(y_valid.mean(), 4))\nprint(\"Proporção de inadimplentes no teste:    \", round(y_test.mean(), 4))\n\n\nAtividade de leitura 3\nCompare as três proporções acima.\n\nElas ficaram parecidas?\nO que poderia acontecer se a divisão fosse feita sem estratificação?"
+    "text": "10. Verificando a estratificação\nComo usamos stratify, esperamos que a proporção de inadimplentes fique parecida nos três conjuntos.\nAtividade de leitura 3\nCompare as três proporções acima.\n\nElas ficaram parecidas?\nO que poderia acontecer se a divisão fosse feita sem estratificação?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#exemplo-de-transformação-agrupando-idade",
     "href": "minicurso_risco_credito_parte_1.html#exemplo-de-transformação-agrupando-idade",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "11. Exemplo de transformação: agrupando idade",
-    "text": "11. Exemplo de transformação: agrupando idade\nVariáveis contínuas podem ser agrupadas em faixas para:\n\nfacilitar interpretação;\nresumir padrões;\nreduzir sensibilidade a valores extremos.\n\nIsso é comum em aplicações de crédito, especialmente em análises exploratórias e scorecards tradicionais.\n\ndados[\"age\"].describe()\n\nA idade varia de 19 a 75 anos, com maior concentração entre aproximadamente 27 e 42 anos.\n\ndados[\"faixa_idade\"] = pd.cut(\n    dados[\"age\"],\n    bins=[0, 25, 35, 50, 100],\n    labels=[\"até 25\", \"26–35\", \"36–50\", \"50+\"]\n)\n\ndados[[\"age\", \"faixa_idade\"]].head(10)\n\n\nfaixas = dados[\"faixa_idade\"].value_counts().sort_index()\n\nplt.figure(figsize=(7, 4))\nplt.bar(faixas.index.astype(str), faixas.values)\nplt.title(\"Distribuição das faixas de idade\")\nplt.ylabel(\"Frequência\")\nplt.show()\n\nAgrupar a idade em faixas reduz a variabilidade dos dados e facilita a interpretação dos padrões de risco."
+    "text": "11. Exemplo de transformação: agrupando idade\nVariáveis contínuas podem ser agrupadas em faixas para:\n\nfacilitar interpretação;\nresumir padrões;\nreduzir sensibilidade a valores extremos.\n\nIsso é comum em aplicações de crédito, especialmente em análises exploratórias e scorecards tradicionais.\nA idade varia de 19 a 75 anos, com maior concentração entre aproximadamente 27 e 42 anos.\nAgrupar a idade em faixas reduz a variabilidade dos dados e facilita a interpretação dos padrões de risco."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#cruzando-faixa-etária-e-inadimplência",
     "href": "minicurso_risco_credito_parte_1.html#cruzando-faixa-etária-e-inadimplência",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "12. Cruzando faixa etária e inadimplência",
-    "text": "12. Cruzando faixa etária e inadimplência\nAgora vamos olhar, de forma exploratória, como a inadimplência se distribui entre as faixas de idade.\n\ntab_idade = pd.crosstab(dados[\"faixa_idade\"], dados[\"target\"], normalize=\"index\")\ntab_idade.columns = [\"Adimplente\", \"Inadimplente\"]\ntab_idade\n\n\nAtividade de leitura 4\nObserve a tabela acima.\n\nAlguma faixa parece ter proporção maior de inadimplência?\nIsso significa causalidade?\nQue outras variáveis poderiam interferir nessa relação?"
+    "text": "12. Cruzando faixa etária e inadimplência\nAgora vamos olhar, de forma exploratória, como a inadimplência se distribui entre as faixas de idade.\nAtividade de leitura 4\nObserve a tabela acima.\n\nAlguma faixa parece ter proporção maior de inadimplência?\nIsso significa causalidade?\nQue outras variáveis poderiam interferir nessa relação?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#tratamento-pré-modelagem-checagens-básicas",
     "href": "minicurso_risco_credito_parte_1.html#tratamento-pré-modelagem-checagens-básicas",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "13. Tratamento pré-modelagem: checagens básicas",
-    "text": "13. Tratamento pré-modelagem: checagens básicas\nAntes de modelar, precisamos verificar se a base está coerente. Nesta etapa, vamos observar:\n\ndados faltantes\nduplicatas\ntipos das variáveis\nvalores potencialmente impossíveis\n\nMesmo quando a base está “limpa”, fazer esse checklist é uma boa prática.\n\n# Dados faltantes por coluna\nfaltantes = dados.isna().sum().sort_values(ascending=False)\nfaltantes.head(10)\n\n\n# Número de linhas duplicadas\ndados.duplicated().sum()\n\n\n# Tipos das variáveis\ndados.dtypes.value_counts()\n\n\n# Checagem simples de valores potencialmente problemáticos\nprint(\"Idades &lt; 18:\", (dados[\"age\"] &lt; 18).sum())\nprint(\"Duração &lt;= 0:\", (dados[\"duration\"] &lt;= 0).sum())\nprint(\"Crédito &lt;= 0:\", (dados[\"credit_amount\"] &lt;= 0).sum())\n\n\nAtividade de leitura 5\nObserve as checagens acima e responda:\n\nA base possui muitos dados faltantes?\nEncontramos duplicatas?\nAlgum valor parece claramente impossível?\n\n\nEm uma base real, essas verificações ajudam a evitar erros de modelagem."
+    "text": "13. Tratamento pré-modelagem: checagens básicas\nAntes de modelar, precisamos verificar se a base está coerente. Nesta etapa, vamos observar:\n\ndados faltantes\nduplicatas\ntipos das variáveis\nvalores potencialmente impossíveis\n\nMesmo quando a base está “limpa”, fazer esse checklist é uma boa prática.\nAtividade de leitura 5\nObserve as checagens acima e responda:\n\nA base possui muitos dados faltantes?\nEncontramos duplicatas?\nAlgum valor parece claramente impossível?\n\n\nEm uma base real, essas verificações ajudam a evitar erros de modelagem."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#transformações-simples-de-variáveis",
     "href": "minicurso_risco_credito_parte_1.html#transformações-simples-de-variáveis",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "14. Transformações simples de variáveis",
-    "text": "14. Transformações simples de variáveis\nAlém de limpar os dados, podemos criar variáveis mais informativas.\nExemplos: - usar o log do valor do crédito - criar uma medida de crédito por mês - comparar discretizações diferentes da mesma variável\nEssas transformações podem tornar os padrões de risco mais visíveis.\n\nimport numpy as np\n\n# Transformações simples\ndados[\"log_credit_amount\"] = np.log1p(dados[\"credit_amount\"])\ndados[\"credit_per_month\"] = dados[\"credit_amount\"] / dados[\"duration\"]\n\ndados[[\"credit_amount\", \"log_credit_amount\", \"duration\", \"credit_per_month\"]].head()\n\nA variável log_credit_amount reduz a assimetria do valor do crédito, enquanto credit_per_month combina valor e prazo em uma medida simples de esforço mensal."
+    "text": "14. Transformações simples de variáveis\nAlém de limpar os dados, podemos criar variáveis mais informativas.\nExemplos: - usar o log do valor do crédito - criar uma medida de crédito por mês - comparar discretizações diferentes da mesma variável\nEssas transformações podem tornar os padrões de risco mais visíveis.\nA variável log_credit_amount reduz a assimetria do valor do crédito, enquanto credit_per_month combina valor e prazo em uma medida simples de esforço mensal."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#comparando-duas-discretizações-manuais-da-idade",
     "href": "minicurso_risco_credito_parte_1.html#comparando-duas-discretizações-manuais-da-idade",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "15. Comparando duas discretizações manuais da idade",
-    "text": "15. Comparando duas discretizações manuais da idade\nA discretização que usamos antes foi definida manualmente. Mas será que outra divisão seria melhor para separar clientes bons e maus?\nVamos comparar duas possibilidades.\n\n# Divisão A\ndados[\"faixa_A\"] = pd.cut(\n    dados[\"age\"],\n    bins=[0, 30, 45, 60, 100],\n    labels=[\"até 30\", \"31–45\", \"46–60\", \"60+\"]\n)\n\n# Divisão B\ndados[\"faixa_B\"] = pd.cut(\n    dados[\"age\"],\n    bins=[0, 25, 35, 50, 100],\n    labels=[\"até 25\", \"26–35\", \"36–50\", \"50+\"]\n)\n\ntabela_A = pd.crosstab(dados[\"faixa_A\"], dados[\"target\"], normalize=\"index\")\ntabela_B = pd.crosstab(dados[\"faixa_B\"], dados[\"target\"], normalize=\"index\")\n\nprint(\"=== Divisão A ===\")\ndisplay(tabela_A)\n\nprint(\"=== Divisão B ===\")\ndisplay(tabela_B)\n\n\n# Comparando a diferença entre a maior e a menor proporção de inadimplentes\ndif_A = tabela_A[1].max() - tabela_A[1].min()\ndif_B = tabela_B[1].max() - tabela_B[1].min()\n\nprint(\"Diferença de risco - Divisão A:\", round(dif_A, 4))\nprint(\"Diferença de risco - Divisão B:\", round(dif_B, 4))\n\n\nAtividade de leitura 6\nCompare as duas divisões:\n\nEm qual delas a proporção de inadimplentes varia mais entre as faixas?\nQual parece separar melhor clientes de maior e menor risco?\nIsso sugere que uma discretização “boa” depende apenas da intuição?"
+    "text": "15. Comparando duas discretizações manuais da idade\nA discretização que usamos antes foi definida manualmente. Mas será que outra divisão seria melhor para separar clientes bons e maus?\nVamos comparar duas possibilidades.\nAtividade de leitura 6\nCompare as duas divisões:\n\nEm qual delas a proporção de inadimplentes varia mais entre as faixas?\nQual parece separar melhor clientes de maior e menor risco?\nIsso sugere que uma discretização “boa” depende apenas da intuição?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#woe-e-iv-ideias-importantes-em-modelagem-de-crédito",
     "href": "minicurso_risco_credito_parte_1.html#woe-e-iv-ideias-importantes-em-modelagem-de-crédito",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "16. WoE e IV: ideias importantes em modelagem de crédito",
-    "text": "16. WoE e IV: ideias importantes em modelagem de crédito\nEm credit scoring, uma técnica clássica é transformar faixas de variáveis em números usando o WoE (Weight of Evidence).\nPara a faixa \\(j\\):\n\\[\nWoE_j = \\ln\\left(\\frac{\\%\\,bons_j}{\\%\\,maus_j}\\right)\n\\]\nTambém podemos medir a força preditiva da variável usando o IV (Information Value):\n\\[\nIV = \\sum_j (\\%\\,bons_j - \\%\\,maus_j) \\cdot WoE_j\n\\]\nA ideia central é simples: uma boa divisão cria grupos com comportamentos diferentes de risco.\n\n# Instalação do pacote para WoE/IV no Colab, se necessário\nimport sys\nimport subprocess\n\nsubprocess.check_call([sys.executable, \"-m\", \"pip\", \"install\", \"scorecardpy\", \"-q\"])\n\n\nimport scorecardpy as sc\n\n\ndef calcular_woe(df, var_faixa, target):\n    tab = pd.crosstab(df[var_faixa], df[target])\n\n    if 0 not in tab.columns:\n        tab[0] = 0\n    if 1 not in tab.columns:\n        tab[1] = 0\n\n    tab = tab[[0, 1]]\n    tab.columns = [\"bons\", \"maus\"]\n\n    total_bons = tab[\"bons\"].sum()\n    total_maus = tab[\"maus\"].sum()\n\n    tab[\"prop_bons\"] = tab[\"bons\"] / total_bons\n    tab[\"prop_maus\"] = tab[\"maus\"] / total_maus\n\n    eps = 1e-6\n    tab[\"woe\"] = np.log((tab[\"prop_bons\"] + eps) / (tab[\"prop_maus\"] + eps))\n    tab[\"iv_parcial\"] = (tab[\"prop_bons\"] - tab[\"prop_maus\"]) * tab[\"woe\"]\n\n    return tab\n\n\nwoe_A = calcular_woe(dados, \"faixa_A\", \"target\")\nwoe_B = calcular_woe(dados, \"faixa_B\", \"target\")\n\nprint(\"=== WoE da Divisão A ===\")\ndisplay(woe_A)\n\nprint(\"IV total - Divisão A:\", round(woe_A[\"iv_parcial\"].sum(), 6))\n\nprint(\"\\n=== WoE da Divisão B ===\")\ndisplay(woe_B)\n\nprint(\"IV total - Divisão B:\", round(woe_B[\"iv_parcial\"].sum(), 6))\n\nObserve que:\n\nWoE positivo sugere maior presença relativa de bons clientes\nWoE negativo sugere maior presença relativa de maus clientes\nIV maior indica, em geral, maior capacidade de separação\n\nAssim, podemos comparar discretizações manuais antes mesmo de ajustar um modelo."
+    "text": "16. WoE e IV: ideias importantes em modelagem de crédito\nEm credit scoring, uma técnica clássica é transformar faixas de variáveis em números usando o WoE (Weight of Evidence).\nPara a faixa \\(j\\):\n\\[\nWoE_j = \\ln\\left(\\frac{\\%\\,bons_j}{\\%\\,maus_j}\\right)\n\\]\nTambém podemos medir a força preditiva da variável usando o IV (Information Value):\n\\[\nIV = \\sum_j (\\%\\,bons_j - \\%\\,maus_j) \\cdot WoE_j\n\\]\nA ideia central é simples: uma boa divisão cria grupos com comportamentos diferentes de risco.\nObserve que:\n\nWoE positivo sugere maior presença relativa de bons clientes\nWoE negativo sugere maior presença relativa de maus clientes\nIV maior indica, em geral, maior capacidade de separação\n\nAssim, podemos comparar discretizações manuais antes mesmo de ajustar um modelo."
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#binning-automático-com-scorecardpy",
     "href": "minicurso_risco_credito_parte_1.html#binning-automático-com-scorecardpy",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "17. Binning automático com scorecardpy",
-    "text": "17. Binning automático com scorecardpy\nAgora vamos deixar que um método automático proponha faixas com base nos dados.\nA ideia é comparar:\n\ndiscretização manual\ndiscretização orientada por dados\n\nIsso ajuda a mostrar por que o tratamento pré-modelagem é tão importante em crédito.\n\nbase_woe = dados.copy()\nbase_woe[\"inad\"] = base_woe[\"target\"]\n\nvars_exemplo = [\n    \"age\",\n    \"credit_amount\",\n    \"duration\",\n    \"credit_per_month\",\n    \"log_credit_amount\",\n    \"inad\"\n]\n\nbase_woe = base_woe[vars_exemplo]\n\nbins = sc.woebin(base_woe, y=\"inad\")\n\n\n# Tabela de bins para a idade\nbins[\"age\"]\n\n\n# Tabela de Information Value\niv = sc.iv(base_woe, y=\"inad\")\niv.sort_values(\"info_value\", ascending=False)\n\n\n# Aplicando a transformação WoE\nbase_woe_transf = sc.woebin_ply(base_woe, bins)\nbase_woe_transf.head()\n\n\nAtividade de leitura 7\nCom base nos resultados de WoE e IV:\n\nA discretização automática parece coerente?\nQuais variáveis parecem mais informativas?\nO que você ganha ao transformar uma faixa em um valor WoE?"
+    "text": "17. Binning automático com scorecardpy\nAgora vamos deixar que um método automático proponha faixas com base nos dados.\nA ideia é comparar:\n\ndiscretização manual\ndiscretização orientada por dados\n\nIsso ajuda a mostrar por que o tratamento pré-modelagem é tão importante em crédito.\nAtividade de leitura 7\nCom base nos resultados de WoE e IV:\n\nA discretização automática parece coerente?\nQuais variáveis parecem mais informativas?\nO que você ganha ao transformar uma faixa em um valor WoE?"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#síntese-ampliada-do-dia-1",
@@ -1152,7 +1138,7 @@
     "href": "minicurso_risco_credito_parte_1.html#exercícios-adicionais",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "19. Exercícios adicionais",
-    "text": "19. Exercícios adicionais\n\nExercício 8\nPor que duas discretizações diferentes da mesma variável podem levar a níveis diferentes de separação entre bons e maus clientes?\nResposta:\n\n\nExercício 9\nO que significa um WoE negativo em uma faixa?\nResposta:\n\n\nExercício 10\nQual é a diferença entre uma discretização manual e uma discretização orientada por dados?\nResposta:"
+    "text": "19. Exercícios adicionais\nExercício 8\nPor que duas discretizações diferentes da mesma variável podem levar a níveis diferentes de separação entre bons e maus clientes?\nResposta:\nExercício 9\nO que significa um WoE negativo em uma faixa?\nResposta:\nExercício 10\nQual é a diferença entre uma discretização manual e uma discretização orientada por dados?\nResposta:"
   },
   {
     "objectID": "minicurso_risco_credito_parte_1.html#síntese-do-bloco-inicial-do-dia-1",
@@ -1166,6 +1152,6 @@
     "href": "minicurso_risco_credito_parte_1.html#exercícios-finais",
     "title": "Minicurso de Introdução à Modelagem de Risco de Crédito — Dia 1",
     "section": "21. Exercícios finais",
-    "text": "21. Exercícios finais\nResponda às questões abaixo com base no que foi visto no notebook.\n\nExercício 1\nQual é a diferença entre a variável original class e a variável criada target?\nResposta:\n\n\nExercício 2\nPor que a variável target é essencial para formular o problema de risco de crédito como classificação binária?\nResposta:\n\n\nExercício 3\nO que significa dizer que uma base é desbalanceada?\nResposta:\n\n\nExercício 4\nExplique por que alta acurácia não garante um bom modelo em risco de crédito.\nResposta:\n\n\nExercício 5\nQual é o papel dos conjuntos de treino, validação e teste?\nResposta:\n\n\nExercício 6\nPor que usamos stratify na divisão da base?\nResposta:\n\n\nExercício 7\nQual a vantagem de transformar uma variável contínua, como idade, em faixas?\nResposta:"
+    "text": "21. Exercícios finais\nResponda às questões abaixo com base no que foi visto no notebook.\nExercício 1\nQual é a diferença entre a variável original class e a variável criada target?\nResposta:\nExercício 2\nPor que a variável target é essencial para formular o problema de risco de crédito como classificação binária?\nResposta:\nExercício 3\nO que significa dizer que uma base é desbalanceada?\nResposta:\nExercício 4\nExplique por que alta acurácia não garante um bom modelo em risco de crédito.\nResposta:\nExercício 5\nQual é o papel dos conjuntos de treino, validação e teste?\nResposta:\nExercício 6\nPor que usamos stratify na divisão da base?\nResposta:\nExercício 7\nQual a vantagem de transformar uma variável contínua, como idade, em faixas?\nResposta:"
   }
 ]

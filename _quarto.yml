@@ -7,3 +7,14 @@ website:
   navbar: false
   sidebar: false
   page-navigation: false
+
+format:
+  revealjs:
+    theme: default
+    css: estilos-dark.css
+    slide-number: true
+    width: 1600
+    height: 900
+    margin: 0.02
+    center: false
+    transition: fade
