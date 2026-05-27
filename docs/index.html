@@ -567,8 +567,8 @@ P(Y=1 \mid X)
 <li>histórico de pagamento, tipo de emprego ou estabilidade</li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 <p><img data-src="figuras/figura_07_problema_estatistico.svg" class="quarto-figure quarto-figure-center" style="width:95.0%"> O problema de crédito pode ser formulado como a estimação da probabilidade de inadimplência.</p>
 </section>
 <section id="tipos-de-modelos-de-crédito" class="slide level2">
@@ -868,7 +868,7 @@ P(Y=1 \mid X)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Frequência da variável original</span></span>
 <span id="cb2-2"><a></a>dados[<span class="st">"class"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a8e3b5ba" class="cell" data-execution_count="5">
+<div id="4fa0f991" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Criando variável binária</span></span>
 <span id="cb3-2"><a></a><span class="co"># 1 = inadimplente (bad)</span></span>
 <span id="cb3-3"><a></a><span class="co"># 0 = adimplente (good)</span></span>
@@ -880,7 +880,7 @@ P(Y=1 \mid X)
 </section>
 <section id="definição-da-variável-alvo-1" class="slide level2">
 <h2>Definição da variável alvo</h2>
-<div id="aeb75c57" class="cell" data-execution_count="6">
+<div id="ad5eece0" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -1236,7 +1236,7 @@ P(Y=1 \mid X)
 </section>
 <section id="criando-a-variável-idade-em-faixas" class="slide level2">
 <h2>Criando a variável idade em faixas</h2>
-<div id="3ed12b0b" class="cell" data-execution_count="9">
+<div id="605f2f66" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a></a></span>
@@ -1260,8 +1260,8 @@ P(Y=1 \mid X)
 <span id="cb6-21"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 
 <img data-src="figuras/figura_16_agrupando_idade.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:95.0%"><p>Em modelos de crédito, variáveis agrupadas ajudam na interpretação e podem capturar melhor diferenças de risco entre perfis.</p>
 </section>
@@ -1959,58 +1959,58 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">inad</th>
-<th data-quarto-table-cell-role="th">credit_per_month_woe</th>
 <th data-quarto-table-cell-role="th">duration_woe</th>
+<th data-quarto-table-cell-role="th">log_credit_amount_woe</th>
 <th data-quarto-table-cell-role="th">credit_amount_woe</th>
 <th data-quarto-table-cell-role="th">age_woe</th>
-<th data-quarto-table-cell-role="th">log_credit_amount_woe</th>
+<th data-quarto-table-cell-role="th">credit_per_month_woe</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>0</td>
-<td>-0.287682</td>
 <td>-1.312186</td>
+<td>0.037891</td>
 <td>0.033661</td>
 <td>-0.212371</td>
-<td>0.037891</td>
+<td>-0.287682</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>1</td>
-<td>-0.092881</td>
 <td>1.134980</td>
+<td>0.375583</td>
 <td>0.390539</td>
 <td>0.528844</td>
-<td>0.375583</td>
+<td>-0.092881</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>0</td>
-<td>-0.287682</td>
 <td>-0.346625</td>
+<td>-0.244346</td>
 <td>-0.258307</td>
 <td>-0.212371</td>
-<td>-0.244346</td>
+<td>-0.287682</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>0</td>
-<td>-0.287682</td>
 <td>0.524524</td>
+<td>0.375583</td>
 <td>0.390539</td>
 <td>-0.212371</td>
-<td>0.375583</td>
+<td>-0.287682</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>1</td>
-<td>-0.287682</td>
 <td>0.108688</td>
+<td>0.375583</td>
 <td>0.390539</td>
 <td>-0.212371</td>
-<td>0.375583</td>
+<td>-0.287682</td>
 </tr>
 </tbody>
 </table>
@@ -2051,7 +2051,7 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>duration</td>
 <td>0.337572</td>
 </tr>
@@ -2061,17 +2061,17 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <td>0.260453</td>
 </tr>
 <tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>log_credit_amount</td>
+<td>0.054639</td>
+</tr>
+<tr class="even">
 <th data-quarto-table-cell-role="th">2</th>
 <td>credit_amount</td>
 <td>0.054639</td>
 </tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">4</th>
-<td>log_credit_amount</td>
-<td>0.054639</td>
-</tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">4</th>
 <td>credit_per_month</td>
 <td>0.030922</td>
 </tr>
@@ -2113,8 +2113,8 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <p>Modelos de crédito costumam depender fortemente dessa etapa.</p>
 </blockquote>
 </section>
-<section id="o-que-aprendemos-hoje" class="slide level2">
-<h2>O que aprendemos hoje</h2>
+<section id="foi-apresentado-até-aqui" class="slide level2">
+<h2>Foi apresentado até aqui</h2>
 <ul>
 <li>risco de crédito é decisão sob incerteza<br>
 </li>
@@ -2129,9 +2129,8 @@ IV=\sum_j (\%\,bons_j-\%\,maus_j)\cdot WoE_j
 <blockquote>
 <p>Hoje estruturamos o problema.</p>
 </blockquote>
-<blockquote>
-<p>Agora que sabemos como o problema é estruturado, a próxima pergunta é: como transformar isso em um modelo que realmente ajude a decidir?</p>
-</blockquote>
+<p>📘 Para fixação e prática em Python:</p>
+<p>🔗 <a href="https://colab.research.google.com/drive/1e_d6GQ8ym9GWryhfxT06VGdf3djM6iiK">Acessar notebook no Google Colab</a></p>
 </section>
 <section id="referências-essenciais" class="slide level2 smaller scrollable">
 <h2>Referências essenciais</h2>
@@ -2199,12 +2198,12 @@ scikit-learn developers. (2024b). <em>Model evaluation documentation</em>. <a hr
 </div>
 </div></div>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 
 <img data-src="figuras/Slide_1o.PNG" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="section-3" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 
 <img data-src="figuras/Slide_p2.PNG" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="vamos-continuar" class="slide level2">
@@ -2256,8 +2255,8 @@ P(Y=1 \mid X)
 <p>A decisão depende de como usamos essas probabilidades.</p>
 </blockquote>
 </section>
-<section id="section-4" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 
 <img data-src="figuras/figura_17_fluxo_modelo_decisao.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:95.0%"></section>
 <section id="probabilidade-em-si-não-é-decisão" class="slide level2">
@@ -2355,8 +2354,8 @@ P(Y_i=1 \mid X_i) = \frac{1}{1 + \exp\{-\eta_i\}}
 <p>É um modelo simples, mas muito eficaz em crédito.</p>
 </blockquote>
 </section>
-<section id="section-5" class="slide level2">
-<h2></h2>
+<section class="slide level2">
+
 
 <img data-src="figuras/figura_18_curva_logistica.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:95.0%"></section>
 <section id="interpretação-dos-coeficientes" class="slide level2">
@@ -3196,8 +3195,8 @@ mas isso não garante melhor decisão final</p>
 <p>a instituição continua responsável pelas decisões <span class="citation" data-cites="sr117 cfpb_2022">(<a href="#/referências-essenciais" role="doc-biblioref" onclick="">Consumer Financial Protection Bureau, 2022</a>; <a href="#/referências-essenciais" role="doc-biblioref" onclick="">Federal Reserve, 2011</a>)</span></p>
 </blockquote>
 </section>
-<section id="o-que-aprendemos-hoje-1" class="slide level2">
-<h2>O que aprendemos hoje</h2>
+<section id="foi-apresentado-até-aqui-1" class="slide level2">
+<h2>Foi apresentado até aqui</h2>
 <ul>
 <li>modelos geram probabilidades de risco<br>
 </li>
@@ -3210,9 +3209,10 @@ mas isso não garante melhor decisão final</p>
 <li>diferentes modelos podem ser comparados</li>
 </ul>
 <blockquote>
-<p>modelar é importante<br>
-decidir é essencial</p>
+<p>modelar é importante → decidir é essencial</p>
 </blockquote>
+<p>📘 Para fixação e prática em Python:</p>
+<p>🔗 <a href="https://colab.research.google.com/drive/19x02exZUtXJwD1lTX8aVZnX-LR8yDzct">Acessar notebook no Google Colab</a></p>
 </section>
 <section id="referências-essenciais-1" class="slide level2">
 <h2>Referências essenciais</h2>

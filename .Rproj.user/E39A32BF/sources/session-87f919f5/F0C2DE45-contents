@@ -1,9 +1,0 @@
-project:
-  type: website
-  output-dir: docs
-
-website:
-  title: "Minicurso de Risco de Crédito"
-  navbar: false
-  sidebar: false
-  page-navigation: false

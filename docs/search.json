@@ -336,13 +336,6 @@
     "text": "O problema estatístico\nDefinimos a variável resposta:\n\\[\nY =\n\\begin{cases}\n1, & \\text{se o cliente for inadimplente} \\\\\n0, & \\text{se o cliente for adimplente}\n\\end{cases}\n\\]\nNosso objetivo é modelar:\n\\[\nP(Y=1 \\mid X)\n\\]\n\na probabilidade de um cliente se tornar inadimplente dado seu perfil\n\nem que \\(X\\) representa informações do cliente, como:\n\nidade, renda, valor e duração do crédito\n\nhistórico de pagamento, tipo de emprego ou estabilidade"
   },
   {
-    "objectID": "index.html#section",
-    "href": "index.html#section",
-    "title": "Minicurso de Risco de Crédito",
-    "section": "",
-    "text": "O problema de crédito pode ser formulado como a estimação da probabilidade de inadimplência."
-  },
-  {
     "objectID": "index.html#tipos-de-modelos-de-crédito",
     "href": "index.html#tipos-de-modelos-de-crédito",
     "title": "Minicurso de Risco de Crédito",
@@ -504,13 +497,6 @@
     "text": "Criando a variável idade em faixas\n\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# =========================\n# Criando faixas de idade\n# =========================\ndados[\"faixa_idade\"] = pd.cut(\n    dados[\"age\"],\n    bins=[0, 25, 35, 50, 100],\n    labels=[\"até 25\", \"26–35\", \"36–50\", \"50+\"]\n)\n\n# Contagem das faixas\nfaixas = dados[\"faixa_idade\"].value_counts().sort_index()\n\n# Gráfico\nplt.figure(figsize=(7, 4))\nplt.bar(faixas.index.astype(str), faixas.values)\nplt.title(\"Distribuição das faixas de idade\")\nplt.ylabel(\"Frequência\")\nplt.show()"
   },
   {
-    "objectID": "index.html#section-1",
-    "href": "index.html#section-1",
-    "title": "Minicurso de Risco de Crédito",
-    "section": "",
-    "text": "Em modelos de crédito, variáveis agrupadas ajudam na interpretação e podem capturar melhor diferenças de risco entre perfis."
-  },
-  {
     "objectID": "index.html#as-faixas-ajudam-a-entender-o-risco",
     "href": "index.html#as-faixas-ajudam-a-entender-o-risco",
     "title": "Minicurso de Risco de Crédito",
@@ -623,11 +609,11 @@
     "text": "Ideia central\nAntes de modelar, podemos:\n\ntratar a base\n\ndiscretizar variáveis\n\ncriar novas variáveis\n\ntransformar informações em sinais de risco\n\n\nModelos de crédito costumam depender fortemente dessa etapa."
   },
   {
-    "objectID": "index.html#o-que-aprendemos-hoje",
-    "href": "index.html#o-que-aprendemos-hoje",
+    "objectID": "index.html#foi-apresentado-até-aqui",
+    "href": "index.html#foi-apresentado-até-aqui",
     "title": "Minicurso de Risco de Crédito",
-    "section": "O que aprendemos hoje",
-    "text": "O que aprendemos hoje\n\nrisco de crédito é decisão sob incerteza\n\nerros têm impactos econômicos distintos\n\nos dados são naturalmente desbalanceados\n\na divisão correta evita avaliações incorretas\n\na transformação influencia diretamente o modelo\n\n\nHoje estruturamos o problema.\n\n\nAgora que sabemos como o problema é estruturado, a próxima pergunta é: como transformar isso em um modelo que realmente ajude a decidir?"
+    "section": "Foi apresentado até aqui",
+    "text": "Foi apresentado até aqui\n\nrisco de crédito é decisão sob incerteza\n\nerros têm impactos econômicos distintos\n\nos dados são naturalmente desbalanceados\n\na divisão correta evita avaliações incorretas\n\na transformação influencia diretamente o modelo\n\n\nHoje estruturamos o problema.\n\n📘 Para fixação e prática em Python:\n🔗 Acessar notebook no Google Colab"
   },
   {
     "objectID": "index.html#referências-essenciais",
@@ -1001,11 +987,11 @@
     "text": "E na prática do mercado?\nEm instituições financeiras:\n\nmodelos podem ser adquiridos de bureaus de crédito\n\nmodelos internos são desenvolvidos e ajustados\n\nmodelos precisam ser monitorados continuamente\n\nAlém disso:\n\ndecisões devem ser justificáveis\n\nmodelos precisam ser auditáveis\n\n\na instituição continua responsável pelas decisões (Consumer Financial Protection Bureau, 2022; Federal Reserve, 2011)"
   },
   {
-    "objectID": "index.html#o-que-aprendemos-hoje-1",
-    "href": "index.html#o-que-aprendemos-hoje-1",
+    "objectID": "index.html#foi-apresentado-até-aqui-1",
+    "href": "index.html#foi-apresentado-até-aqui-1",
     "title": "Minicurso de Risco de Crédito",
-    "section": "O que aprendemos hoje",
-    "text": "O que aprendemos hoje\n\nmodelos geram probabilidades de risco\n\nmétricas avaliam desempenho\n\no threshold define a decisão\n\no custo define a melhor escolha\n\ndiferentes modelos podem ser comparados\n\n\nmodelar é importante\ndecidir é essencial"
+    "section": "Foi apresentado até aqui",
+    "text": "Foi apresentado até aqui\n\nmodelos geram probabilidades de risco\n\nmétricas avaliam desempenho\n\no threshold define a decisão\n\no custo define a melhor escolha\n\ndiferentes modelos podem ser comparados\n\n\nmodelar é importante → decidir é essencial\n\n📘 Para fixação e prática em Python:\n🔗 Acessar notebook no Google Colab"
   },
   {
     "objectID": "index.html#referências-essenciais-1",

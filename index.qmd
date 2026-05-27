@@ -377,8 +377,6 @@ em que $X$ representa informações do cliente, como:
 
 ---
 
-## 
-
 ![](figuras/figura_07_problema_estatistico.svg){width=95% fig-align="center"}
 O problema de crédito pode ser formulado como a estimação da probabilidade de inadimplência.
 
@@ -542,6 +540,7 @@ dados["target"] = (dados["class"] == "bad").astype(int)
 
 dados[["class", "target"]].head(10)
 ```
+
 ---
 
 ## Definição da variável alvo
@@ -884,7 +883,6 @@ plt.show()
 
 ---
 
-## 
 ![](figuras/figura_16_agrupando_idade.svg){width=95% fig-align="center"}
 
 
@@ -1363,8 +1361,7 @@ Antes de modelar, podemos:
 
 ---
 
-
-## O que aprendemos hoje
+## Foi apresentado até aqui
 
 - risco de crédito é decisão sob incerteza  
 - erros têm impactos econômicos distintos  
@@ -1372,10 +1369,11 @@ Antes de modelar, podemos:
 - a divisão correta evita avaliações incorretas  
 - a transformação influencia diretamente o modelo  
 
-
 > Hoje estruturamos o problema.
 
-> Agora que sabemos como o problema é estruturado, a próxima pergunta é: como transformar isso em um modelo que realmente ajude a decidir?
+📘 Para fixação e prática em Python:
+
+🔗 [Acessar notebook no Google Colab](https://colab.research.google.com/drive/1e_d6GQ8ym9GWryhfxT06VGdf3djM6iiK)
 
 ---
 
@@ -1424,13 +1422,9 @@ Antes de modelar, podemos:
 
 ---
 
-## 
-
 ![](figuras/Slide_1o.PNG){width=100% fig-align="center"}
 
 ---
-
-## 
 
 ![](figuras/Slide_p2.PNG){width=100% fig-align="center"}
 
@@ -1484,8 +1478,6 @@ O modelo gera probabilidades.
 > A decisão depende de como usamos essas probabilidades.
 
 ---
-
-## 
 
 ![](figuras/figura_17_fluxo_modelo_decisao.svg){width=95% fig-align="center"}
 
@@ -1590,8 +1582,6 @@ Isso garante:
 > É um modelo simples, mas muito eficaz em crédito.
 
 ---
-
-## 
 
 ![](figuras/figura_18_curva_logistica.svg){width=95% fig-align="center"}
 
@@ -2392,7 +2382,7 @@ Além disso:
 
 ---
 
-## O que aprendemos hoje
+## Foi apresentado até aqui
 
 - modelos geram probabilidades de risco  
 - métricas avaliam desempenho  
@@ -2400,8 +2390,11 @@ Além disso:
 - o custo define a melhor escolha  
 - diferentes modelos podem ser comparados  
 
-> modelar é importante  
-> decidir é essencial
+> modelar é importante  → decidir é essencial
+
+📘 Para fixação e prática em Python:
+
+🔗 [Acessar notebook no Google Colab](https://colab.research.google.com/drive/19x02exZUtXJwD1lTX8aVZnX-LR8yDzct)
 
 ---
 
