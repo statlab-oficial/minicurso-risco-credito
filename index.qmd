@@ -1373,7 +1373,9 @@ Antes de modelar, podemos:
 
 📘 Para fixação e prática em Python:
 
-🔗 [Acessar notebook no Google Colab](https://colab.research.google.com/drive/1e_d6GQ8ym9GWryhfxT06VGdf3djM6iiK)
+🔗 <a href="https://colab.research.google.com/drive/1e_d6GQ8ym9GWryhfxT06VGdf3djM6iiK" target="_blank">
+Acessar notebook no Google Colab
+</a>
 
 ---
 
@@ -2434,7 +2436,9 @@ Além disso:
 
 📘 Para fixação e prática em Python:
 
-🔗 [Acessar notebook no Google Colab](https://colab.research.google.com/drive/19x02exZUtXJwD1lTX8aVZnX-LR8yDzct)
+🔗 <a href="https://colab.research.google.com/drive/19x02exZUtXJwD1lTX8aVZnX-LR8yDzct" target="_blank">
+Acessar notebook no Google Colab
+</a>
 
 ---
 
